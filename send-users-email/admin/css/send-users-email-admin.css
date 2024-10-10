@@ -22,7 +22,14 @@ label {
     font-size: 1.1em;
 }
 
-/* </fs_premium_only> */
+.pro-features-list .col-sm-4 {
+    display: flex;
+}
+.pro-features-list .col-sm-4 .card {
+    max-width: unset;
+}
+
+    /* </fs_premium_only> */
 .delete-queue-email {
     cursor: pointer;
 }

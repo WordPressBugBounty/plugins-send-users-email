@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Plugin Name:       Send Users Email
- * Plugin URI:        https://sendusersemail.com
+ * Plugin Name: Send Users Email
+ * Plugin URI:        https://sendusersemail.com/
  * Description:       Easily send emails to your users. Select individual users or role to send email.
- * Version:           1.5.4
+ * Version:           1.5.5
  * Author:            SendUsersEmail.com
  * Author URI:        https://sendusersemail.com/?utm_source=wp_repo&utm_medium=link&utm_campaign=author_url
  * License:           GPL-2.0+
@@ -43,8 +43,9 @@ if ( function_exists( 'sue_fs' ) ) {
                         'is_require_payment' => true,
                     ),
                     'menu'           => array(
-                        'first-path' => 'plugins.php',
-                        'support'    => false,
+                        'slug'    => 'send-users-email',
+                        'support' => false,
+                        'contact' => false,
                     ),
                     'is_live'        => true,
                 ) );
@@ -60,7 +61,7 @@ if ( function_exists( 'sue_fs' ) ) {
     /**
      * Currently plugin version.
      */
-    define( 'SEND_USERS_EMAIL_VERSION', '1.5.4' );
+    define( 'SEND_USERS_EMAIL_VERSION', '1.5.5' );
     /**
      * Currently plugin base path.
      */
