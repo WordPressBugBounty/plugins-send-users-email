@@ -619,6 +619,18 @@ class Send_Users_Email_Admin {
                 if ( !empty( $save_email_log_till_days ) && $save_email_log_till_days < 1 ) {
                     $validation_message['save_email_log_till_days'] = __( 'Please provide a valid positive number.', "send-users-email" );
                 }
+                if ( !empty( $save_smtp_host ) && strlen( $save_smtp_host ) < 3 ) {
+                    $validation_message['save_smtp_host'] = __( 'Please provide a valid SMTP host.', "send-users-email" );
+                }
+                if ( !empty( $save_smtp_port ) && !is_integer( $save_smtp_port ) && $save_smtp_port < 0 ) {
+                    $validation_message['save_smtp_port'] = __( 'Please provide a valid SMTP port number.', "send-users-email" );
+                }
+                if ( !empty( $save_smtp_username ) && strlen( $save_smtp_username ) < 2 ) {
+                    $validation_message['save_smtp_username'] = __( 'Please provide a valid SMTP username.', "send-users-email" );
+                }
+                if ( !empty( $save_smtp_password ) && strlen( $save_smtp_password ) < 2 ) {
+                    $validation_message['save_smtp_password'] = __( 'Please provide a valid SMTP password.', "send-users-email" );
+                }
                 // If validation fails send, error messages
                 if ( count( $validation_message ) > 0 ) {
                     wp_send_json( array(
@@ -844,6 +856,68 @@ class Send_Users_Email_Admin {
             'message' => 'Permission Denied',
             'success' => false,
         ), 200 );
+    }
+
+    public function deliver_email_via_smtp( $phpmailer ) {
+        // Todo:
+        // - if pw field is empty and no new pw is set, make sure it wont get nulled at saving
+        // - make sure this function also works on a localhost
+        $options = get_option( 'sue_send_users_email' );
+        $smtp_host = $options['save_smtp_host'];
+        $smtp_port = $options['save_smtp_port'];
+        $smtp_security = $options['save_smtp_security'];
+        $smtp_security = ( $smtp_security === 'none' ? '' : $smtp_security );
+        $smtp_username = $options['save_smtp_username'];
+        $smtp_password = $options['save_smtp_password'];
+        $smtp_default_from_name = $options['email_from_name'];
+        $smtp_default_from_email = $options['email_from_address'];
+        $smtp_bypass_ssl_verification = $options['save_smtp_bypass_ssl'];
+        $smtp_force_from = true;
+        // $options['smtp_force_from'];
+        // $smtp_debug = $options['smtp_debug'];
+        // Return if fields are missing
+        if ( empty( $smtp_host ) || empty( $smtp_port ) || empty( $smtp_security ) || empty( $smtp_username ) || empty( $smtp_password ) ) {
+            return;
+        }
+        // Maybe override FROM email and/or name if the sender is "WordPress <wordpress@sitedomain.com>", the default from WordPress core and not yet overridden by another plugin.
+        $from_name = $phpmailer->FromName;
+        $from_email_beginning = substr( $phpmailer->From, 0, 9 );
+        // Replace From and FromName
+        if ( $smtp_force_from ) {
+            $phpmailer->FromName = $smtp_default_from_name;
+            $phpmailer->From = $smtp_default_from_email;
+        }
+        // Send using SMTP
+        $phpmailer->isSMTP();
+        $phpmailer->SMTPAuth = true;
+        // $phpmailer->CharSet  = 'utf-8';
+        $phpmailer->XMailer = 'Send Users Email v' . $this->version . ' - a WordPress plugin';
+        $phpmailer->Host = $smtp_host;
+        $phpmailer->Port = $smtp_port;
+        $phpmailer->SMTPSecure = $smtp_security;
+        $phpmailer->Username = trim( $smtp_username );
+        $phpmailer->Password = trim( $smtp_password );
+        // If verification of SSL certificate is bypassed
+        // Reference: https://www.php.net/manual/en/context.ssl.php & https://stackoverflow.com/a/30803024
+        if ( $smtp_bypass_ssl_verification ) {
+            $phpmailer->SMTPOptions = [
+                'ssl' => [
+                    'verify_peer'       => false,
+                    'verify_peer_name'  => false,
+                    'allow_self_signed' => true,
+                ],
+            ];
+        }
+        // If debug mode is enabled, send debug info (SMTP::DEBUG_CONNECTION) to WordPress debug.log file set in wp-config.php
+        // Reference: https://github.com/PHPMailer/PHPMailer/wiki/SMTP-Debugging
+        /*
+                if (true) {
+                    $phpmailer->SMTPDebug = 4;
+                    //phpcs:ignore
+                    $phpmailer->Debugoutput = 'error_log';
+                    //phpcs:ignore
+                }
+        */
     }
 
 }

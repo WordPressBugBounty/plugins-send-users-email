@@ -5,7 +5,7 @@ Tags: email users, email subscribers, email system users, send email, email all 
 Requires at least: 5.7
 Tested up to: 6.6
 Requires PHP: 7.4
-Stable tag: 1.5.5
+Stable tag: 1.5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -47,6 +47,7 @@ This plugin uses `wp_mail` function to send emails. Any other E-Mail plugin that
 - **Optional Queue Default Setting**: Set whether the email queue should be used by default for all emails.
 - **Extended Email Logs (90 Days)**: Logs are retained for 90 days, adjustable in settings, giving you a longer email history for auditing and review.
 - **Clutter-Free UI**: Enjoy an optimized, user-friendly interface designed to improve your workflow.
+- **Improved Email Deliverability**: Add your own SMPT server or a third-party SMTP server to improve email deliverability
 
 📚 [Documentation](https://sendusersemail.com/docs/how-to-install/?utm_source=wp_dir&utm_medium=link&utm_campaign=docs) | 🌟 [PRO Features](https://sendusersemail.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=features#pricing) | 🔥 [Get PRO](https://sendusersemail.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=get_pro)
 
@@ -125,6 +126,13 @@ The free version logs emails for 15 days, while the [PRO version](https://sendus
 6. Tags for email personalization
 
 == Changelog ==
+
+= 1.5.6 (2024-10-23) =
+* CSS harmonization
+* Beta features for SMTP settings
+
+= 1.5.5 =
+* Freemius SDK update
 
 = 1.5.4 (2024-07-07) =
 * Compatibility check with latest WP

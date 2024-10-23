@@ -29,6 +29,11 @@ label {
     max-width: unset;
 }
 
+#wpcontent {
+    background-color: #f0f0f1;
+    min-height: calc(100vh - 32px);
+}
+
     /* </fs_premium_only> */
 .delete-queue-email {
     cursor: pointer;
