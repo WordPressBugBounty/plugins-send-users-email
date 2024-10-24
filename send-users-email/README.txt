@@ -5,7 +5,7 @@ Tags: email users, email subscribers, email system users, send email, email all 
 Requires at least: 5.7
 Tested up to: 6.6
 Requires PHP: 7.4
-Stable tag: 1.5.6
+Stable tag: 1.5.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -126,6 +126,9 @@ The free version logs emails for 15 days, while the [PRO version](https://sendus
 6. Tags for email personalization
 
 == Changelog ==
+
+= 1.5.7 (2024-10-24)
+* Freemius SDK update
 
 = 1.5.6 (2024-10-23) =
 * CSS harmonization
