@@ -212,6 +212,139 @@ class Send_Users_Email_Admin {
     }
 
     /**
+     * @return void
+     * Handle bulk user selection for email groups on user list page
+     */
+    public function add_custom_group_selection_button() {
+        global $wpdb;
+        $groups = $wpdb->get_results( "SELECT * FROM " . SEND_USERS_EMAIL_USER_GROUP_NAME_TABLE );
+        ?>
+        <div class="alignleft actions" style="margin-left: 10px;">
+            <select name="custom_group_id" id="custom_group_select">
+                <option value="">Select Email Group ...</option>
+                <?php 
+        foreach ( $groups as $group ) {
+            ?>
+                    <option value="<?php 
+            echo esc_attr( $group->id );
+            ?>"><?php 
+            echo esc_html( $group->name );
+            ?></option>
+                <?php 
+        }
+        ?>
+            </select>
+            <button type="button" class="button assign_email_group_button" id="assign_email_group_button">
+                <?php 
+        echo __( 'Assign Group', 'send-users-email' );
+        ?>
+            </button>
+        </div>
+
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', function () {
+                const buttons = document.querySelectorAll('.assign_email_group_button');
+                buttons.forEach(button => {
+                    button.addEventListener('click', function () {
+                        let groupId = document.getElementById('custom_group_select').value;
+                        const selectElement = this.previousElementSibling;
+
+                        if (selectElement && selectElement.value) {
+                            groupId = selectElement.value;
+                        } else {
+                            return;
+                        }
+
+                        let userIds = Array.from(document.querySelectorAll('input[name="users[]"]:checked'))
+                            .map(checkbox => checkbox.value);
+
+                        if (groupId && userIds.length > 0) {
+                            // Send AJAX request
+                            jQuery.post(ajaxurl, {
+                                action: 'assign_email_group',
+                                group_id: groupId,
+                                user_ids: userIds,
+                                security: '<?php 
+        echo wp_create_nonce( "assign_email_group_nonce" );
+        ?>'
+                            }, function(response) {
+                                if (response.success) {
+                                    jQuery.post(ajaxurl, {
+                                        action: 'set_admin_notification',
+                                        message: response.data.message
+                                    }, function() {
+                                        // Reload the page to display the notification
+                                        location.reload();
+                                    });
+                                } else {
+                                    alert('Error: ' + response.data.message);
+                                }
+                            });
+                        } else {
+                            alert('Please select a group and at least one user.');
+                        }
+                    });
+                })
+            });
+        </script>
+        <?php 
+    }
+
+    /**
+     * @return void
+     * Handle AJAX request to assign users to email group
+     */
+    public function handle_assign_email_group_ajax() {
+        check_ajax_referer( 'assign_email_group_nonce', 'security' );
+        if ( !empty( $_POST['group_id'] ) && !empty( $_POST['user_ids'] ) ) {
+            global $wpdb;
+            $group_id = intval( $_POST['group_id'] );
+            $user_ids = array_map( 'intval', $_POST['user_ids'] );
+            foreach ( $user_ids as $user_id ) {
+                $wpdb->delete( SEND_USERS_EMAIL_GROUP_USER_TABLE, [
+                    'user_id'  => $user_id,
+                    'group_id' => $group_id,
+                ] );
+                $wpdb->insert( SEND_USERS_EMAIL_GROUP_USER_TABLE, [
+                    'group_id' => $group_id,
+                    'user_id'  => $user_id,
+                ] );
+            }
+            wp_send_json_success( [
+                'message' => count( $user_ids ) . ' users were assigned to the selected group.',
+            ] );
+        } else {
+            wp_send_json_error( [
+                'message' => 'Invalid group or user selection.',
+            ] );
+        }
+    }
+
+    /*
+     * @return void
+     * Handle AJAX request to set admin notification message
+     */
+    public function set_admin_notification() {
+        if ( isset( $_POST['message'] ) ) {
+            update_option( 'admin_notification_message', sanitize_text_field( $_POST['message'] ) );
+        }
+        wp_send_json_success();
+    }
+
+    /**
+     * @return void
+     * Display admin notification message after adding users to group
+     */
+    public function display_admin_notification() {
+        $message = get_option( 'admin_notification_message' );
+        if ( $message ) {
+            echo '<div class="notice notice-success is-dismissible"><p>' . esc_html( $message ) . '</p></div>';
+            delete_option( 'admin_notification_message' );
+            // Clear message after displaying
+        }
+    }
+
+    /**
      * Settings page
      */
     public function settings() {
