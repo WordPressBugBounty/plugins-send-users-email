@@ -65,7 +65,7 @@ echo __( 'Are you sending the same email content over and over again?', 'send-us
 echo __( 'Are you tired of typing same email repeatedly?', 'send-users-email' );
 ?></p>
                         <p class="card-text"><?php 
-echo __( 'The PRO version of Send Users Email allows you to save a email templates and reuse them when sending emails to your users.', 'send-users-email' );
+echo __( 'The PRO version of Send Users Email allows you to save email templates and reuse them when sending emails to your users.', 'send-users-email' );
 ?></p>
                     </div>
                 </div>

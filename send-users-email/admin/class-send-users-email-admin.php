@@ -31,7 +31,8 @@ class Send_Users_Email_Admin {
         'send-users-email-email-queue',
         'send-users-email-error-logs',
         'send-users-email-user-groups',
-        'send-users-email-groups'
+        'send-users-email-groups',
+        'send-users-email-preview'
     );
 
     /**
@@ -140,6 +141,14 @@ class Send_Users_Email_Admin {
             SEND_USERS_EMAIL_SEND_MAIL_CAPABILITY,
             'send-users-email-roles',
             [$this, 'roles_email']
+        );
+        add_submenu_page(
+            'send-users-email',
+            __( 'Email Theme Preview', 'send-users-email' ),
+            __( 'Theme Preview', 'send-users-email' ),
+            'manage_options',
+            'send-users-email-preview',
+            [$this, 'theme_preview']
         );
         add_submenu_page(
             'send-users-email',
@@ -342,6 +351,24 @@ class Send_Users_Email_Admin {
             delete_option( 'admin_notification_message' );
             // Clear message after displaying
         }
+    }
+
+    /**
+     * Theme preview page
+     * @return void
+     */
+    public function theme_preview() {
+        if ( !current_user_can( 'manage_options' ) ) {
+            wp_die( 'Unauthorized' );
+        }
+        // Retrieve data from the WordPress database as needed
+        $data = [
+            'site_name' => get_bloginfo( 'name' ),
+            'user'      => wp_get_current_user(),
+        ];
+        global $preview;
+        $preview = true;
+        require_once 'partials/email-template.php';
     }
 
     /**
@@ -693,6 +720,46 @@ class Send_Users_Email_Admin {
         require 'partials/email-template.php';
         $output = ob_get_contents();
         ob_end_clean();
+        /*
+        		if ( sue_fs()->is__premium_only() ) {
+        			if ( sue_fs()->can_use_premium_code() ) {
+        
+        blue   : #142467 / #042467 -> This is default scheme
+        red    : #D64123 / #C64123
+        green  : #04AA6D / #03AA6D
+        purple : #692c91 / #592c91
+        pink   : #ee3e80 / #de3e80
+        yellow : #ffbd00 / #efbd00
+        */
+        /*
+        				switch ( $style ) {
+        					case "green":
+        						$output = str_replace( '#042467', '#03AA6D', $output );
+        						$output = str_replace( '#142467', '#04AA6D', $output );
+        						break;
+        					case "pink":
+        						$output = str_replace( '#042467', '#de3e80', $output );
+        						$output = str_replace( '#142467', '#ee3e80', $output );
+        						break;
+        					case "purple":
+        						$output = str_replace( '#042467', '#592c91', $output );
+        						$output = str_replace( '#142467', '#692c91', $output );
+        						break;
+        					case "red":
+        						$output = str_replace( '#042467', '#C64123', $output );
+        						$output = str_replace( '#142467', '#D64123', $output );
+        						break;
+        					case "yellow":
+        						$output = str_replace( '#042467', '#efbd00', $output );
+        						$output = str_replace( '#142467', '#ffbd00', $output );
+        						break;
+        					default:
+        						$output = str_replace( '#042467', '#042467', $output );
+        						$output = str_replace( '#142467', '#142467', $output );
+        				}
+        			}
+        		}
+        */
         return $output;
     }
 

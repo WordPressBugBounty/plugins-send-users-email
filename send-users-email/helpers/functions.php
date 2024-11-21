@@ -68,6 +68,12 @@ if ( ! function_exists( 'sue_get_asset_url' ) ) {
 	}
 }
 
+if ( ! function_exists( 'sue_get_asset_url_new' ) ) {
+    function sue_get_asset_url_new( $file = '' ) {
+        return SEND_USERS_EMAIL_PLUGIN_BASE_URL . '/assets/icons/' . $file;
+    }
+}
+
 if ( ! function_exists( 'sue_get_date_range_interval' ) ) {
 	function sue_get_past_dates_range_interval( $interval_days = 1 ) {
 
@@ -93,6 +99,7 @@ if ( ! function_exists( 'sue_get_email_theme_scheme' ) ) {
 			'purple',
 			'red',
 			'yellow',
+			'purity',
 		];
 	}
 }

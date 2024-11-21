@@ -36,6 +36,7 @@ label {
 }
 .pro-features-list .col-sm-4 .card {
     max-width: unset;
+    width: 100%;
 }
 .pro-features-list .card img {
     max-width: 100px;
