@@ -24,3 +24,16 @@ echo __( 'Rate the plugin', 'send-users-email' );
             </div>
         </div>
 
+        <div class="card shadow">
+            <div class="card-body">
+                <p class="card-text text-uppercase" style="font-size: 1rem;">
+                    <a style="text-decoration: none;" target="_blank"
+                       href="https://trello.com/b/ngaIRuqL/send-users-email-plugin-feature-requests">
+                        <?php 
+echo __( 'Vote for new features 👍', 'send-users-email' );
+?>
+                    </a>
+                </p>
+            </div>
+        </div>
+
