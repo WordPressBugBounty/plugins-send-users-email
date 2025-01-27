@@ -3,7 +3,7 @@ Contributors: paretodigital, metalfreek
 Donate link: https://sendusersemail.com/?utm_source=wp_repo&utm_medium=link&utm_campaign=donate_link
 Tags: email users, email subscribers, email system users, send email, email all users
 Requires at least: 5.7
-Tested up to: 6.6
+Tested up to: 6.7.1
 Requires PHP: 7.4
 Stable tag: 1.5.10
 License: GPLv2 or later
