@@ -207,11 +207,6 @@ class Send_Users_Email_Admin {
                 'user_login'
             ),
         ) );
-        // Get the default Email title and Tagline
-        $options = get_option( 'sue_send_users_email' );
-        $title = $options['email_title'] ?? '';
-        $tagline = $options['email_tagline'] ?? '';
-        $allowed_title_tagline = $options['allow_title_and_tagline'] ?? 0;
         require_once 'partials/users-email.php';
     }
 
@@ -222,11 +217,6 @@ class Send_Users_Email_Admin {
         $users = count_users();
         $roles = $users['avail_roles'];
         $templates = [];
-        // Get the default Email title and Tagline.
-        $options = get_option( 'sue_send_users_email' );
-        $title = $options['email_title'] ?? '';
-        $tagline = $options['email_tagline'] ?? '';
-        $allowed_title_tagline = $options['allow_title_and_tagline'] ?? 0;
         require_once 'partials/roles-email.php';
     }
 
@@ -437,12 +427,7 @@ class Send_Users_Email_Admin {
             $param = ( isset( $_REQUEST['param'] ) ? sanitize_text_field( $_REQUEST['param'] ) : "" );
             $action = ( isset( $_REQUEST['action'] ) ? sanitize_text_field( $_REQUEST['action'] ) : "" );
             if ( $param == 'send_email_user' && $action == 'sue_user_email_ajax' ) {
-                $options = get_option( 'sue_send_users_email' );
-                $option_title = $options['email_title'] ?? '';
-                $option_tagline = $options['email_tagline'] ?? '';
                 $subject = ( isset( $_REQUEST['subject'] ) ? sanitize_text_field( $_REQUEST['subject'] ) : "" );
-                $title = ( isset( $_REQUEST['title'] ) ? sanitize_text_field( $_REQUEST['title'] ) : $option_title );
-                $tagline = ( isset( $_REQUEST['tagline'] ) ? sanitize_text_field( $_REQUEST['tagline'] ) : $option_tagline );
                 $message = ( isset( $_REQUEST['sue_user_email_message'] ) ? wp_kses_post( $_REQUEST['sue_user_email_message'] ) : "" );
                 $users = $_REQUEST['users'] ?? [];
                 $users = array_map( 'sanitize_text_field', $users );
@@ -514,14 +499,8 @@ class Send_Users_Email_Admin {
                             $user_id
                         );
                         $email_subject = stripslashes_deep( $subject );
-                        $email_title = stripslashes_deep( $title );
-                        $email_tagline = stripslashes_deep( $tagline );
                         // Send email
-                        $input_request = [
-                            'title'   => $email_title,
-                            'tagline' => $email_tagline,
-                        ];
-                        $email_template = $this->email_template( $email_body, $email_style, $input_request );
+                        $email_template = $this->email_template( $email_body, $email_style );
                         if ( !wp_mail(
                             $user_email,
                             $email_subject,
@@ -589,12 +568,7 @@ class Send_Users_Email_Admin {
             $param = ( isset( $_REQUEST['param'] ) ? sanitize_text_field( $_REQUEST['param'] ) : "" );
             $action = ( isset( $_REQUEST['action'] ) ? sanitize_text_field( $_REQUEST['action'] ) : "" );
             if ( $param == 'send_email_role' && $action == 'sue_role_email_ajax' ) {
-                $options = get_option( 'sue_send_users_email' );
-                $option_title = $options['email_title'] ?? '';
-                $option_tagline = $options['email_tagline'] ?? '';
                 $subject = ( isset( $_REQUEST['subject'] ) ? sanitize_text_field( $_REQUEST['subject'] ) : "" );
-                $title = ( isset( $_REQUEST['title'] ) ? sanitize_text_field( $_REQUEST['title'] ) : $option_title );
-                $tagline = ( isset( $_REQUEST['tagline'] ) ? sanitize_text_field( $_REQUEST['tagline'] ) : $option_tagline );
                 $message = ( isset( $_REQUEST['sue_user_email_message'] ) ? wp_kses_post( $_REQUEST['sue_user_email_message'] ) : "" );
                 $roles = $_REQUEST['roles'] ?? [];
                 $roles = array_map( 'sanitize_text_field', $roles );
@@ -653,7 +627,7 @@ class Send_Users_Email_Admin {
                         $display_name = $user->display_name;
                         $user_email = sanitize_email( $user->user_email );
                         $user_id = (int) $user->ID;
-                        $user_meta = get_user_meta( user_id: $user->ID );
+                        $user_meta = get_user_meta( $user->ID );
                         $first_name = $user_meta['first_name'][0] ?? '';
                         $last_name = $user_meta['last_name'][0] ?? '';
                         // Replace placeholder with user content
@@ -667,14 +641,8 @@ class Send_Users_Email_Admin {
                             $user_id
                         );
                         $email_subject = stripslashes_deep( $subject );
-                        $email_title = stripslashes_deep( $title );
-                        $email_tagline = stripslashes_deep( $tagline );
                         // Send email
-                        $input_request = [
-                            'title'   => $email_title,
-                            'tagline' => $email_tagline,
-                        ];
-                        $email_template = $this->email_template( $email_body, $email_style, $input_request );
+                        $email_template = $this->email_template( $email_body, $email_style );
                         if ( !wp_mail(
                             $user_email,
                             $email_subject,
@@ -737,19 +705,12 @@ class Send_Users_Email_Admin {
     /**
      * Email template
      */
-    private function email_template( $email_body, $style = 'default', $input_request = [] ) {
+    private function email_template( $email_body, $style = 'default' ) {
         ob_start();
-        /**
-         * Allan
-         * I added this input request to allow users to pass their own title and tagline.
-         */
-        $user_input_request = $input_request;
-        $request_title = ( isset( $input_request['title'] ) ? $input_request['title'] : '' );
-        $request_tagline = ( isset( $input_request['tagline'] ) ? $input_request['tagline'] : '' );
         $options = get_option( 'sue_send_users_email' );
         $logo = $options['logo_url'] ?? '';
-        $title = $request_title ?? $options['email_title'];
-        $tagline = $request_tagline ?? $options['email_tagline'];
+        $title = $options['email_title'] ?? '';
+        $tagline = $options['email_tagline'] ?? '';
         $footer = $options['email_footer'] ?? '';
         $styles = $options['email_template_style'] ?? '';
         $social = $options['social'] ?? [];

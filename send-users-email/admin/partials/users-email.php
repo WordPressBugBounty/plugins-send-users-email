@@ -36,42 +36,6 @@ echo __( 'Email subject here.', 'send-users-email' );
 ?> <?php 
 ?>">
                         </div>
-                        
-                        <?php 
-if ( $allowed_title_tagline && sue_fs()->is__premium_only() && sue_fs()->can_use_premium_code() ) {
-    ?>
-
-                            <div class="mb-4">
-                                <label for="title"
-                                    class="form-label"><?php 
-    echo __( 'Email Title', 'send-users-email' );
-    ?></label>
-                                <input type="text" class="form-control title" id="subject" name="title" maxlength="100" value="<?php 
-    echo esc_attr( $title );
-    ?>"
-                                    placeholder="<?php 
-    echo __( 'Email title here.', 'send-users-email' );
-    ?> <?php 
-    ?>">
-                            </div>
-
-                            <div class="mb-4">
-                                <label for="tagline"
-                                    class="form-label"><?php 
-    echo __( 'Email Tagline', 'send-users-email' );
-    ?></label>
-                                <input type="text" class="form-control tagline" id="tagline" name="tagline" maxlength="100" value="<?php 
-    echo esc_attr( $tagline );
-    ?>"
-                                    placeholder="<?php 
-    echo __( 'Email tagline here.', 'send-users-email' );
-    ?> <?php 
-    ?>">
-                            </div>
-
-                        <?php 
-}
-?>
 
                         <div class="mb-4 sue-user-email-datatable-wrapper">
                             <div class="sue-user-email-datatable">
