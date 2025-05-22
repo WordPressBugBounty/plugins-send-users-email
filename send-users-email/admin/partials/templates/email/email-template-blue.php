@@ -145,7 +145,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
     <![endif]-->
     <?php if ( $styles ): ?>
         <style>
-            <?php echo stripslashes_deep( esc_html( $styles ) ); ?>
+            <?php echo stripslashes_deep( wp_strip_all_tags( $styles ) ); ?>
         </style>
     <?php endif; ?>
 
@@ -202,9 +202,9 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
                                                         style="font-size:0pt; line-height:0pt; text-align:left;">
                                                         <a href="<?php echo esc_url_raw( $social[ $platform ] ); ?>"
                                                            target="_blank">
-                                                            <img src="<?php echo sue_get_asset_url( $platform . '.png' ); ?>"
+                                                            <img src="<?php echo esc_attr( sue_get_asset_url( $platform . '.png' ) ); ?>"
                                                                  width="18" height="18" border="0"
-                                                                 alt="<?php echo $platform; ?>">
+                                                                 alt="<?php echo esc_attr($platform); ?>">
                                                         </a>
                                                     </td>
                                                 <?php endif; ?>
@@ -296,7 +296,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
 
                                                                         <?php if ( $title ): ?>
                                                                             <p style="font-size: 24px; line-height: 32px; font-weight:bold;;text-shadow: 1px 1px 1px #3d3d3d;">
-                                                                                <?php echo stripslashes_deep( esc_html( $title ) ); ?>
+                                                                                <?php echo esc_html( stripslashes_deep( $title ) ); ?>
                                                                             </p>
                                                                         <?php endif; ?>
 
@@ -305,7 +305,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
 
                                                                             <p align="center"
                                                                                style="font-size:20px; line-height: 22px;text-shadow: 1px 1px 1px #3d3d3d;">
-                                                                                <?php echo stripslashes_deep( esc_html( $tagline ) ); ?>
+                                                                               <?php echo esc_html( stripslashes_deep( $tagline ) ); ?>
                                                                             </p>
                                                                         <?php endif; ?>
                                                                     </td>
@@ -363,7 +363,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
                             <tr>
                                 <td class="padding content sue-footer"
                                     style="background-color:#042467;color:#ffffff;padding-top:30px;padding-bottom:30px;padding-right:0;padding-left:0;width:100%;text-align:center; width:600px;">
-                                    <?php echo stripslashes_deep( $footer ); ?>
+                                    <?php echo esc_html( stripslashes_deep( $footer ) ); ?>
                                 </td>
                             </tr>
                         </table>
@@ -382,8 +382,8 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
                                         <?php if ( isset( $social[ $platform ] ) ): ?>
                                             <?php if ( ! empty( $social[ $platform ] ) ): ?>
                                                 <a href="<?php echo esc_url_raw( $social[ $platform ] ); ?>">
-                                                    <img src="<?php echo sue_get_asset_url( $platform . '.png' ); ?>"
-                                                         alt="<?php echo $platform; ?>" width="35"
+                                                    <img src="<?php echo esc_attr( sue_get_asset_url( $platform . '.png' ) ); ?>"
+                                                         alt="<?php echo esc_attr($platform); ?>" width="35"
                                                          style="display:inline-block;border-width:0;max-width: 35px;">
                                                 </a>
                                             <?php endif; ?>
@@ -408,7 +408,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
 </center>
 
 <p class="darkmode-bg" style="color: #000000;text-align: center;font-size: 13px;">
-    <?php echo __( 'You are receiving this message because you are a member of', 'send-users-email' ) ?>
+    <?php esc_attr_e( 'You are receiving this message because you are a member of', 'send-users-email' ) ?>
     <strong><?php bloginfo( 'name' ); ?></strong>.
 </p>
 

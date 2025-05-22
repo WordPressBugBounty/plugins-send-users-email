@@ -2,10 +2,12 @@
         <div class="card shadow">
             <div class="card-body">
                 <h5 class="card-title mb-4 text-uppercase"><?php 
-echo __( 'Send Users Email PRO', 'send-users-email' );
+esc_html_e( 'Send Users Email PRO', 'send-users-email' );
 ?></h5>
 				<?php 
-echo '<p class="card-text"><a class="btn btn-success" href="' . sue_fs()->get_upgrade_url() . '">' . __( 'Upgrade Now!', 'send-users-email' ) . '</a></p>';
+echo '<p class="card-text"><a class="btn btn-success" href="' . esc_url( sue_fs()->get_upgrade_url() ) . '">';
+esc_html_e( 'Upgrade Now!', 'send-users-email' );
+echo '</a></p>';
 ?>
             </div>
         </div>
@@ -16,7 +18,7 @@ echo '<p class="card-text"><a class="btn btn-success" href="' . sue_fs()->get_up
                     <a style="text-decoration: none;" target="_blank"
                        href="https://wordpress.org/support/plugin/send-users-email/reviews/#new-post">
 	                    <?php 
-echo __( 'Rate the plugin', 'send-users-email' );
+esc_html_e( 'Rate the plugin', 'send-users-email' );
 ?>
                         <span style="color: #ffb900; font-size: 1.3rem;">&starf;&starf;&starf;&starf;&starf;</span>
                     </a>
@@ -30,7 +32,7 @@ echo __( 'Rate the plugin', 'send-users-email' );
                     <a style="text-decoration: none;" target="_blank"
                        href="https://trello.com/b/ngaIRuqL/send-users-email-plugin-feature-requests">
                         <?php 
-echo __( 'Vote for new features 👍', 'send-users-email' );
+esc_html_e( 'Vote for new features 👍', 'send-users-email' );
 ?>
                     </a>
                 </p>

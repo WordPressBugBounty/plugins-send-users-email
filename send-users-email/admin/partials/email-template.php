@@ -36,22 +36,22 @@ if ( $preview ) {
                 <div class="card shadow" style="text-align: center; margin-bottom: 5rem;">
                     <div class="card-body">
                         <h3 class="text-center pt-3 pb-3 display-7 text-uppercase"><?php 
-    echo __( 'You are using the free version', 'send-users-email' );
+    esc_attr_e( 'You are using the free version', 'send-users-email' );
     ?></h3>
                         <h6 style="margin-bottom: 2rem;"><?php 
-    echo __( 'Upgrade to PRO to preview and use prebuilt templates.', 'send-users-email' );
+    esc_attr_e( 'Upgrade to PRO to preview and use prebuilt templates.', 'send-users-email' );
     ?></h6>
                         <a class="btn btn-success btn-lg" href="<?php 
-    echo sue_fs()->get_upgrade_url();
+    echo esc_attr( sue_fs()->get_upgrade_url() );
     ?>"
                            role="button"><?php 
-    echo __( 'Upgrade to PRO', 'send-users-email' );
+    esc_attr_e( 'Upgrade to PRO', 'send-users-email' );
     ?></a>
                     </div>
                 </div>
 
                 <h3 class="text-center" style="margin-bottom: 3rem;"><?php 
-    echo __( 'Email Plain Text Preview:', 'send-users-email' );
+    esc_attr_e( 'Email Plain Text Preview:', 'send-users-email' );
     ?></h3>
             </div>
         </div>
@@ -137,7 +137,7 @@ if ( $styles ) {
     ?>
         <style>
             <?php 
-    echo stripslashes_deep( esc_html( $styles ) );
+    echo stripslashes_deep( wp_strip_all_tags( $styles ) );
     ?>
         </style>
 	<?php 
@@ -173,7 +173,7 @@ if ( $title || $tagline ) {
     if ( $title ) {
         ?>
                     <h2 class="sue-title"><?php 
-        echo stripslashes_deep( esc_html( $title ) );
+        echo esc_html( stripslashes_deep( $title ) );
         ?></h2>
 				<?php 
     }
@@ -183,7 +183,7 @@ if ( $title || $tagline ) {
     if ( $tagline ) {
         ?>
                     <h5 class="sue-tagline"><?php 
-        echo stripslashes_deep( esc_html( $tagline ) );
+        echo esc_html( stripslashes_deep( $tagline ) );
         ?></h5>
 				<?php 
     }
@@ -208,7 +208,7 @@ if ( $footer ) {
         <tr class="sue-footer">
             <td>
 				<?php 
-    echo stripslashes_deep( $footer );
+    echo esc_html( stripslashes_deep( $footer ) );
     ?>
             </td>
         </tr>
@@ -234,10 +234,10 @@ if ( !empty( $social ) ) {
                 echo esc_url_raw( $social[$platform] );
                 ?>" style="text-decoration: none;">
                                 <img src="<?php 
-                echo sue_get_asset_url( $platform . '.png' );
+                echo esc_attr( sue_get_asset_url( $platform . '.png' ) );
                 ?>"
                                      alt="<?php 
-                echo $platform;
+                echo esc_attr( $platform );
                 ?>" width="30"
                                      style="display:inline-block;border-width:0;max-width: 35px;">
                             </a>

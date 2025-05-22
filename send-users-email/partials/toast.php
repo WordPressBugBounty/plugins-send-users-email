@@ -3,7 +3,7 @@
          aria-atomic="true">
         <div class="d-flex">
             <div class="toast-body">
-				<?php echo __( 'Success', 'send-users-email' ) ?>.
+				<?php esc_html_e( 'Success', 'send-users-email' ) ?>.
             </div>
             <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
                     aria-label="Close"></button>
@@ -14,7 +14,7 @@
          aria-atomic="true" data-bs-delay=20000>
         <div class="d-flex">
             <div class="toast-body">
-				<?php echo __( 'Warning', 'send-users-email' ) ?>.
+				<?php esc_html_e( 'Warning', 'send-users-email' ) ?>.
             </div>
             <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
                     aria-label="Close"></button>

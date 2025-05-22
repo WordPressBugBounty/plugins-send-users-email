@@ -255,7 +255,7 @@ class Send_Users_Email_Admin {
             </select>
             <button type="button" class="button assign_email_group_button" id="assign_email_group_button">
                 <?php 
-        echo __( 'Assign Group', 'send-users-email' );
+        echo esc_attr( 'Assign Group', 'send-users-email' );
         ?>
             </button>
         </div>
@@ -284,7 +284,7 @@ class Send_Users_Email_Admin {
                                 group_id: groupId,
                                 user_ids: userIds,
                                 security: '<?php 
-        echo wp_create_nonce( "assign_email_group_nonce" );
+        echo esc_attr( wp_create_nonce( "assign_email_group_nonce" ) );
         ?>'
                             }, function(response) {
                                 if (response.success) {
@@ -541,7 +541,17 @@ class Send_Users_Email_Admin {
                     // Cleanup email progress record
                     Send_Users_Email_cleanup::cleanupUserEmailProgress();
                     if ( $total_failed_email > 0 ) {
-                        $warningMessage = 'Plugin tried to send ' . count( $users ) . ' ' . _n( 'email', 'emails', count( $users ) ) . ' but ' . $total_failed_email . ' ' . _n( 'email', 'emails', $total_failed_email ) . ' failed to send. Please check logs for possible errors.';
+                        $warningMessage = 'Plugin tried to send ' . count( $users ) . ' ' . _n(
+                            'email',
+                            'emails',
+                            count( $users ),
+                            'send-users-email'
+                        ) . ' but ' . $total_failed_email . ' ' . _n(
+                            'email',
+                            'emails',
+                            $total_failed_email,
+                            'send-users-email'
+                        ) . ' failed to send. Please check logs for possible errors.';
                     }
                     wp_send_json( array(
                         'message' => $resMessage,
@@ -694,7 +704,17 @@ class Send_Users_Email_Admin {
                     // Cleanup email progress record
                     Send_Users_Email_cleanup::cleanupRoleEmailProgress();
                     if ( $total_failed_email > 0 ) {
-                        $warningMessage = 'Plugin tried to send ' . $total_email_to_send . ' ' . _n( 'email', 'emails', $total_email_to_send ) . ' but ' . $total_failed_email . ' ' . _n( 'email', 'emails', $total_failed_email ) . ' failed to send. Please check logs for possible errors.';
+                        $warningMessage = 'Plugin tried to send ' . $total_email_to_send . ' ' . _n(
+                            'email',
+                            'emails',
+                            $total_email_to_send,
+                            'send-users-email'
+                        ) . ' but ' . $total_failed_email . ' ' . _n(
+                            'email',
+                            'emails',
+                            $total_failed_email,
+                            'send-users-email'
+                        ) . ' failed to send. Please check logs for possible errors.';
                     }
                     wp_send_json( array(
                         'message' => $resMessage,

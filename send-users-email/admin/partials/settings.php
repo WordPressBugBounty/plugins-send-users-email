@@ -5,7 +5,7 @@
             <div class="card shadow">
                 <div class="card-body">
                     <h5 class="card-title mb-5 text-uppercase"><?php 
-echo __( 'Settings', 'send-users-email' );
+esc_attr_e( 'Settings', 'send-users-email' );
 ?></h5>
 
                     <div class="sue-messages"></div>
@@ -17,11 +17,11 @@ echo __( 'Settings', 'send-users-email' );
                                 <tr>
                                     <td style="width: 25%">
                                         <label for="logo" class="form-label"><?php 
-echo __( 'Logo URL', 'send-users-email' );
+esc_attr_e( 'Logo URL', 'send-users-email' );
 ?></label>
                                         <div id="logoHelp"
                                              class="form-text"><?php 
-echo __( 'Add email header logo URL here. If left blank, logo will not be used.', 'send-users-email' );
+esc_attr_e( 'Add email header logo URL here. If left blank, logo will not be used.', 'send-users-email' );
 ?></div>
                                     </td>
                                     <td>
@@ -30,7 +30,7 @@ echo __( 'Add email header logo URL here. If left blank, logo will not be used.'
 echo esc_url_raw( $logo );
 ?>"
                                                placeholder="<?php 
-echo __( 'Add your logo URL', 'send-users-email' );
+esc_attr_e( 'Add your logo URL', 'send-users-email' );
 ?>"
                                                aria-describedby="logoHelp">
                                     </td>
@@ -39,11 +39,11 @@ echo __( 'Add your logo URL', 'send-users-email' );
                                 <tr>
                                     <td>
                                         <label for="title" class="form-label"><?php 
-echo __( 'Email Title', 'send-users-email' );
+esc_attr_e( 'Email Title', 'send-users-email' );
 ?></label>
                                         <div id="titleHelp"
                                              class="form-text"><?php 
-echo __( 'This value will be shown below logo image.', 'send-users-email' );
+esc_attr_e( 'This value will be shown below logo image.', 'send-users-email' );
 ?></div>
                                     </td>
                                     <td>
@@ -61,11 +61,11 @@ bloginfo( 'name' );
                                 <tr>
                                     <td>
                                         <label for="tagline" class="form-label"><?php 
-echo __( 'Email Tagline', 'send-users-email' );
+esc_attr_e( 'Email Tagline', 'send-users-email' );
 ?></label>
                                         <div id="taglineHelp"
                                              class="form-text"><?php 
-echo __( 'This value will be shown below email title image.', 'send-users-email' );
+esc_attr_e( 'This value will be shown below email title image.', 'send-users-email' );
 ?></div>
                                     </td>
                                     <td>
@@ -83,11 +83,11 @@ bloginfo( 'description' );
                                 <tr>
                                     <td>
                                         <label for="footer" class="form-label"><?php 
-echo __( 'Email Footer', 'send-users-email' );
+esc_attr_e( 'Email Footer', 'send-users-email' );
 ?></label>
                                         <div id="footerHelp"
                                              class="form-text"><?php 
-echo __( 'Email footer content will be added to all emails at footer of email (supports HTML). Please use full https links for maximum compatibility among email clients.', 'send-users-email' );
+esc_attr_e( 'Email footer content will be added to all emails at footer of email (supports HTML). Please use full https links for maximum compatibility among email clients.', 'send-users-email' );
 ?></div>
                                     </td>
                                     <td>
@@ -96,7 +96,7 @@ echo __( 'Email footer content will be added to all emails at footer of email (s
 echo esc_attr( $footer );
 ?>"
                                                placeholder="<?php 
-echo __( 'Email footer content', 'send-users-email' );
+esc_attr_e( 'Email footer content', 'send-users-email' );
 ?>"
                                                aria-describedby="footerHelp">
                                     </td>
@@ -106,11 +106,11 @@ echo __( 'Email footer content', 'send-users-email' );
                                     <td>
                                         <label for="email_from_name"
                                                class="form-label"><?php 
-echo __( 'Email From/Reply-To Name', 'send-users-email' );
+esc_attr_e( 'Email From/Reply-To Name', 'send-users-email' );
 ?></label>
                                         <div id="emailFromNameHelp"
                                              class="form-text"><?php 
-echo __( 'Email from/reply-to name to use in send emails.', 'send-users-email' );
+esc_attr_e( 'Email from/reply-to name to use in send emails.', 'send-users-email' );
 ?></div>
                                     </td>
                                     <td>
@@ -120,7 +120,7 @@ echo __( 'Email from/reply-to name to use in send emails.', 'send-users-email' )
 echo esc_attr( $email_from_name );
 ?>"
                                                placeholder="<?php 
-echo __( 'Email from Name', 'send-users-email' );
+esc_attr_e( 'Email from Name', 'send-users-email' );
 ?>"
                                                aria-describedby="emailFromNameHelp">
                                     </td>
@@ -130,11 +130,11 @@ echo __( 'Email from Name', 'send-users-email' );
                                     <td>
                                         <label for="email_from_address"
                                                class="form-label"><?php 
-echo __( 'Email From Address', 'send-users-email' );
+esc_attr_e( 'Email From Address', 'send-users-email' );
 ?></label>
                                         <div id="emailFromAddressHelp"
                                              class="form-text"><?php 
-echo __( 'Email from address to use in send emails.', 'send-users-email' );
+esc_attr_e( 'Email from address to use in send emails.', 'send-users-email' );
 ?></div>
                                     </td>
                                     <td>
@@ -152,11 +152,11 @@ echo esc_attr( $email_from_address );
                                     <td>
                                         <label for="reply_to_address"
                                                class="form-label"><?php 
-echo __( 'Reply To Address', 'send-users-email' );
+esc_attr_e( 'Reply To Address', 'send-users-email' );
 ?></label>
                                         <div id="replyToAddressHelp"
                                              class="form-text"><?php 
-echo __( 'Reply To address to use.', 'send-users-email' );
+esc_attr_e( 'Reply To address to use.', 'send-users-email' );
 ?></div>
                                     </td>
                                     <td>
@@ -174,11 +174,11 @@ echo esc_attr( $reply_to_address );
                                     <td>
                                         <label for="email_template_style"
                                                class="form-label"><?php 
-echo __( 'Email Template Style', 'send-users-email' );
+esc_attr_e( 'Email Template Style', 'send-users-email' );
 ?></label>
                                         <div id="emailTemplateStyleHelp"
                                              class="form-text"><?php 
-echo __( 'Add your custom CSS style to email template. These style will be applied on top of default style.', 'send-users-email' );
+esc_attr_e( 'Add your custom CSS style to email template. These style will be applied on top of default style.', 'send-users-email' );
 ?></div>
                                     </td>
                                     <td>
@@ -197,14 +197,14 @@ echo esc_attr( $email_template_style );
                                     <td>
                                         <label for="email_send_roles"
                                                class="form-label"><?php 
-echo __( 'Roles', 'send-users-email' );
+esc_attr_e( 'Roles', 'send-users-email' );
 ?></label>
                                         <div id="emailSendRolesHelp"
                                              class="form-text"><?php 
-echo __( 'Select role(s) that has access to send emails. Administrators by default has this access.', 'send-users-email' );
+esc_attr_e( 'Select role(s) that has access to send emails. Administrators by default has this access.', 'send-users-email' );
 ?><br>
                                             <span class="text-danger"><strong><?php 
-echo __( 'Be careful that only intended users have this access.', 'send-users-email' );
+esc_attr_e( 'Be careful that only intended users have this access.', 'send-users-email' );
 ?></strong></span>
                                         </div>
                                     </td>
@@ -248,14 +248,14 @@ foreach ( $roles as $slug => $name ) {
                                     <td>
                                         <label for="email_social_links"
                                                class="form-label"><?php 
-echo __( 'Social Media', 'send-users-email' );
+esc_attr_e( 'Social Media', 'send-users-email' );
 ?></label>
                                         <div id="emailSendRolesHelp"
                                              class="form-text"><?php 
-echo __( 'Add link to your social media pages and this will be used on email you send to your users. Leave empty if you don\'t want it included.', 'send-users-email' );
+esc_attr_e( 'Add link to your social media pages and this will be used on email you send to your users. Leave empty if you don\'t want it included.', 'send-users-email' );
 ?><br>
                                             <span class="text-warning"><?php 
-echo __( 'Please use full URL to social media profile.', 'send-users-email' );
+esc_attr_e( 'Please use full URL to social media profile.', 'send-users-email' );
 ?></span>
                                         </div>
                                     </td>
@@ -266,27 +266,28 @@ foreach ( Send_Users_Email_Admin::$social as $platform ) {
                                             <div class="input-group mb-2">
                                                 <span class="input-group-text">
                                                     <img src="<?php 
-    echo sue_get_asset_url( $platform . '.png' );
+    echo esc_attr( sue_get_asset_url( $platform . '.png' ) );
     ?>"
                                                          alt="<?php 
-    echo $platform;
+    echo esc_attr( $platform );
     ?>"
                                                          title="<?php 
-    echo ucfirst( $platform );
+    echo esc_attr( ucfirst( $platform ) );
     ?>" height="18">
                                                 </span>
                                                 <input type="text" class="form-control" id="<?php 
-    echo $platform;
+    echo esc_attr( $platform );
     ?>"
                                                        name="social[<?php 
-    echo $platform;
+    echo esc_attr( $platform );
     ?>]"
                                                        value="<?php 
     echo $social[$platform] ?? '';
     ?>"
                                                        placeholder="<?php 
-    echo __( ucfirst( $platform ), 'send-users-email' );
-    ?>">
+    esc_attr_e( ucfirst( $platform ), 'send-users-email' );
+    ?>"
+                                                >
                                             </div>
 										<?php 
 }
@@ -301,17 +302,17 @@ foreach ( Send_Users_Email_Admin::$social as $platform ) {
                                     <td>
                                         <div class="spinner-border text-info sue-spinner" role="status">
                                             <span class="visually-hidden"><?php 
-echo __( 'Loading...', 'send-users-email' );
+esc_attr_e( 'Loading...', 'send-users-email' );
 ?></span>
                                         </div>
                                         <input type="hidden" id="_wpnonce" name="_wpnonce"
                                                value="<?php 
-echo wp_create_nonce( 'sue-email-user' );
+echo esc_attr( wp_create_nonce( 'sue-email-user' ) );
 ?>"/></td>
                                     <td>
                                         <button type="submit" class="btn btn-primary" id="sue-settings-btn">
                                             <span class="dashicons dashicons-admin-settings"></span> <?php 
-echo __( 'Save Settings', 'send-users-email' );
+esc_attr_e( 'Save Settings', 'send-users-email' );
 ?>
                                         </button>
                                     </td>
@@ -334,16 +335,16 @@ require_once SEND_USERS_EMAIL_PLUGIN_BASE_PATH . '/partials/donate.php';
             <div class="card shadow">
                 <div class="card-body">
                     <h5 class="card-title text-uppercase"><?php 
-echo __( 'Instruction', 'send-users-email' );
+esc_attr_e( 'Instruction', 'send-users-email' );
 ?></h5>
                     <p class="card-text"><?php 
-echo __( 'Please configure email settings before sending emails.', 'send-users-email' );
+esc_attr_e( 'Please configure email settings before sending emails.', 'send-users-email' );
 ?></p>
                     <p class="card-text"><?php 
-echo __( 'If the settings fields are left blank, the corresponding section will not be added to email.', 'send-users-email' );
+esc_attr_e( 'If the settings fields are left blank, the corresponding section will not be added to email.', 'send-users-email' );
 ?></p>
                     <p class="card-text"><?php 
-echo __( 'Example: If you leave logo setting blank, no logo will be added to outgoing emails.', 'send-users-email' );
+esc_attr_e( 'Example: If you leave logo setting blank, no logo will be added to outgoing emails.', 'send-users-email' );
 ?></p>
                 </div>
             </div>
@@ -351,13 +352,13 @@ echo __( 'Example: If you leave logo setting blank, no logo will be added to out
             <div class="card shadow bg-warning bg-opacity-10">
                 <div class="card-body">
                     <h5 class="text-uppercase mb-4"><?php 
-echo __( "CAUTION", 'send-users-email' );
+esc_attr_e( "CAUTION", 'send-users-email' );
 ?></h5>
                     <p><?php 
-echo __( "Email from Name and Email from Address can be overwritten by other plugins.", 'send-users-email' );
+esc_attr_e( "Email from Name and Email from Address can be overwritten by other plugins.", 'send-users-email' );
 ?></p>
                     <p><?php 
-echo __( "If from Name and from Email set here is not working, please make sure that other plugins are not overriding.", 'send-users-email' );
+esc_attr_e( "If from Name and from Email set here is not working, please make sure that other plugins are not overriding.", 'send-users-email' );
 ?></p>
                 </div>
             </div>

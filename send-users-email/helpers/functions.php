@@ -219,3 +219,9 @@ if ( ! function_exists( 'sue_obscure_text' ) ) {
 		return $string;
 	}
 }
+
+if ( ! function_exists( 'sue_get_plugin_text_domain' ) ) {
+	function sue_get_plugin_text_domain() {
+		return 'send-users-email';
+	}
+}

@@ -5,7 +5,7 @@
             <div class="card shadow">
                 <div class="card-body">
                     <h5 class="card-title mb-4 text-uppercase text-center"><?php 
-echo __( 'Send email to selected users', 'send-users-email' );
+esc_attr_e( 'Send email to selected users', 'send-users-email' );
 ?></h5>
 
 					<?php 
@@ -16,7 +16,7 @@ if ( $total_users > 6000 ) {
     ?>
                         <div class="alert alert-danger" role="alert">
 							<?php 
-    echo __( 'You have high number of users in the system so this page might take some time to load all users. Please consider using Role Email instead.', 'send-users-email' );
+    esc_attr_e( 'You have high number of users in the system so this page might take some time to load all users. Please consider using Role Email instead.', 'send-users-email' );
     ?>
                         </div>
 					<?php 
@@ -28,11 +28,11 @@ if ( $total_users > 6000 ) {
                         <div class="mb-4">
                             <label for="subject"
                                    class="form-label"><?php 
-echo __( 'Email Subject', 'send-users-email' );
+esc_attr_e( 'Email Subject', 'send-users-email' );
 ?></label>
                             <input type="text" class="form-control subject" id="subject" name="subject" maxlength="200"
                                    placeholder="<?php 
-echo __( 'Email subject here.', 'send-users-email' );
+esc_attr_e( 'Email subject here.', 'send-users-email' );
 ?> <?php 
 ?>">
                         </div>
@@ -44,13 +44,13 @@ if ( $allowed_title_tagline && sue_fs()->is__premium_only() && sue_fs()->can_use
                             <div class="mb-4">
                                 <label for="title"
                                     class="form-label"><?php 
-    echo __( 'Email Title', 'send-users-email' );
+    esc_attr_e( 'Email Title', 'send-users-email' );
     ?></label>
                                 <input type="text" class="form-control title" id="subject" name="title" maxlength="100" value="<?php 
     echo esc_attr( $title );
     ?>"
                                     placeholder="<?php 
-    echo __( 'Email title here.', 'send-users-email' );
+    esc_attr_e( 'Email title here.', 'send-users-email' );
     ?> <?php 
     ?>">
                             </div>
@@ -58,13 +58,13 @@ if ( $allowed_title_tagline && sue_fs()->is__premium_only() && sue_fs()->can_use
                             <div class="mb-4">
                                 <label for="tagline"
                                     class="form-label"><?php 
-    echo __( 'Email Tagline', 'send-users-email' );
+    esc_attr_e( 'Email Tagline', 'send-users-email' );
     ?></label>
                                 <input type="text" class="form-control tagline" id="tagline" name="tagline" maxlength="100" value="<?php 
     echo esc_attr( $tagline );
     ?>"
                                     placeholder="<?php 
-    echo __( 'Email tagline here.', 'send-users-email' );
+    esc_attr_e( 'Email tagline here.', 'send-users-email' );
     ?> <?php 
     ?>">
                             </div>
@@ -77,7 +77,7 @@ if ( $allowed_title_tagline && sue_fs()->is__premium_only() && sue_fs()->can_use
                             <div class="sue-user-email-datatable">
                                 <label for="sue_users"
                                        class="form-label"><?php 
-echo __( 'Select Users', 'send-users-email' );
+esc_attr_e( 'Select Users', 'send-users-email' );
 ?></label>
 
                                 <table class="table table-sm">
@@ -85,15 +85,15 @@ echo __( 'Select Users', 'send-users-email' );
                                     <tr>
                                         <td>
                                             <strong><?php 
-echo __( 'Filter users using user ID range', 'send-users-email' );
+esc_attr_e( 'Filter users using user ID range', 'send-users-email' );
 ?></strong>
                                         </td>
                                         <td><label for="minID"><?php 
-echo __( 'Minimum ID', 'send-users-email' );
+esc_attr_e( 'Minimum ID', 'send-users-email' );
 ?></label></td>
                                         <td><input class="form-control" type="text" id="minID" name="minID"></td>
                                         <td><label for="maxID"><?php 
-echo __( 'Maximum ID', 'send-users-email' );
+esc_attr_e( 'Maximum ID', 'send-users-email' );
 ?></label></td>
                                         <td><input class="form-control" type="text" id="maxID" name="maxID"></td>
                                     </tr>
@@ -105,16 +105,16 @@ echo __( 'Maximum ID', 'send-users-email' );
                                     <tr>
                                         <th><input type="checkbox" id="sueSelectAllUsers"></th>
                                         <th><?php 
-echo __( 'ID', 'send-users-email' );
+esc_attr_e( 'ID', 'send-users-email' );
 ?></th>
                                         <th><?php 
-echo __( 'Username', 'send-users-email' );
+esc_attr_e( 'Username', 'send-users-email' );
 ?></th>
                                         <th><?php 
-echo __( 'Email', 'send-users-email' );
+esc_attr_e( 'Email', 'send-users-email' );
 ?></th>
                                         <th><?php 
-echo __( 'Display Name', 'send-users-email' );
+esc_attr_e( 'Display Name', 'send-users-email' );
 ?></th>
                                     </tr>
                                     </thead>
@@ -151,7 +151,7 @@ foreach ( $blog_users as $user ) {
                         <div class="mb-4">
                             <label for="sue_user_email_message"
                                    class="form-label"><?php 
-echo __( 'Email Message', 'send-users-email' );
+esc_attr_e( 'Email Message', 'send-users-email' );
 ?></label>
 
 							<?php 
@@ -165,7 +165,7 @@ wp_editor( '', 'sue_user_email_message', [
 
                         <input type="hidden" id="_wpnonce" name="_wpnonce"
                                value="<?php 
-echo wp_create_nonce( 'sue-email-user' );
+echo esc_attr( wp_create_nonce( 'sue-email-user' ) );
 ?>"/>
 
 						<?php 
@@ -176,7 +176,7 @@ echo wp_create_nonce( 'sue-email-user' );
                                 <div class="d-grid gap-2">
                                     <button type="submit" id="sue-user-email-btn" class="btn btn-primary btn-block">
                                         <span class="dashicons dashicons-email"></span> <?php 
-echo __( 'Send Message', 'send-users-email' );
+esc_attr_e( 'Send Message', 'send-users-email' );
 ?>
                                     </button>
                                 </div>
@@ -184,7 +184,7 @@ echo __( 'Send Message', 'send-users-email' );
                             <div class="col-md-2 mt-2">
                                 <div class="spinner-border text-info sue-spinner" role="status">
                                     <span class="visually-hidden"><?php 
-echo __( 'Loading...', 'send-users-email' );
+esc_attr_e( 'Loading...', 'send-users-email' );
 ?></span>
                                 </div>
                             </div>
@@ -216,7 +216,7 @@ require_once SEND_USERS_EMAIL_PLUGIN_BASE_PATH . '/partials/warnings.php';
             <div class="card shadow">
                 <div class="card-body">
                     <h5 class="card-title text-uppercase mb-4"><?php 
-echo __( 'Hide columns', 'send-users-email' );
+esc_attr_e( 'Hide columns', 'send-users-email' );
 ?></h5>
 					<?php 
 $columns = [
@@ -231,19 +231,19 @@ foreach ( $columns as $i => $column ) {
     ?>
                         <div class="form-check">
                             <input data-column="<?php 
-    echo $i;
+    echo esc_attr( $i );
     ?>" class="form-check-input hideUserColumn"
                                    type="checkbox" value="<?php 
-    echo $i;
+    echo esc_attr( $i );
     ?>" id="<?php 
-    echo $i . $column;
+    echo esc_attr( $i . $column );
     ?>">
                             <label class="form-check-label" for="<?php 
-    echo $i . $column;
+    echo esc_attr( $i . $column );
     ?>"
                                    style="margin-top: -25px;">
 								<?php 
-    echo ucwords( str_replace( '_', ' ', $column ) );
+    echo esc_attr( ucwords( str_replace( '_', ' ', $column ) ) );
     ?>
                             </label>
                         </div>
@@ -258,10 +258,10 @@ foreach ( $columns as $i => $column ) {
                 <div class="card shadow">
                     <div class="card-body">
                         <h5 class="card-title text-uppercase"><?php 
-echo __( 'Instruction', 'send-users-email' );
+esc_attr_e( 'Instruction', 'send-users-email' );
 ?></h5>
                         <p class="card-text"><?php 
-echo __( 'Send email to individual users by selecting them from the user list.', 'send-users-email' );
+esc_attr_e( 'Send email to individual users by selecting them from the user list.', 'send-users-email' );
 ?></p>
                     </div>
                 </div>

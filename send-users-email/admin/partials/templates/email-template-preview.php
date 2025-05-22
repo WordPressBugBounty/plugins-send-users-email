@@ -43,13 +43,13 @@ $style = ( isset( $_GET['style'] ) ) ? sanitize_text_field( $_GET['style'] ) : '
 <div class="container" style="margin-bottom: 3rem;margin-top:2rem;">
     <div class="row justify-content-center">
         <div class="col-md-5">
-            <p><strong><?php echo __( 'Select email theme for preview', 'send-users-email' ); ?></strong></p>
+            <p><strong><?php esc_attr_e( 'Select email theme for preview', 'send-users-email' ); ?></strong></p>
             <select class="form-select" aria-label="Select email style" id="email_style" name="email_style">
                 <?php foreach ( sue_get_email_theme_scheme() as $theme ): ?>
                     <option
-                        value="<?php echo __( esc_attr( $theme ), 'send-users-email' ); ?>"
+                        value="<?php esc_attr_e( $theme, 'send-users-email' ); ?>"
                         <?php echo ( $style == $theme ) ? 'selected="selected"' : ''; ?>">
-                        <?php echo __( ucfirst( esc_attr( $theme ) ), 'send-users-email' ); ?>
+                        <?php esc_attr_e( ucfirst( esc_attr( $theme ) ), 'send-users-email' ); ?>
                     </option>
                 <?php endforeach; ?>
             </select>
@@ -61,7 +61,7 @@ $style = ( isset( $_GET['style'] ) ) ? sanitize_text_field( $_GET['style'] ) : '
         const emailStyle = document.getElementById('email_style');
         emailStyle.addEventListener('change', function() {
             const style = emailStyle.value;
-            window.location.href = '<?php echo admin_url( 'admin.php?page=send-users-email-preview' ); ?>&style=' + style;
+            window.location.href = '<?php echo esc_attr( admin_url( 'admin.php?page=send-users-email-preview' ) ); ?>&style=' + style;
         });
     });
 </script>

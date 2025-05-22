@@ -144,7 +144,7 @@
     <![endif]-->
     <?php if ( $styles ): ?>
         <style>
-            <?php echo stripslashes_deep( esc_html( $styles ) ); ?>
+            <?php echo stripslashes_deep( wp_strip_all_tags( $styles ) ); ?>
         </style>
     <?php endif; ?>
 
@@ -237,7 +237,7 @@
 
                                                                         <?php if ( $title ): ?>
                                                                             <p style="font-size: 20px; line-height: 22px; font-weight:600;margin-bottom:8px;margin-top:0;">
-                                                                                <?php echo stripslashes_deep( esc_html( $title ) ); ?>
+                                                                                <?php echo esc_html( stripslashes_deep( $title ) ); ?>
                                                                             </p>
                                                                         <?php endif; ?>
 
@@ -245,7 +245,7 @@
 
                                                                             <p align="center"
                                                                                style="font-size:16px; line-height: 22px; margin-bottom:0;">
-                                                                                <?php echo stripslashes_deep( esc_html( $tagline ) ); ?>
+                                                                                <?php echo esc_html( stripslashes_deep( $tagline ) ); ?>
                                                                             </p>
                                                                         <?php endif; ?>
                                                                     </td>
@@ -303,7 +303,7 @@
                             <tr>
                                 <td class="padding content sue-footer"
                                     style="background-color:#a9a9a9;color:#ffffff;padding-top:25px;padding-bottom:25px;padding-right:0;padding-left:0;width:100%;text-align:center; width:600px;font-size:14px;">
-                                    <?php echo stripslashes_deep( $footer ); ?>
+                                    <?php echo esc_html( stripslashes_deep( $footer ) ); ?>
                                 </td>
                             </tr>
                         </table>
@@ -322,8 +322,8 @@
                                         <?php if ( isset( $social[ $platform ] ) ): ?>
                                             <?php if ( ! empty( $social[ $platform ] ) ): ?>
                                                 <a href="<?php echo esc_url_raw( $social[ $platform ] ); ?>">
-                                                    <img src="<?php echo sue_get_asset_url_new( $platform . '.png' ); ?>"
-                                                         alt="<?php echo $platform; ?>" width="15"
+                                                    <img src="<?php echo esc_attr( sue_get_asset_url( $platform . '.png' ) ); ?>"
+                                                         alt="<?php echo esc_attr($platform); ?>" width="15"
                                                          style="display:inline-block;border-width:0;max-width: 15px;margin: 0 8px;">
                                                 </a>
                                             <?php endif; ?>
@@ -348,7 +348,7 @@
 </center>
 
 <p class="darkmode-bg" style="color: #000000;text-align: center;font-size: 12px;margin-top:16px;font-weight:400;">
-    <?php echo __( 'You are receiving this message because you are a member of', 'send-users-email' ) ?>
+    <?php esc_attr_e( 'You are receiving this message because you are a member of', 'send-users-email' ) ?>
     <?php bloginfo( 'name' ); ?>.
 </p>
 

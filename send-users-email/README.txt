@@ -3,9 +3,9 @@ Contributors: paretodigital, metalfreek
 Donate link: https://sendusersemail.com/?utm_source=wp_repo&utm_medium=link&utm_campaign=donate_link
 Tags: email users, email subscribers, email system users, send email, email all users
 Requires at least: 5.7
-Tested up to: 6.7.1
+Tested up to: 6.8.1
 Requires PHP: 7.4
-Stable tag: 1.5.13
+Stable tag: 1.5.14
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -126,6 +126,11 @@ The free version logs emails for 15 days, while the [PRO version](https://sendus
 6. Tags for email personalization
 
 == Changelog ==
+= 1.5.14 (2024-05-22) =
+* Hotfix for custom CSS output
+* Compliance with wp.org standards
+* Fremius SDK upgrade
+
 = 1.5.13 (2025-04-02) =
 * Hotfix for compatibility with PHP 7.4
 
