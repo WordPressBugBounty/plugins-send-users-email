@@ -5,7 +5,7 @@ Tags: email users, email subscribers, email system users, send email, email all 
 Requires at least: 5.7
 Tested up to: 6.8.1
 Requires PHP: 7.4
-Stable tag: 1.5.14
+Stable tag: 1.5.15
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -126,6 +126,9 @@ The free version logs emails for 15 days, while the [PRO version](https://sendus
 6. Tags for email personalization
 
 == Changelog ==
+= 1.5.15 (2024-05-27) =
+* Hotfix for escaping html in emails
+
 = 1.5.14 (2024-05-22) =
 * Hotfix for custom CSS output
 * Compliance with wp.org standards

@@ -208,7 +208,7 @@ if ( $footer ) {
         <tr class="sue-footer">
             <td>
 				<?php 
-    echo esc_html( stripslashes_deep( $footer ) );
+    echo stripslashes_deep( $footer );
     ?>
             </td>
         </tr>

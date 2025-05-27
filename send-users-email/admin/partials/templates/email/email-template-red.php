@@ -364,7 +364,7 @@
                             <tr>
                                 <td class="padding content sue-footer"
                                     style="background-color:#D64123;color:#ffffff;padding-top:30px;padding-bottom:30px;padding-right:0;padding-left:0;width:100%;text-align:center; width:600px;">
-                                    <?php echo esc_html( stripslashes_deep( $footer ) ); ?>
+                                    <?php echo stripslashes_deep( $footer ); ?>
                                 </td>
                             </tr>
                         </table>

@@ -303,7 +303,7 @@
                             <tr>
                                 <td class="padding content sue-footer"
                                     style="background-color:#a9a9a9;color:#ffffff;padding-top:25px;padding-bottom:25px;padding-right:0;padding-left:0;width:100%;text-align:center; width:600px;font-size:14px;">
-                                    <?php echo esc_html( stripslashes_deep( $footer ) ); ?>
+                                    <?php echo stripslashes_deep( $footer ); ?>
                                 </td>
                             </tr>
                         </table>
