@@ -39,7 +39,7 @@ if ( $preview ) {
     esc_attr_e( 'You are using the free version', 'send-users-email' );
     ?></h3>
                         <h6 style="margin-bottom: 2rem;"><?php 
-    esc_attr_e( 'Upgrade to PRO to preview and use prebuilt templates.', 'send-users-email' );
+    esc_attr_e( 'Upgrade to PRO to preview and use prebuilt templates. Or even use your own HTML template.', 'send-users-email' );
     ?></h6>
                         <a class="btn btn-success btn-lg" href="<?php 
     echo esc_attr( sue_fs()->get_upgrade_url() );

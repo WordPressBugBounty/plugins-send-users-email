@@ -119,6 +119,9 @@ esc_attr_e( 'Send Users Email provides you with an option to use prebuilt email 
                         <p class="card-text"><?php 
 esc_attr_e( 'The PRO version of Send Users Email provides email styles that are compatible with various screen sizes and you can choose different color schemes as per your need.', 'send-users-email' );
 ?></p>
+                        <p class="card-text"><strong><?php 
+esc_attr_e( 'If that\'s not enough, you can even use your own HTML/CSS templates.', 'send-users-email' );
+?></strong></p>
                     </div>
                 </div>
             </div>

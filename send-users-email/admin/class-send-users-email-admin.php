@@ -32,7 +32,8 @@ class Send_Users_Email_Admin {
         'send-users-email-error-logs',
         'send-users-email-user-groups',
         'send-users-email-groups',
-        'send-users-email-preview'
+        'send-users-email-preview',
+        'send-users-html-template'
     );
 
     /**
@@ -364,6 +365,18 @@ class Send_Users_Email_Admin {
     }
 
     /**
+     * Summary of html_template
+     * This function is a placeholder for the HTML template page.
+     * 
+     * @return void
+     */
+    public function html_template() {
+        if ( !current_user_can( 'manage_options' ) ) {
+            wp_die( 'Unauthorized' );
+        }
+    }
+
+    /**
      * Theme preview page
      * @return void
      */
@@ -516,6 +529,15 @@ class Send_Users_Email_Admin {
                         $email_subject = stripslashes_deep( $subject );
                         $email_title = stripslashes_deep( $title );
                         $email_tagline = stripslashes_deep( $tagline );
+                        $email_subject = strip_tags( $this->replace_placeholder(
+                            $email_subject,
+                            $username,
+                            $display_name,
+                            $first_name,
+                            $last_name,
+                            $user_email,
+                            $user_id
+                        ) );
                         // Send email
                         $input_request = [
                             'title'   => $email_title,
@@ -679,6 +701,15 @@ class Send_Users_Email_Admin {
                         $email_subject = stripslashes_deep( $subject );
                         $email_title = stripslashes_deep( $title );
                         $email_tagline = stripslashes_deep( $tagline );
+                        $email_subject = strip_tags( $this->replace_placeholder(
+                            $email_subject,
+                            $username,
+                            $display_name,
+                            $first_name,
+                            $last_name,
+                            $user_email,
+                            $user_id
+                        ) );
                         // Send email
                         $input_request = [
                             'title'   => $email_title,

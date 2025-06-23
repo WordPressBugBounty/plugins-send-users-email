@@ -90,6 +90,13 @@ switch ( $style ) {
     case "purity":
         require SEND_USERS_EMAIL_PLUGIN_BASE_PATH .'/admin/partials/templates/email/email-template-purity.php';
         break;
+    case 'custom':
+        echo SUE_Custom_Html_Template::parse_template(
+            $title,
+            $tagline,
+            $email_body
+        );
+        break;
     case "default":
         global $preview;
         $preview = true;

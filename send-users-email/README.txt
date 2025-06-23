@@ -3,9 +3,9 @@ Contributors: paretodigital, metalfreek
 Donate link: https://sendusersemail.com/?utm_source=wp_repo&utm_medium=link&utm_campaign=donate_link
 Tags: email users, email subscribers, email system users, send email, email all users
 Requires at least: 5.7
-Tested up to: 6.8.1
+Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.5.15
+Stable tag: 1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,6 +41,7 @@ This plugin uses `wp_mail` function to send emails. Any other E-Mail plugin that
 - **Queue Scheduling**: Schedule emails to be sent at a later time or date, giving you more flexibility in managing campaigns.
 - **User Groups**: Create and manage user groups to send targeted emails to specific segments of your audience.
 - **Email Templates**: Save time by creating and reusing email templates for commonly sent messages.
+- **Add your own template**: Add your own HTML/CSS email template and use it as your default template.
 - **Pre-designed Email Styles**: Choose from well-crafted, ready-to-use email styles with various color schemes, no CSS required.
 - **Subject Line Placeholders**: Personalize email subject lines with placeholders for higher engagement.
 - **Default Email Styles**: Set a default email style for consistency across your communications.
@@ -48,6 +49,7 @@ This plugin uses `wp_mail` function to send emails. Any other E-Mail plugin that
 - **Extended Email Logs (90 Days)**: Logs are retained for 90 days, adjustable in settings, giving you a longer email history for auditing and review.
 - **Clutter-Free UI**: Enjoy an optimized, user-friendly interface designed to improve your workflow.
 - **Improved Email Deliverability**: Add your own SMPT server or a third-party SMTP server to improve email deliverability
+
 
 📚 [Documentation](https://sendusersemail.com/docs/how-to-install/?utm_source=wp_dir&utm_medium=link&utm_campaign=docs) | 🌟 [PRO Features](https://sendusersemail.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=features#pricing) | 🔥 [Get PRO](https://sendusersemail.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=get_pro)
 
@@ -126,10 +128,15 @@ The free version logs emails for 15 days, while the [PRO version](https://sendus
 6. Tags for email personalization
 
 == Changelog ==
-= 1.5.15 (2024-05-27) =
+
+= 1.6 (2025-06-19)
+= New feature descriptions
+= Hofix for template tag replacement
+
+= 1.5.15 (2025-05-27) =
 * Hotfix for escaping html in emails
 
-= 1.5.14 (2024-05-22) =
+= 1.5.14 (2025-05-22) =
 * Hotfix for custom CSS output
 * Compliance with wp.org standards
 * Fremius SDK upgrade

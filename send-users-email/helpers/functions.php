@@ -93,6 +93,7 @@ if ( ! function_exists( 'sue_get_email_theme_scheme' ) ) {
 
 		return [
 			'default',
+			'custom',
 			'blue',
 			'green',
 			'pink',
@@ -223,5 +224,23 @@ if ( ! function_exists( 'sue_obscure_text' ) ) {
 if ( ! function_exists( 'sue_get_plugin_text_domain' ) ) {
 	function sue_get_plugin_text_domain() {
 		return 'send-users-email';
+	}
+}
+
+/**
+ * Check if the plugin is premium and can use premium code.
+ * This function checks if the plugin is premium and if the user has the capability to use premium code.
+ * It returns true if both conditions are met, otherwise false.
+ * @return bool
+ */
+if ( ! function_exists( 'sue_is_premium_and_can_use_premium_code' ) ) {
+	function sue_is_premium_and_can_use_premium_code(): bool {
+		if ( sue_fs()->is__premium_only() 
+			&& sue_fs()->can_use_premium_code() 
+		) {
+			return true;
+		}
+
+		return false;
 	}
 }
