@@ -544,12 +544,19 @@ class Send_Users_Email_Admin {
                             'tagline' => $email_tagline,
                         ];
                         $email_template = $this->email_template( $email_body, $email_style, $input_request );
-                        if ( !wp_mail(
-                            $user_email,
-                            $email_subject,
-                            $email_template,
-                            $headers
-                        ) ) {
+                        $args_send_mail = [
+                            'user_id'       => $user_id,
+                            'email_style'   => $email_style,
+                            'to'            => $user_email,
+                            'subject'       => $email_subject,
+                            'body'          => $email_template,
+                            'headers'       => $headers,
+                            'email_title'   => $email_title,
+                            'email_tagline' => $email_tagline,
+                        ];
+                        $sue_override_user_email_subscription = ( isset( $_REQUEST['sue_override_user_email_subscription'] ) ? sanitize_text_field( $_REQUEST['sue_override_user_email_subscription'] ) : 0 );
+                        $send_mail = $this->send_email( $sue_override_user_email_subscription, $args_send_mail );
+                        if ( !$send_mail ) {
                             $total_failed_email++;
                         } else {
                             sue_log_sent_emails( $user_email, $email_subject, $email_body );
@@ -716,12 +723,19 @@ class Send_Users_Email_Admin {
                             'tagline' => $email_tagline,
                         ];
                         $email_template = $this->email_template( $email_body, $email_style, $input_request );
-                        if ( !wp_mail(
-                            $user_email,
-                            $email_subject,
-                            $email_template,
-                            $headers
-                        ) ) {
+                        $args_send_mail = [
+                            'user_id'       => $user_id,
+                            'email_style'   => $email_style,
+                            'to'            => $user_email,
+                            'subject'       => $email_subject,
+                            'body'          => $email_template,
+                            'headers'       => $headers,
+                            'email_title'   => $email_title,
+                            'email_tagline' => $email_tagline,
+                        ];
+                        $sue_override_user_email_subscription = ( isset( $_REQUEST['sue_override_user_email_subscription'] ) ? sanitize_text_field( $_REQUEST['sue_override_user_email_subscription'] ) : 0 );
+                        $send_mail = $this->send_email( $sue_override_user_email_subscription, $args_send_mail );
+                        if ( !$send_mail ) {
                             $total_failed_email++;
                         } else {
                             sue_log_sent_emails( $user_email, $email_subject, $email_body );
@@ -1208,6 +1222,61 @@ class Send_Users_Email_Admin {
                     //phpcs:ignore
                 }
         */
+    }
+
+    /**
+     * Summary of send_email
+     * This will send email using wp_mail function.
+     * It can be override using the hook sue_send_using_wp_mail_{$email_style}
+     * It can use different mail service, use hook sue_process_sue_send_using_email_service_{$email_style}
+     * @param mixed $sue_data
+     * @param mixed $input_requests
+     * @return bool
+     */
+    private function send_email( $sue_override_user_email_subscription, $sue_data = [] ) {
+        $user_id = $sue_data['user_id'];
+        $email_style = $sue_data['email_style'];
+        $to = $sue_data['to'];
+        $subject = $sue_data['subject'];
+        $body = $sue_data['body'];
+        $headers = $sue_data['headers'];
+        $attachments = $sue_data['attachments'] ?? [];
+        // this is for the free
+        $send_email = true;
+        // does the system will send even the unsubscribed users?
+        if ( sue_is_premium_and_can_use_premium_code() ) {
+            $send_email = SUE_Email_Subscription_Override::override( $user_id, $sue_override_user_email_subscription );
+        }
+        /**
+         * Use this hook to by-pass wp_mail function.
+         * Always return true.
+         * @see SUE_Woo_Email_Template::init_hook
+         * @var mixed
+         */
+        $send_using_wp_mail = apply_filters( 'sue_send_using_wp_mail_' . $email_style, '__return_true' );
+        /**
+         * If ok to send email and user is subscribed then send.
+         * And if no hook returned false then send mail.
+         */
+        if ( $send_email && $send_using_wp_mail ) {
+            return wp_mail(
+                $to,
+                $subject,
+                $body,
+                $headers,
+                $attachments
+            );
+        }
+        /**
+         * Hook Use for custom mail service.
+         */
+        do_action( 'sue_process_sue_send_using_email_service_' . $email_style, $send_email, $sue_data );
+        /**
+         * If the user is unsubscribed, then return true to bypass.
+         */
+        if ( !sue_is_user_email_subscribed( $user_id ) || !$send_using_wp_mail ) {
+            return true;
+        }
     }
 
 }

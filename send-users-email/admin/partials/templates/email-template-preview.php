@@ -94,8 +94,14 @@ switch ( $style ) {
         echo SUE_Custom_Html_Template::parse_template(
             $title,
             $tagline,
-            $email_body
+            $email_body,
+            $logo 
         );
+        break;
+    case 'woocommerce':
+        global $preview;
+        $preview = true;
+        require SEND_USERS_EMAIL_PLUGIN_BASE_PATH .'/admin/partials/templates/woo-email-template.php';
         break;
     case "default":
         global $preview;

@@ -5,7 +5,7 @@ Tags: email users, email subscribers, email system users, send email, email all 
 Requires at least: 5.7
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.6
+Stable tag: 1.6.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -129,9 +129,14 @@ The free version logs emails for 15 days, while the [PRO version](https://sendus
 
 == Changelog ==
 
-= 1.6 (2025-06-19)
-= New feature descriptions
-= Hofix for template tag replacement
+= 1.6.2 (2025-06-26) =
+* Bugfix: user group editing
+* Feature: Support default WooCommerce templates
+* Feature: Unsubscribe option
+
+= 1.6 (2025-06-19) =
+* New feature descriptions
+* Hotfix for template tag replacement
 
 = 1.5.15 (2025-05-27) =
 * Hotfix for escaping html in emails
