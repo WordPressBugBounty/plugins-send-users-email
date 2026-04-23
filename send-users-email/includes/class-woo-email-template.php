@@ -38,8 +38,8 @@ class SUE_Woo_Email_Template
             ob_start();
 
             wc_get_template(
-            'emails/email-header.php',
-            ['email_heading' => $title]
+                'emails/email-header.php',
+                ['email_heading' => $title]
             );
 
             echo wp_kses_post($email_content);

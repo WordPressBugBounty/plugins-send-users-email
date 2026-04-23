@@ -1,11 +1,11 @@
 === Send Users Email - Email Subscribers, Email Marketing Newsletter ===
-Contributors: paretodigital, metalfreek
+Contributors: paretodigital, metalfreek, freemius
 Donate link: https://sendusersemail.com/?utm_source=wp_repo&utm_medium=link&utm_campaign=donate_link
 Tags: email users, email subscribers, email system users, send email, email all users
 Requires at least: 5.7
-Tested up to: 6.9
+Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.6.2
+Stable tag: 1.6.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -129,7 +129,15 @@ The free version logs emails for 15 days, while the [PRO version](https://sendus
 
 == Changelog ==
 
-= 1.6.2 (2025-06-26) =
+= 2.0 (2026-04-23) =
+* New user interface design
+* Added new email design templates
+* Added external list import functionality
+* Added email to external list functionality
+* Added email to single email functionality
+* Upgraded Freemius SDK
+
+= 1.6.1 (2025-06-26) =
 * Bugfix: user group editing
 * Feature: Support default WooCommerce templates
 * Feature: Unsubscribe option

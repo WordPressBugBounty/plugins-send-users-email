@@ -1,3 +1,6 @@
+<?php
+$obj_template_data = $args['obj_template_data'] ?? null;
+?>
 <!DOCTYPE html
 PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
@@ -143,9 +146,9 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
         }
     </style>
     <![endif]-->
-    <?php if ( $styles ): ?>
+    <?php if ( $obj_template_data && $obj_template_data->get_email_styles() ): ?>
         <style>
-            <?php echo stripslashes_deep( wp_strip_all_tags( $styles ) ); ?>
+            <?php echo stripslashes_deep( wp_strip_all_tags( $obj_template_data->get_email_styles() ) ); ?>
         </style>
     <?php endif; ?>
 
@@ -186,7 +189,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
             </th>
             <th class="column-top"
                 style="font-size:0pt; line-height:0pt; padding:0; margin:0; font-weight:normal; vertical-align:top;">
-                <?php if ( ! empty( $social ) ): ?>
+                <?php if ( $obj_template_data && ! empty( $obj_template_data->get_email_social_links() ) ): ?>
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                         <tbody>
                         <tr>
@@ -196,11 +199,11 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
                                     <tbody>
                                     <tr>
                                         <?php foreach ( Send_Users_Email_Admin::$social as $platform ): ?>
-                                            <?php if ( isset( $social[ $platform ] ) ): ?>
-                                                <?php if ( ! empty( $social[ $platform ] ) ): ?>
+                                            <?php if ( isset( $obj_template_data->get_email_social_links()[ $platform ] ) ): ?>
+                                                <?php if ( ! empty( $obj_template_data->get_email_social_links()[ $platform ] ) ): ?>
                                                     <td class="img" width="32"
                                                         style="font-size:0pt; line-height:0pt; text-align:left;">
-                                                        <a href="<?php echo esc_url_raw( $social[ $platform ] ); ?>"
+                                                        <a href="<?php echo esc_url_raw( $obj_template_data->get_email_social_links()[ $platform ] ); ?>"
                                                            target="_blank">
                                                             <img src="<?php echo esc_attr( sue_get_asset_url( $platform . '.png' ) ); ?>"
                                                                  width="18" height="18" border="0"
@@ -243,11 +246,11 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
                 <td style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
                     <table width="100%" style="border-spacing:0;" role="presentation">
 
-                        <?php if ( esc_url_raw( $logo ) ): ?>
+                        <?php if ( $obj_template_data && $obj_template_data->get_email_logo() ): ?>
                             <tr class="sue-email-logo">
                                 <td style="background-color:#ffffff;padding-top:10px;padding-bottom:8px;width:100%;width:600px;text-align:center;border-radius: 30px 30px 0 0;">
                                     <a href="<?php bloginfo( 'url' ); ?>">
-                                        <img src="<?php echo esc_url_raw( $logo ); ?>"
+                                        <img src="<?php echo esc_url_raw( $obj_template_data->get_email_logo() ); ?>"
                                              alt="<?php bloginfo( 'name' ); ?>" width="100" style="border-width:0;"
                                              border="0">
                                     </a>
@@ -266,7 +269,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
                             </tr>
                         <?php endif; ?>
 
-                        <?php if ( $title || $tagline ): ?>
+                        <?php if ( $obj_template_data && ( $obj_template_data->get_email_title() || $obj_template_data->get_email_tagline() ) ): ?>
                             <tr>
                                 <td class="banner" width="600" style="background-position: center top;" align="center">
 
@@ -294,18 +297,18 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
                                                                     <td class="darkmode-bg" valign="top" align="center"
                                                                         style="padding-bottom:20px;padding-top:20px;vertical-align:middle; font-size: 22px; line-height: 26px;">
 
-                                                                        <?php if ( $title ): ?>
+                                                                        <?php if ( $obj_template_data && $obj_template_data->get_email_title() ): ?>
                                                                             <p style="font-size: 24px; line-height: 32px; font-weight:bold;;text-shadow: 1px 1px 1px #3d3d3d;">
-                                                                                <?php echo esc_html( stripslashes_deep( $title ) ); ?>
+                                                                                <?php echo esc_html( stripslashes_deep( $obj_template_data->get_email_title() ) ); ?>
                                                                             </p>
                                                                         <?php endif; ?>
 
-                                                                        <?php if ( $tagline ): ?>
+                                                                        <?php if ( $obj_template_data && $obj_template_data->get_email_tagline() ): ?>
                                                                             <p style="max-width: 150px;height: 2px;background-color:#042467;border-top: 1px solid #ffffff;border-bottom: 1px solid #ffffff;line-height: 40px;"></p>
 
                                                                             <p align="center"
                                                                                style="font-size:20px; line-height: 22px;text-shadow: 1px 1px 1px #3d3d3d;">
-                                                                               <?php echo esc_html( stripslashes_deep( $tagline ) ); ?>
+                                                                               <?php echo esc_html( stripslashes_deep( $obj_template_data->get_email_tagline() ) ); ?>
                                                                             </p>
                                                                         <?php endif; ?>
                                                                     </td>
@@ -336,7 +339,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
                 </td>
             </tr>
 
-            <?php if ( $title || $tagline ): ?>
+            <?php if ( $obj_template_data && ( $obj_template_data->get_email_title() || $obj_template_data->get_email_tagline() ) ): ?>
                 <tr>
                     <td style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
                         <table width="100%" style="border-spacing:0;" role="presentation">
@@ -352,18 +355,20 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
 
             <tr class="sue-email-body">
                 <td style="padding: 25px 18px 25px 18px;">
-                    <?php echo wp_kses_post( stripslashes_deep( $email_body ) ); ?>
+                    <?php if ( $obj_template_data && $obj_template_data->get_email_body() ): ?>
+                        <?php echo $obj_template_data->get_email_body(); ?>
+                    <?php endif; ?>
                 </td>
             </tr>
 
-            <?php if ( $footer ): ?>
+            <?php if ( $obj_template_data && $obj_template_data->get_email_footer() ): ?>
                 <tr>
                     <td style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
                         <table width="100%" style="border-spacing:0;padding-top:5px" role="presentation">
                             <tr>
                                 <td class="padding content sue-footer"
                                     style="background-color:#042467;color:#ffffff;padding-top:30px;padding-bottom:30px;padding-right:0;padding-left:0;width:100%;text-align:center; width:600px;">
-                                    <?php echo stripslashes_deep( $footer ); ?>
+                                    <?php echo stripslashes_deep( $obj_template_data->get_email_footer() ); ?>
                                 </td>
                             </tr>
                         </table>
@@ -371,23 +376,21 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
                 </tr>
             <?php endif; ?>
 
-            <?php if ( ! empty( $social ) ): ?>
+            <?php if ( $obj_template_data && ! empty( $obj_template_data->get_email_social_links() ) ): ?>
                 <tr>
                     <td style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
                         <table width="100%" style="border-spacing:0;" role="presentation">
                             <tr>
                                 <td class="padding content"
                                     style="padding-top:35px;padding-bottom:35px;padding-right:0;padding-left:0;width:100%;text-align:center; width:600px;">
-                                    <?php foreach ( Send_Users_Email_Admin::$social as $platform ): ?>
-                                        <?php if ( isset( $social[ $platform ] ) ): ?>
-                                            <?php if ( ! empty( $social[ $platform ] ) ): ?>
-                                                <a href="<?php echo esc_url_raw( $social[ $platform ] ); ?>">
-                                                    <img src="<?php echo esc_attr( sue_get_asset_url( $platform . '.png' ) ); ?>"
-                                                         alt="<?php echo esc_attr($platform); ?>" width="35"
+                                    <?php foreach ( $obj_template_data->get_email_social_links() as $platform => $url ): ?>
+                                        <?php if ( ! empty( $url ) ): ?>
+                                            <a href="<?php echo esc_url_raw( $url ); ?>">
+                                                <img src="<?php echo esc_attr( sue_get_asset_url( $platform . '.png' ) ); ?>"
+                                                     alt="<?php echo esc_attr($platform); ?>" width="35"
                                                          style="display:inline-block;border-width:0;max-width: 35px;">
                                                 </a>
                                             <?php endif; ?>
-                                        <?php endif; ?>
                                     <?php endforeach; ?>
                                 </td>
                             </tr>

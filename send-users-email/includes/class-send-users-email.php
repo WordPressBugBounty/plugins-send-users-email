@@ -34,6 +34,9 @@ class Send_Users_Email {
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-send-users-email-admin.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'helpers/cleanup.class.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'helpers/functions.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-admin-notices.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-email-template-data.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-template-data.php';
         $this->loader = new Send_Users_Email_Loader();
     }
 
@@ -56,6 +59,8 @@ class Send_Users_Email {
         $this->loader->add_action( 'admin_menu', $plugin_admin, 'admin_menu' );
         // User email handler
         $this->loader->add_action( "wp_ajax_sue_user_email_ajax", $plugin_admin, 'handle_ajax_admin_user_email' );
+        // User single email handler
+        $this->loader->add_action( "wp_ajax_sue_user_single_email_ajax", $plugin_admin, 'handle_ajax_admin_user_single_email' );
         // User email send progress
         $this->loader->add_action( "wp_ajax_sue_email_users_progress", $plugin_admin, 'handle_ajax_email_users_progress' );
         // Role email handler

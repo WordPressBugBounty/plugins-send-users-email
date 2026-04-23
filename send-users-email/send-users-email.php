@@ -4,7 +4,7 @@
  * Plugin Name: Send Users Email
  * Plugin URI:        https://sendusersemail.com/
  * Description:       Easily send emails to your users. Select individual users or role to send email.
- * Version:           1.6.2
+ * Version:           2.0
  * Author:            SendUsersEmail.com
  * Author URI:        https://sendusersemail.com/?utm_source=wp_repo&utm_medium=link&utm_campaign=author_url
  * License:           GPL-2.0+
@@ -29,25 +29,26 @@ if ( function_exists( 'sue_fs' ) ) {
                 // Include Freemius SDK.
                 require_once dirname( __FILE__ ) . '/vendor/freemius/start.php';
                 $sue_fs = fs_dynamic_init( array(
-                    'id'             => '11436',
-                    'slug'           => 'send-users-email',
-                    'premium_slug'   => 'send-users-email-pro',
-                    'type'           => 'plugin',
-                    'public_key'     => 'pk_29ad05bfbd6008f9c20e155704ec0',
-                    'is_premium'     => false,
-                    'premium_suffix' => 'PRO',
-                    'has_addons'     => false,
-                    'has_paid_plans' => true,
-                    'trial'          => array(
+                    'id'               => '11436',
+                    'slug'             => 'send-users-email',
+                    'premium_slug'     => 'send-users-email-pro',
+                    'type'             => 'plugin',
+                    'public_key'       => 'pk_29ad05bfbd6008f9c20e155704ec0',
+                    'is_premium'       => false,
+                    'premium_suffix'   => 'PRO',
+                    'has_addons'       => false,
+                    'has_paid_plans'   => true,
+                    'trial'            => array(
                         'days'               => 14,
                         'is_require_payment' => true,
                     ),
-                    'menu'           => array(
+                    'menu'             => array(
                         'slug'    => 'send-users-email',
                         'support' => false,
                         'contact' => false,
                     ),
-                    'is_live'        => true,
+                    'is_live'          => true,
+                    'is_org_compliant' => true,
                 ) );
             }
             return $sue_fs;
@@ -61,7 +62,7 @@ if ( function_exists( 'sue_fs' ) ) {
     /**
      * Currently plugin version.
      */
-    define( 'SEND_USERS_EMAIL_VERSION', '1.6.2' );
+    define( 'SEND_USERS_EMAIL_VERSION', '2.0' );
     /**
      * Currently plugin base path.
      */
@@ -74,6 +75,18 @@ if ( function_exists( 'sue_fs' ) ) {
      * Email send capability name
      */
     define( 'SEND_USERS_EMAIL_SEND_MAIL_CAPABILITY', 'sue_send_email_capability' );
+    /**
+     * Summary of sue_get_plugin_dir
+     * 
+     */
+    function sue_get_plugin_dir() {
+        return plugin_dir_path( __FILE__ );
+    }
+
+    function sue_get_plugin_url() {
+        return plugins_url( plugin_basename( SEND_USERS_EMAIL_PLUGIN_BASE_PATH ) );
+    }
+
     /**
      * The code that runs during plugin activation.
      */

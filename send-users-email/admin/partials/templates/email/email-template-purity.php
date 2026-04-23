@@ -1,3 +1,6 @@
+<?php
+$obj_template_data = $args['obj_template_data'] ?? null;
+?>
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
@@ -142,9 +145,9 @@
         }
     </style>
     <![endif]-->
-    <?php if ( $styles ): ?>
+    <?php if ( $obj_template_data && $obj_template_data->get_email_styles() ): ?>
         <style>
-            <?php echo stripslashes_deep( wp_strip_all_tags( $styles ) ); ?>
+            <?php echo stripslashes_deep( wp_strip_all_tags( $obj_template_data->get_email_styles() ) ); ?>
         </style>
     <?php endif; ?>
 
@@ -184,11 +187,11 @@
                 <td style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
                     <table width="100%" style="border-spacing:0;" role="presentation">
 
-                        <?php if ( esc_url_raw( $logo ) ): ?>
+                        <?php if ( $obj_template_data && esc_url_raw( $obj_template_data->get_email_logo() ) ): ?>
                             <tr class="sue-email-logo">
                                 <td style="background-color:#ffffff;padding-top:25px;padding-bottom:25px;width:100%;width:600px;text-align:center;">
                                     <a href="<?php bloginfo( 'url' ); ?>">
-                                        <img src="<?php echo esc_url_raw( $logo ); ?>"
+                                        <img src="<?php echo esc_url_raw( $obj_template_data->get_email_logo() ); ?>"
                                              alt="<?php bloginfo( 'name' ); ?>" width="180" style="border-width:0;"
                                              border="0">
                                     </a>
@@ -207,7 +210,7 @@
                             </tr>
                         <?php endif; ?>
 
-                        <?php if ( $title || $tagline ): ?>
+                        <?php if ( $obj_template_data && ( $obj_template_data->get_email_title() || $obj_template_data->get_email_tagline() ) ): ?>
                             <tr>
                                 <td class="banner" width="600" style="background-position: center top;background-color:#ffffff;" align="center">
 
@@ -235,17 +238,17 @@
                                                                     <td class="darkmode-bg" valign="top" align="center"
                                                                         style="padding-bottom:20px;padding-top:20px;vertical-align:middle; font-size: 22px; line-height: 26px;">
 
-                                                                        <?php if ( $title ): ?>
+                                                                        <?php if ( $obj_template_data && $obj_template_data->get_email_title() ): ?>
                                                                             <p style="font-size: 20px; line-height: 22px; font-weight:600;margin-bottom:8px;margin-top:0;">
-                                                                                <?php echo esc_html( stripslashes_deep( $title ) ); ?>
+                                                                                <?php echo esc_html( stripslashes_deep( $obj_template_data->get_email_title() ) ); ?>
                                                                             </p>
                                                                         <?php endif; ?>
 
-                                                                        <?php if ( $tagline ): ?>
+                                                                        <?php if ( $obj_template_data && $obj_template_data->get_email_tagline() ): ?>
 
                                                                             <p align="center"
                                                                                style="font-size:16px; line-height: 22px; margin-bottom:0;">
-                                                                                <?php echo esc_html( stripslashes_deep( $tagline ) ); ?>
+                                                                                <?php echo esc_html( stripslashes_deep( $obj_template_data->get_email_tagline() ) ); ?>
                                                                             </p>
                                                                         <?php endif; ?>
                                                                     </td>
@@ -276,7 +279,7 @@
                 </td>
             </tr>
 
-            <?php if ( $title || $tagline ): ?>
+            <?php if ( $obj_template_data && ( $obj_template_data->get_email_title() || $obj_template_data->get_email_tagline() ) ): ?>
                 <tr>
                     <td style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
                         <table width="100%" style="border-spacing:0;" role="presentation">
@@ -292,18 +295,18 @@
 
             <tr class="sue-email-body">
                 <td style="padding: 15px 18px 15px 18px;background-color: #ffffff;">
-                    <?php echo wp_kses_post( stripslashes_deep( $email_body ) ); ?>
+                    <?php echo $obj_template_data->get_email_body(); ?>
                 </td>
             </tr>
 
-            <?php if ( $footer ): ?>
+            <?php if ( $obj_template_data && $obj_template_data->get_email_footer() ): ?>
                 <tr>
                     <td style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
                         <table width="100%" style="border-spacing:0;padding-top:5px" role="presentation">
                             <tr>
                                 <td class="padding content sue-footer"
                                     style="background-color:#a9a9a9;color:#ffffff;padding-top:25px;padding-bottom:25px;padding-right:0;padding-left:0;width:100%;text-align:center; width:600px;font-size:14px;">
-                                    <?php echo stripslashes_deep( $footer ); ?>
+                                    <?php echo stripslashes_deep( $obj_template_data->get_email_footer() ); ?>
                                 </td>
                             </tr>
                         </table>
@@ -311,7 +314,7 @@
                 </tr>
             <?php endif; ?>
 
-            <?php if ( ! empty( $social ) ): ?>
+            <?php if ( $obj_template_data && ! empty( $obj_template_data->get_email_social_links() ) ): ?>
                 <tr>
                     <td style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
                         <table width="100%" style="border-spacing:0;" role="presentation">
@@ -319,9 +322,9 @@
                                 <td class="padding content"
                                     style="padding-top:35px;padding-bottom:35px;padding-right:0;padding-left:0;width:100%;text-align:center; width:600px;background-color:#ffffff;">
                                     <?php foreach ( Send_Users_Email_Admin::$social as $platform ): ?>
-                                        <?php if ( isset( $social[ $platform ] ) ): ?>
-                                            <?php if ( ! empty( $social[ $platform ] ) ): ?>
-                                                <a href="<?php echo esc_url_raw( $social[ $platform ] ); ?>">
+                                        <?php if ( isset( $obj_template_data->get_email_social_links()[ $platform ] ) ): ?>
+                                            <?php if ( ! empty( $obj_template_data->get_email_social_links()[ $platform ] ) ): ?>
+                                                <a href="<?php echo esc_url_raw( $obj_template_data->get_email_social_links()[ $platform ] ); ?>">
                                                     <img src="<?php echo esc_attr( sue_get_asset_url( $platform . '.png' ) ); ?>"
                                                          alt="<?php echo esc_attr($platform); ?>" width="15"
                                                          style="display:inline-block;border-width:0;max-width: 15px;margin: 0 8px;">

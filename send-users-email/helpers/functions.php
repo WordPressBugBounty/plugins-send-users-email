@@ -101,6 +101,14 @@ if ( ! function_exists( 'sue_get_email_theme_scheme' ) ) {
 			'red',
 			'yellow',
 			'purity',
+			'creatorloop',
+			'darkmode',
+			'modern',
+			'dailybrief',
+			'plaintext',
+			'plainletter',
+			'serif',
+			'growthmode'
 		];
 
 		/**
@@ -260,8 +268,14 @@ if ( ! function_exists( 'sue_is_premium_and_can_use_premium_code' ) ) {
 
 if ( ! function_exists( 'sue_is_woocommerce_active' ) ) {
 	function sue_is_woocommerce_active(): bool {
-		if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) 
-			|| ( is_multisite() && in_array( 'woocommerce/woocommerce.php', get_site_option( 'active_sitewide_plugins', array() ) ) ) 
+		$active_plugins = get_option( 'active_plugins' );
+
+		if ( ! is_array( $active_plugins ) ) {
+			$active_plugins = [];
+		}
+
+		if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', $active_plugins ) )
+			|| ( is_multisite() && in_array( 'woocommerce/woocommerce.php', get_site_option( 'active_sitewide_plugins', array() ) ) )
 		) {
 			return true;
 		}
@@ -286,5 +300,191 @@ if ( ! function_exists( 'sue_is_user_email_subscribed' ) ) {
 		}
 
 		return SUE_Email_Subscription_User_Meta::is_email_subscribed( $user_id );
+	}
+}
+
+/**
+ * Render admin template file with optional arguments.
+ *
+ * @param string $template_path The path to the template file relative to the admin/partials/ directory.
+ * @param array  $args          Optional. An associative array of arguments to extract for use in the template.
+ * @param bool   $load_once     Optional. Whether to include the template file only once. Default is true.
+ */
+if ( ! function_exists( 'sue_render_admin_template' ) ) {
+	function sue_render_admin_template($template_path, $args = [], $load_once = true) {
+		$template_file = plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/' . $template_path;
+		
+		if ( file_exists( $template_file ) ) {
+			
+			if (!empty($args) && is_array($args)) {
+				extract($args, EXTR_SKIP);
+			}
+
+			if ( $load_once ) {
+				include_once $template_file;
+			} else {
+				include $template_file;
+			}
+		}
+	}
+}
+
+/**
+ * Include a template file from the admin/partials/ directory with optional arguments.
+ *
+ * @param string $template_path The path to the template file relative to the admin/partials/ directory.
+ * @param array  $args          Optional. An associative array of arguments to extract for use in the template.
+ * @param bool   $load_once     Optional. Whether to include the template file only once. Default is true.
+ */
+if ( ! function_exists( 'sue_include_template') ) {
+	function sue_include_template($template_path, $args = [], $load_once = true) {
+
+		$template = sue_get_plugin_dir() . 'admin/partials/' . $template_path;
+		
+		if ( ! file_exists( $template ) ) {
+			return;
+		}
+
+		if ( ! empty( $args ) && is_array( $args ) ) {
+			extract( $args );
+		}
+
+		if ( $load_once ) {
+			include_once $template;
+		} else {
+			include $template;
+		}
+	}
+}
+
+/**
+ * Render the email theme selection dropdown.
+ *
+ * @param string|null $default_email_theme The default selected email theme. If null, retrieves from options.
+ */
+if ( ! function_exists( 'sue_render_email_theme_to_use') ) {
+	function sue_render_email_theme_to_use($default_email_theme = null) {
+		if( $default_email_theme === null ) {
+			$options              = get_option( 'sue_send_users_email' );
+			$default_email_theme  = $options['default_email_theme'] ?? 'default';
+		}
+
+		sue_include_template( 'templates/select-theme.php', [ 'default_email_theme' => $default_email_theme ] );
+	}
+}
+
+if ( ! function_exists( 'sue_db_prepare' ) ) {
+	/**
+	 * Wraps $wpdb->prepare and adds support for passing arrays as parameters
+	 * (useful for IN() clauses). When an array is provided as a parameter,
+	 * the first %s placeholder will be expanded into the correct number of
+	 * %s placeholders and the array values will be flattened into the
+	 * prepared arguments.
+	 *
+	 * Example:
+	 * $sql = "SELECT * FROM {$table} WHERE id IN (%s) AND status = %s";
+	 * $prepared = sue_db_prepare( $sql, [ [1,2,3], 'active' ] );
+	 *
+	 * @param string $query  SQL query with placeholders
+	 * @param mixed  $params Single value or array of values/arrays
+	 * @return string Prepared SQL string
+	 */
+	function sue_db_prepare( $query, $params = [] ) {
+		global $wpdb;
+
+		if ( ! is_array( $params ) ) {
+			$params = [ $params ];
+		}
+
+		$flattened = [];
+		foreach ( $params as $p ) {
+			if ( is_array( $p ) ) {
+				$count = count( $p );
+				if ( $count === 0 ) {
+					// Empty array -> use a dummy value that will never match
+					$query = preg_replace( '/%s/', "('')", $query, 1 );
+					continue;
+				}
+
+				$placeholders = implode( ',', array_fill( 0, $count, '%s' ) );
+				$query = preg_replace( '/%s/', $placeholders, $query, 1 );
+				foreach ( $p as $v ) {
+					$flattened[] = $v;
+				}
+			} else {
+				$flattened[] = $p;
+			}
+		}
+
+		if ( empty( $flattened ) ) {
+			return $query;
+		}
+
+		// Call prepare with varargs to be compatible with different WP versions
+		$args = array_merge( [ $query ], $flattened );
+		return call_user_func_array( [ $wpdb, 'prepare' ], $args );
+	}
+}
+
+if ( ! function_exists('sue_make_haystack') ) 
+{
+	/**
+	 * Convert a string or an array of strings into a single haystack string for searching.
+	 * If the input is an array, it will be flattened and concatenated into a single string.
+	 *
+	 * @param string|array $input The input string or array of strings to convert.
+	 * @return string A single haystack string containing all input values.
+	 */
+	function sue_make_haystack($input) {
+		$fields = [
+			$input->email ?? '',
+			$input->first_name ?? '',
+			$input->last_name ?? '',
+			$input->title ?? '',
+			$input->salutation ?? '',
+			$input->field_01 ?? '',
+			$input->field_02 ?? '',
+			$input->field_03 ?? '',
+			$input->field_04 ?? '',
+			$input->field_05 ?? '',
+		];
+		
+		// Minimal normalization: lowercase + trim
+		// (If you want diacritics stripped server-side and have intl/Transliterator:
+		// $trans = Transliterator::create('NFD; [:Nonspacing Mark:] Remove; NFC; Any-Latin; Latin-ASCII');
+		// $text = $trans ? $trans->transliterate($text) : $text;
+		$text = strtolower( trim( implode(' ', $fields) ) );
+
+		return $text;
+	}
+}
+
+if ( ! function_exists('sue_iframe_template_preview_url') ) 
+{
+	/**
+	 * Check if a haystack string contains a needle string, ignoring case and whitespace.
+	 *
+	 * @param string $haystack The haystack string to search within.
+	 * @param string $needle The needle string to search for.
+	 * @return bool True if the haystack contains the needle, false otherwise.
+	 */
+	function sue_iframe_template_preview_url($args = []) {
+		// Define a unique action
+		$action = 'template_preview_iframe_action';
+		// Create the nonce
+		$nonce = wp_create_nonce($action);
+		// Append nonce to the iframe source URL
+		$style = $args['style'] ?? 'default';
+		$iframe_url = add_query_arg(
+			[
+				'wp_nonce' => $nonce,
+				'action'   => $action,
+				'style'    => $style,
+				'path'     => ABSPATH,
+			],
+			esc_attr( sue_get_plugin_url() ) . '/admin/template-preview.php'
+		);
+
+		return $iframe_url;
 	}
 }

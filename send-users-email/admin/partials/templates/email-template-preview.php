@@ -1,117 +1,163 @@
 <?php
-
-$options = get_option('sue_send_users_email');
-
-// Ensure $options is an array before accessing its keys
-if ( ! is_array( $options ) ) {
-    $options = [];
+$style      = isset( $_POST['email_style'] ) ? sanitize_text_field( $_POST['email_style'] ) : 'default';
+$themes     = sue_get_email_theme_scheme();
+$is_premium = sue_fs()->is__premium_only() && sue_fs()->can_use_premium_code();
+if ( ! $is_premium ) {
+    $themes = [ 'default' ];
+    $style  = 'default';
 }
-
-// Use null coalescing operator (??) for default values
-$logo = $options['logo_url'] ?? SEND_USERS_EMAIL_PLUGIN_BASE_URL . '/assets/sample-logo.png';
-$title = $options['email_title'] ?? __('This is a preview title', 'send-users-email');
-$tagline = $options['email_tagline'] ?? __('This is a preview tagline', 'send-users-email');
-$footer = $options['email_footer'] ?? __('Demo Footer Content', 'send-users-email');
-
-// Handle social links with a default array
-$social = $options['social'] ?? ["facebook" => "#", "instagram" => "#", "linkedin" => "#", "skype" => "#", "tiktok" => "#", "twitter" => "#", "youtube" => "#"];
-
-// Default email body content
-$email_body = __('Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.', 'send-users-email');
-
-// Optional styles
-$styles = $options['email_template_style'] ?? '';
-
-$style = ( isset( $_GET['style'] ) ) ? sanitize_text_field( $_GET['style'] ) : 'default';
-
+$iframe_url = sue_iframe_template_preview_url( [ 'style' => $style ] );
 ?>
 <style>
-    #wpbody {
-        height: calc(100vh - 32px);
-        background: #dde0e1;
-        display: flex;
-    }
+    #wpbody,
     #wpcontent {
-        background: #dde0e1;
-    }
-    .sue-main-table {
-        max-width: 768px;
-        margin: 0 auto;
+        background: #f8fafc;
     }
 </style>
 
-<div class="container" style="margin-bottom: 3rem;margin-top:2rem;">
-    <div class="row justify-content-center">
-        <div class="col-md-5">
-            <p><strong><?php esc_attr_e( 'Select email theme for preview', 'send-users-email' ); ?></strong></p>
-            <select class="form-select" aria-label="Select email style" id="email_style" name="email_style">
-                <?php foreach ( sue_get_email_theme_scheme() as $theme ): ?>
-                    <option
-                        value="<?php esc_attr_e( $theme, 'send-users-email' ); ?>"
-                        <?php echo ( $style == $theme ) ? 'selected="selected"' : ''; ?>">
-                        <?php esc_attr_e( ucfirst( esc_attr( $theme ) ), 'send-users-email' ); ?>
-                    </option>
-                <?php endforeach; ?>
-            </select>
+<div class="sue-pro-wrap sue-preview-page">
+    <div class="sue-pro-header">
+        <h2><?php esc_html_e( 'Theme Preview', 'send-users-email' ); ?></h2>
+        <p><?php esc_html_e( 'Preview your email layout and switch between available themes before sending.', 'send-users-email' ); ?></p>
+    </div>
+
+    <div class="sue-settings-layout sue-preview-layout">
+        <div class="sue-settings-main">
+            <?php if ( $is_premium ): ?>
+            <div class="sue-log-card">
+                <div class="sue-log-card-header">
+                    <span class="sue-log-card-icon">🎨</span>
+                    <h3><?php esc_html_e( 'Preview Settings', 'send-users-email' ); ?></h3>
+                </div>
+                <div class="sue-log-card-body">
+                    <form id="emailStyleForm" method="post" action="<?php echo esc_url( admin_url( 'admin.php?page=send-users-email-preview' ) ); ?>">
+                        <?php wp_nonce_field( 'template_preview_iframe_action', 'wp_nonce' ); ?>
+                        <input type="hidden" name="action" value="template_preview_iframe_action">
+                        <input type="hidden" name="path" value="<?php echo defined( 'ABSPATH' ) ? esc_attr( ABSPATH ) : ''; ?>">
+
+                        <div class="sue-field-row sue-preview-selector-row">
+                            <div class="sue-field-label">
+                                <label for="email_style"><?php esc_html_e( 'Email Theme', 'send-users-email' ); ?></label>
+                                <p class="sue-form-hint"><?php esc_html_e( 'Choose a theme to instantly reload the preview below.', 'send-users-email' ); ?></p>
+                            </div>
+                            <div class="sue-field-input">
+                                <select class="sue-select sue-preview-select" aria-label="<?php esc_attr_e( 'Select email theme', 'send-users-email' ); ?>" id="email_style" name="email_style">
+                                    <?php $legacy_themes = [ 'blue', 'green', 'pink', 'purple', 'yellow', 'red' ]; ?>
+                                    <?php foreach ( $themes as $theme_slug ): ?>
+                                        <?php
+                                        if ( $theme_slug === 'custom' ) {
+                                            $theme_label = __( 'Custom HTML Template', 'send-users-email' );
+                                        } else {
+                                            $theme_label = ucfirst( esc_attr( $theme_slug ) );
+                                        }
+                                        if ( in_array( $theme_slug, $legacy_themes, true ) ) {
+                                            $theme_label .= ' (Legacy)';
+                                        }
+                                        ?>
+                                        <option value="<?php echo esc_attr( $theme_slug ); ?>" <?php selected( $style, $theme_slug ); ?>>
+                                            <?php echo esc_html( $theme_label ); ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <?php else: ?>
+            <div class="sue-pro-upgrade-banner" style="margin-bottom: 24px;">
+                <div class="sue-banner-text">
+                    <h3><?php esc_html_e( 'You are using the free version', 'send-users-email' ); ?></h3>
+                    <p><?php esc_html_e( 'Upgrade to PRO to preview and use prebuilt templates — or use your own HTML template.', 'send-users-email' ); ?></p>
+                </div>
+                <a class="btn-upgrade" href="<?php echo esc_url( sue_fs()->get_upgrade_url() ); ?>" role="button">
+                    <?php esc_html_e( 'Upgrade to PRO', 'send-users-email' ); ?>
+                </a>
+            </div>
+            <?php endif; ?>
+
+            <div class="sue-log-card">
+                <div class="sue-log-card-header">
+                    <span class="sue-log-card-icon">👀</span>
+                    <h3><?php esc_html_e( 'Email Preview', 'send-users-email' ); ?></h3>
+                    <div class="sue-log-card-action">
+                        <span class="sue-preview-pill"><?php echo esc_html( ucfirst( $style ) ); ?></span>
+                    </div>
+                </div>
+                <div class="sue-log-card-body">
+                    <div class="sue-notice sue-notice-info sue-preview-note">
+                        <div class="sue-notice-icon">↻</div>
+                        <div class="sue-notice-body">
+                            <p class="sue-notice-title"><?php esc_html_e( 'Automatic refresh', 'send-users-email' ); ?></p>
+                            <p><?php esc_html_e( 'The preview reloads automatically when you select a different theme.', 'send-users-email' ); ?></p>
+                        </div>
+                    </div>
+
+                    <div class="sue-preview-frame-wrap">
+                        <iframe id="theme-iframe" class="sue-preview-frame" src="<?php echo esc_url( $iframe_url ); ?>"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sue-settings-sidebar sue-preview-sidebar">
+            <div class="sue-sidebar-card">
+                <div class="sue-sidebar-card-header">
+                    <span class="sue-sidebar-card-icon">ℹ️</span>
+                    <div>
+                        <p class="sue-sidebar-card-title"><?php esc_html_e( 'How to use this preview', 'send-users-email' ); ?></p>
+                        <p class="sue-sidebar-card-desc"><?php esc_html_e( 'Switch themes, review the layout, and verify how your content is rendered before sending.', 'send-users-email' ); ?></p>
+                    </div>
+                </div>
+
+                <div class="sue-notice sue-notice-info sue-preview-note">
+                    <div class="sue-notice-icon">💡</div>
+                    <div class="sue-notice-body">
+                        <p class="sue-notice-title"><?php esc_html_e( 'Preview tip', 'send-users-email' ); ?></p>
+                        <p><?php esc_html_e( 'The custom theme uses your saved custom HTML template and the email settings configured in the plugin.', 'send-users-email' ); ?></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sue-sidebar-card">
+                <div class="sue-sidebar-card-header">
+                    <span class="sue-sidebar-card-icon">🧾</span>
+                    <div>
+                        <p class="sue-sidebar-card-title"><?php esc_html_e( 'Preview details', 'send-users-email' ); ?></p>
+                        <p class="sue-sidebar-card-desc"><?php esc_html_e( 'A quick summary of the currently displayed preview.', 'send-users-email' ); ?></p>
+                    </div>
+                </div>
+
+                <ul class="sue-placeholder-list sue-preview-meta-list">
+                    <li>
+                        <code><?php echo esc_html( ucfirst( $style ) ); ?></code>
+                        <span><?php esc_html_e( 'Selected theme', 'send-users-email' ); ?></span>
+                    </li>
+                    <li>
+                        <code><?php echo esc_html( count( $themes ) ); ?></code>
+                        <span><?php esc_html_e( 'Available themes', 'send-users-email' ); ?></span>
+                    </li>
+                    <li>
+                        <code>Live</code>
+                        <span><?php esc_html_e( 'Updates immediately after a theme change', 'send-users-email' ); ?></span>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
 <script>
-    window.addEventListener('DOMContentLoaded', function() {
-        const emailStyle = document.getElementById('email_style');
-        emailStyle.addEventListener('change', function() {
-            const style = emailStyle.value;
-            window.location.href = '<?php echo esc_attr( admin_url( 'admin.php?page=send-users-email-preview' ) ); ?>&style=' + style;
+    // Register message listener immediately, outside ready(), to avoid race conditions
+    window.addEventListener('message', function(e) {
+        if (e.data && e.data.type === 'sue_iframe_height') {
+            jQuery('#theme-iframe').css('height', e.data.height + 'px');
+        }
+    });
+
+    jQuery(document).ready(function() {
+        jQuery('#email_style').on('change', function() {
+            jQuery('#emailStyleForm').submit();
         });
     });
 </script>
 
-<?php
-
-switch ( $style ) {
-    case "blue":
-        require SEND_USERS_EMAIL_PLUGIN_BASE_PATH .'/admin/partials/templates/email/email-template-blue.php';
-        break;
-    case "green":
-        require SEND_USERS_EMAIL_PLUGIN_BASE_PATH .'/admin/partials/templates/email/email-template-green.php';
-        break;
-    case "pink":
-        require SEND_USERS_EMAIL_PLUGIN_BASE_PATH .'/admin/partials/templates/email/email-template-pink.php';
-        break;
-    case "purple":
-        require SEND_USERS_EMAIL_PLUGIN_BASE_PATH .'/admin/partials/templates/email/email-template-purple.php';
-        break;
-    case "red":
-        require SEND_USERS_EMAIL_PLUGIN_BASE_PATH .'/admin/partials/templates/email/email-template-red.php';
-        break;
-    case "yellow":
-        require SEND_USERS_EMAIL_PLUGIN_BASE_PATH .'/admin/partials/templates/email/email-template-yellow.php';
-        break;
-    case "purity":
-        require SEND_USERS_EMAIL_PLUGIN_BASE_PATH .'/admin/partials/templates/email/email-template-purity.php';
-        break;
-    case 'custom':
-        echo SUE_Custom_Html_Template::parse_template(
-            $title,
-            $tagline,
-            $email_body,
-            $logo 
-        );
-        break;
-    case 'woocommerce':
-        global $preview;
-        $preview = true;
-        require SEND_USERS_EMAIL_PLUGIN_BASE_PATH .'/admin/partials/templates/woo-email-template.php';
-        break;
-    case "default":
-        global $preview;
-        $preview = true;
-        require SEND_USERS_EMAIL_PLUGIN_BASE_PATH .'/admin/partials/email-template.php';
-        break;
-    default:
-        global $preview;
-        $preview = true;
-        require SEND_USERS_EMAIL_PLUGIN_BASE_PATH .'/admin/partials/email-template.php';
-}
-
-?>

@@ -1,109 +1,210 @@
-<div class="container-fluid">
-    <div class="row sue-row sue-dashboard">
+<div class="sue-pro-wrap">
 
-		<?php 
-?>
-            <div class="col-sm-9">
-				<?php 
-?>
-
-                <div class="card shadow">
-                    <div class="card-body">
-                        <h5 class="card-title text-uppercase"><?php 
+    <!-- Header -->
+    <div class="sue-pro-header">
+        <h2><?php 
 esc_attr_e( 'Dashboard', 'send-users-email' );
-?></h5>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h6 class="card-title text-uppercase"><?php 
-esc_attr_e( 'Total Users', 'send-users-email' );
-?></h6>
-                                        <h3 class="card-text badge bg-success"><?php 
-echo esc_html( $users['total_users'] );
-?></h3>
-                                    </div>
-                                </div>
-                            </div>
+?></h2>
+        <p><?php 
+esc_attr_e( 'An overview of your site\'s users and email activity.', 'send-users-email' );
+?></p>
+    </div>
 
-							<?php 
+    <div class="sue-dashboard-section sue-dashboard-section-stats" aria-labelledby="sue-dashboard-stats-title">
+        <div class="sue-dashboard-section-header">
+            <h3 id="sue-dashboard-stats-title"><?php 
+esc_html_e( 'Site statistics', 'send-users-email' );
+?></h3>
+            <p><?php 
+esc_html_e( 'Quick overview of your users and current email activity.', 'send-users-email' );
+?></p>
+        </div>
+
+        <!-- Stats grid -->
+        <div class="sue-stats-grid">
+
+        <!-- Total Users -->
+        <div class="sue-stat-card">
+            <div class="sue-stat-icon icon-green">👤</div>
+            <div class="sue-stat-content">
+                <span class="sue-stat-label"><?php 
+esc_attr_e( 'Total Users', 'send-users-email' );
+?></span>
+                <span class="sue-stat-value"><?php 
+echo esc_html( $users['total_users'] );
+?></span>
+            </div>
+        </div>
+
+        <!-- Roles -->
+        <?php 
 foreach ( $users['avail_roles'] as $role => $total ) {
     ?>
-								<?php 
+            <?php 
     if ( $total > 0 ) {
         ?>
-                                    <div class="col-sm-4">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h6 class="card-title text-uppercase"><?php 
-        echo esc_attr( ucfirst( str_replace( '_', '', $role ) ) );
-        ?></h6>
-                                                <h3 class="card-text badge bg-primary"><?php 
+                <div class="sue-stat-card">
+                    <div class="sue-stat-icon icon-blue">🔑</div>
+                    <div class="sue-stat-content">
+                        <span class="sue-stat-label"><?php 
+        echo esc_attr( ucfirst( str_replace( '_', ' ', $role ) ) );
+        ?></span>
+                        <span class="sue-stat-value"><?php 
         echo esc_html( $total );
-        ?></h3>
-                                            </div>
-                                        </div>
-                                    </div>
-								<?php 
+        ?></span>
+                    </div>
+                </div>
+            <?php 
     }
     ?>
-							<?php 
+        <?php 
 }
 ?>
 
-							<?php 
+        <!-- Queued Emails (PRO only) -->
+        <?php 
 ?>
-
-                        </div>
-                    </div>
-                </div>
-
-				<?php 
-?>
-
-            </div>
-
-            <div class="col-sm-3">
-
-				<?php 
-require_once SEND_USERS_EMAIL_PLUGIN_BASE_PATH . '/partials/donate.php';
-?>
-
-				<?php 
-?>
-                    <div class="card shadow">
-                        <div class="card-body">
-                            <h5 class="card-title text-uppercase"><?php 
-esc_attr_e( 'About', 'send-users-email' );
-?></h5>
-                            <p class="card-text"><?php 
-esc_attr_e( 'Send email to users by selecting individual users or bulk send emails using roles.', 'send-users-email' );
-?></p>
-                        </div>
-                    </div>
-
-                    <div class="card shadow alert alert-warning">
-                        <div class="card-body">
-                            <h5 class="text-uppercase mb-4"><?php 
-esc_attr_e( "Please don't SPAM", 'send-users-email' );
-?></h5>
-                            <p><?php 
-esc_attr_e( "You don't like spam, I don't like spam, nobody likes spam.", 'send-users-email' );
-?></p>
-                            <p><?php 
-esc_attr_e( "Please be responsible and don't spam your users.", 'send-users-email' );
-?></p>
-                            <p>
-                                <strong><?php 
-esc_attr_e( "With great power comes great responsibility.", 'send-users-email' );
-?></strong>
-                            </p>
-                        </div>
-                    </div>
-				<?php 
-?>
-
-            </div>
 
         </div>
     </div>
+
+    <div class="sue-dashboard-section sue-dashboard-section-actions" aria-labelledby="sue-dashboard-actions-title">
+        <div class="sue-dashboard-section-header">
+            <h3 id="sue-dashboard-actions-title"><?php 
+esc_html_e( 'Quick actions', 'send-users-email' );
+?></h3>
+            <p><?php 
+esc_html_e( 'Choose how you want to target recipients and send your message.', 'send-users-email' );
+?></p>
+        </div>
+
+        <!-- Quick action cards -->
+        <div class="sue-pro-grid">
+
+        <a class="sue-feature-card sue-feature-card-link" href="<?php 
+echo esc_url( admin_url( 'admin.php?page=send-users-email-users' ) );
+?>" aria-label="<?php 
+esc_attr_e( 'Send to users', 'send-users-email' );
+?>">
+            <div class="sue-card-icon icon-blue">👤</div>
+            <h3><?php 
+esc_attr_e( 'Send to users', 'send-users-email' );
+?></h3>
+            <p><?php 
+esc_attr_e( 'Choose individual WordPress users and send your message directly to the people you want to reach.', 'send-users-email' );
+?></p>
+        </a>
+
+        <a class="sue-feature-card sue-feature-card-link" href="<?php 
+echo esc_url( admin_url( 'admin.php?page=send-users-email-roles' ) );
+?>" aria-label="<?php 
+esc_attr_e( 'Send to user roles', 'send-users-email' );
+?>">
+            <div class="sue-card-icon icon-teal">🔑</div>
+            <h3><?php 
+esc_attr_e( 'Send to user roles', 'send-users-email' );
+?></h3>
+            <p><?php 
+esc_attr_e( 'Select one or multiple WordPress roles and send emails to everyone assigned to those roles in one go.', 'send-users-email' );
+?></p>
+        </a>
+
+        <?php 
+if ( sue_fs()->is__premium_only() && sue_fs()->can_use_premium_code() ) {
+    ?>
+            <a class="sue-feature-card sue-feature-card-link" href="<?php 
+    echo esc_url( admin_url( 'admin.php?page=send-users-email-groups' ) );
+    ?>" aria-label="<?php 
+    esc_attr_e( 'Send to user groups', 'send-users-email' );
+    ?>">
+                <div class="sue-card-icon icon-green">👥</div>
+                <h3><?php 
+    esc_attr_e( 'Send to user groups', 'send-users-email' );
+    ?></h3>
+                <p><?php 
+    esc_attr_e( 'Target users by your saved groups and email all matching members in one action.', 'send-users-email' );
+    ?></p>
+            </a>
+
+            <a class="sue-feature-card sue-feature-card-link" href="<?php 
+    echo esc_url( admin_url( 'admin.php?page=send-users-single-email' ) );
+    ?>" aria-label="<?php 
+    esc_attr_e( 'Send to external email', 'send-users-email' );
+    ?>">
+                <div class="sue-card-icon icon-amber">✉️</div>
+                <h3><?php 
+    esc_attr_e( 'Send to external email', 'send-users-email' );
+    ?></h3>
+                <p><?php 
+    esc_attr_e( 'Send an email to a single address that does not belong to a WordPress user account.', 'send-users-email' );
+    ?></p>
+            </a>
+
+            <a class="sue-feature-card sue-feature-card-link" href="<?php 
+    echo esc_url( admin_url( 'admin.php?page=send-users-email-external-list-page' ) );
+    ?>" aria-label="<?php 
+    esc_attr_e( 'Send to external List', 'send-users-email' );
+    ?>">
+                <div class="sue-card-icon icon-slate">📋</div>
+                <h3><?php 
+    esc_attr_e( 'Send to external List (Beta)', 'send-users-email' );
+    ?></h3>
+                <p><?php 
+    esc_attr_e( 'Choose from your imported external lists and send emails to contacts outside WordPress users.', 'send-users-email' );
+    ?></p>
+            </a>
+        <?php 
+}
+?>
+
+        </div>
+    </div>
+
+    <?php 
+?>
+
+    <div class="sue-pro-upgrade-banner" style="margin-top: 32px;">
+        <div class="sue-banner-text">
+            <h3><?php 
+esc_html_e( 'Send Users Email PRO', 'send-users-email' );
+?></h3>
+            <p><?php 
+esc_html_e( 'Unlock templates, queue system, SMTP, user groups & more.', 'send-users-email' );
+?></p>
+        </div>
+        <a class="btn-upgrade" href="<?php 
+echo esc_url( sue_fs()->get_upgrade_url() );
+?>" role="button">
+            <?php 
+esc_html_e( 'Upgrade Now', 'send-users-email' );
+?>
+        </a>
+    </div>
+
+    <?php 
+?>
+
+    <!-- Support & links (PRO only) -->
+    <?php 
+?>
+
+    <!-- Sidebar content for free users -->
+    <?php 
+/* //if ( ! sue_fs()->is__premium_only() || ! sue_fs()->can_use_premium_code() ): ?>
+
+        <?php //require_once SEND_USERS_EMAIL_PLUGIN_BASE_PATH . '/partials/donate.php'; ?>
+
+        <div class="sue-about-card">
+            <div class="sue-card-icon icon-slate">ℹ️</div>
+            <h3><?php esc_attr_e( 'About', 'send-users-email' ); ?></h3>
+            <p><?php esc_attr_e( 'Send emails to users by selecting individuals or bulk send by role.', 'send-users-email' ); ?></p>
+        </div>
+
+    <?php //else: ?>
+
+        <?php //require_once SEND_USERS_EMAIL_PLUGIN_BASE_PATH . '/partials/donate.php'; ?>
+
+    <?php //endif;  */
+?>
+
+</div>

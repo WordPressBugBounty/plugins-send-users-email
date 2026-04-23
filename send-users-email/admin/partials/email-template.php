@@ -1,67 +1,33 @@
 <?php
 
-global $preview;
-if ( $preview ) {
-    $options = get_option( 'sue_send_users_email' );
-    // Ensure $options is an array before accessing its keys
-    if ( !is_array( $options ) ) {
-        $options = [];
-    }
-    // Use null coalescing operator (??) for default values
-    $logo = $options['logo_url'] ?? SEND_USERS_EMAIL_PLUGIN_BASE_URL . '/assets/sample-logo.png';
-    $title = $options['email_title'] ?? __( 'This is a preview title', 'send-users-email' );
-    $tagline = $options['email_tagline'] ?? __( 'This is a preview tagline', 'send-users-email' );
-    $footer = $options['email_footer'] ?? __( 'Demo Footer Content', 'send-users-email' );
-    // Handle social links with a default array
-    $social = $options['social'] ?? [
-        "facebook"  => "#",
-        "instagram" => "#",
-        "linkedin"  => "#",
-        "skype"     => "#",
-        "tiktok"    => "#",
-        "twitter"   => "#",
-        "youtube"   => "#",
-    ];
-    // Default email body content
-    $email_body = __( 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.', 'send-users-email' );
-    // Optional styles
-    $styles = $options['email_template_style'] ?? '';
+$obj_template_data = $args['obj_template_data'] ?? null;
+$iframe_preview = $args['iframe_preview'] ?? false;
+$body_inline_styles = '';
+if ( $obj_template_data->is_preview() && !$iframe_preview ) {
     ?>
-
-<?php 
-    ?>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-5">
-                <div class="card shadow" style="text-align: center; margin-bottom: 5rem;">
-                    <div class="card-body">
-                        <h3 class="text-center pt-3 pb-3 display-7 text-uppercase"><?php 
+    <div class="sue-pro-wrap">
+        <div class="sue-pro-upgrade-banner" style="margin-bottom: 40px;">
+            <div class="sue-banner-text">
+                <h3><?php 
     esc_attr_e( 'You are using the free version', 'send-users-email' );
     ?></h3>
-                        <h6 style="margin-bottom: 2rem;"><?php 
-    esc_attr_e( 'Upgrade to PRO to preview and use prebuilt templates. Or even use your own HTML template.', 'send-users-email' );
-    ?></h6>
-                        <a class="btn btn-success btn-lg" href="<?php 
-    echo esc_attr( sue_fs()->get_upgrade_url() );
-    ?>"
-                           role="button"><?php 
+                <p><?php 
+    esc_attr_e( 'Upgrade to PRO to preview and use prebuilt templates — or use your own HTML template.', 'send-users-email' );
+    ?></p>
+            </div>
+            <a class="btn-upgrade" href="<?php 
+    echo esc_url( sue_fs()->get_upgrade_url() );
+    ?>" role="button">
+                <?php 
     esc_attr_e( 'Upgrade to PRO', 'send-users-email' );
-    ?></a>
-                    </div>
-                </div>
+    ?>
+            </a>
+        </div>
 
-                <h3 class="text-center" style="margin-bottom: 3rem;"><?php 
+        <h3 class="sue-plain-text-heading"><?php 
     esc_attr_e( 'Email Plain Text Preview:', 'send-users-email' );
     ?></h3>
-            </div>
-        </div>
     </div>
-    <style>
-        .sue-main-table {
-            max-width: 768px;
-            margin: 0 auto;
-        }
-    </style>
 <?php 
 }
 ?>
@@ -86,7 +52,13 @@ bloginfo( 'name' );
 ?></title>
     <meta charset="UTF-8"/>
 
-    <style>
+    <style type="text/css">
+        body {
+            font-family: sans-serif;
+        }
+        p {
+            font-family: sans-serif;
+        }
         .sue-logo td {
             text-align: center;
         }
@@ -133,11 +105,11 @@ bloginfo( 'name' );
     </style>
 
 	<?php 
-if ( $styles ) {
+if ( $obj_template_data && $obj_template_data->get_email_styles() ) {
     ?>
         <style>
             <?php 
-    echo stripslashes_deep( wp_strip_all_tags( $styles ) );
+    echo stripslashes_deep( wp_strip_all_tags( $obj_template_data->get_email_styles() ) );
     ?>
         </style>
 	<?php 
@@ -145,16 +117,23 @@ if ( $styles ) {
 ?>
 
 </head>
-<body>
+
+    <?php 
+?>
+<body class="sue-email-template-" style="<?php 
+echo $body_inline_styles;
+?>">
+    <?php 
+?>
 
 <table class="sue-main-table">
 	<?php 
-if ( esc_url_raw( $logo ) ) {
+if ( $obj_template_data && $obj_template_data->get_email_logo() ) {
     ?>
         <tr class="sue-logo">
             <td>
                 <img src="<?php 
-    echo esc_url_raw( $logo );
+    echo esc_url_raw( $obj_template_data->get_email_logo() );
     ?>" alt="<?php 
     bloginfo( 'name' );
     ?>"/>
@@ -165,25 +144,25 @@ if ( esc_url_raw( $logo ) ) {
 ?>
 
 	<?php 
-if ( $title || $tagline ) {
+if ( $obj_template_data && $obj_template_data->get_email_title() || $obj_template_data && $obj_template_data->get_email_tagline() ) {
     ?>
         <tr class="sue-title-tagline">
             <td>
 				<?php 
-    if ( $title ) {
+    if ( $obj_template_data && $obj_template_data->get_email_title() ) {
         ?>
                     <h2 class="sue-title"><?php 
-        echo esc_html( stripslashes_deep( $title ) );
+        echo esc_html( stripslashes_deep( $obj_template_data->get_email_title() ) );
         ?></h2>
 				<?php 
     }
     ?>
 
 				<?php 
-    if ( $tagline ) {
+    if ( $obj_template_data && $obj_template_data->get_email_tagline() ) {
         ?>
                     <h5 class="sue-tagline"><?php 
-        echo esc_html( stripslashes_deep( $tagline ) );
+        echo esc_html( stripslashes_deep( $obj_template_data->get_email_tagline() ) );
         ?></h5>
 				<?php 
     }
@@ -196,19 +175,25 @@ if ( $title || $tagline ) {
 
     <tr class="sue-email-body">
         <td>
-			<?php 
-echo wp_kses_post( stripslashes_deep( $email_body ) );
+            <?php 
+if ( $obj_template_data && $obj_template_data->get_email_body() ) {
+    ?>
+			    <?php 
+    echo $obj_template_data->get_email_body();
+    ?>
+            <?php 
+}
 ?>
         </td>
     </tr>
 
 	<?php 
-if ( $footer ) {
+if ( $obj_template_data && $obj_template_data->get_email_footer() ) {
     ?>
         <tr class="sue-footer">
             <td>
 				<?php 
-    echo stripslashes_deep( $footer );
+    echo stripslashes_deep( $obj_template_data->get_email_footer() );
     ?>
             </td>
         </tr>
@@ -217,38 +202,12 @@ if ( $footer ) {
 ?>
 
 	<?php 
-if ( !empty( $social ) ) {
+if ( $obj_template_data && !empty( $obj_template_data->get_email_social_links() ) ) {
     ?>
         <tr class="sue-footer-social">
             <td>
 				<?php 
-    foreach ( Send_Users_Email_Admin::$social as $platform ) {
-        ?>
-					<?php 
-        if ( isset( $social[$platform] ) ) {
-            ?>
-						<?php 
-            if ( !empty( $social[$platform] ) ) {
-                ?>
-                            <a href="<?php 
-                echo esc_url_raw( $social[$platform] );
-                ?>" style="text-decoration: none;">
-                                <img src="<?php 
-                echo esc_attr( sue_get_asset_url( $platform . '.png' ) );
-                ?>"
-                                     alt="<?php 
-                echo esc_attr( $platform );
-                ?>" width="30"
-                                     style="display:inline-block;border-width:0;max-width: 35px;">
-                            </a>
-						<?php 
-            }
-            ?>
-					<?php 
-        }
-        ?>
-				<?php 
-    }
+    $obj_template_data->display_social_links();
     ?>
             </td>
         </tr>

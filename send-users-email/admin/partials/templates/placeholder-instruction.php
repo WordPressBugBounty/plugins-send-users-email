@@ -1,48 +1,36 @@
-<div class="card shadow">
-    <div class="card-body">
-        <h5 class="card-title text-uppercase"><?php esc_attr_e( 'Placeholder', 'send-users-email' ); ?></h5>
-        <p class="card-text"><?php esc_attr_e( 'You can use following placeholder to replace user detail on email.',
-				'send-users-email' ); ?></p>
-        <table class="table table-borderless">
-            <tr>
-                <td>
-                    {{user_id}}<br>
-					<?php esc_attr_e( 'Use this placeholder to display user ID.', 'send-users-email' ); ?>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    {{username}}<br>
-					<?php esc_attr_e( 'Use this placeholder to display username', 'send-users-email' ); ?>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    {{user_display_name}}<br>
-					<?php esc_attr_e( 'Use this placeholder to display user display name', 'send-users-email' ); ?>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    {{user_first_name}}<br>
-					<?php esc_attr_e( 'Use this placeholder to display user first name', 'send-users-email' ); ?>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    {{user_last_name}}<br>
-					<?php esc_attr_e( 'Use this placeholder to display user last name', 'send-users-email' ); ?>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    {{user_email}}<br>
-					<?php esc_attr_e( 'Use this placeholder to display user email', 'send-users-email' ); ?>
-                </td>
-            </tr>
-        </table>
-
-        <div class="sue-messages"></div>
-
+<div class="sue-sidebar-card">
+    <div class="sue-sidebar-card-header">
+        <span class="sue-sidebar-card-icon">🏷️</span>
+        <div>
+            <p class="sue-sidebar-card-title"><?php esc_html_e( 'Placeholders', 'send-users-email' ); ?></p>
+            <p class="sue-sidebar-card-desc"><?php esc_html_e( 'Insert these tags into your email to personalise each message with recipient details.', 'send-users-email' ); ?></p>
+        </div>
     </div>
+    <ul class="sue-placeholder-list">
+        <li>
+            <code>{{user_id}}</code>
+            <span><?php esc_html_e( 'User ID', 'send-users-email' ); ?></span>
+        </li>
+        <li>
+            <code>{{username}}</code>
+            <span><?php esc_html_e( 'Username', 'send-users-email' ); ?></span>
+        </li>
+        <li>
+            <code>{{user_display_name}}</code>
+            <span><?php esc_html_e( 'Display name', 'send-users-email' ); ?></span>
+        </li>
+        <li>
+            <code>{{user_first_name}}</code>
+            <span><?php esc_html_e( 'First name', 'send-users-email' ); ?></span>
+        </li>
+        <li>
+            <code>{{user_last_name}}</code>
+            <span><?php esc_html_e( 'Last name', 'send-users-email' ); ?></span>
+        </li>
+        <li>
+            <code>{{user_email}}</code>
+            <span><?php esc_html_e( 'Email address', 'send-users-email' ); ?></span>
+        </li>
+    </ul>
+    <div class="sue-messages"></div>
 </div>

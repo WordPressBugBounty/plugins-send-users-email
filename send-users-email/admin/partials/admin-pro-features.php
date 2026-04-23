@@ -1,190 +1,213 @@
-<div class="container-fluid">
-    <div class="row row d-flex align-items-stretch pro-features-list">
+<div class="sue-pro-wrap">
 
-        <div class="col-md-12">
-            <h2 class="text-center pt-3 pb-3 display-7 text-uppercase"><?php 
-esc_attr_e( 'Features of the PRO version', 'send-users-email' );
+    <!-- Header -->
+    <div class="sue-pro-header">
+        <h2><?php 
+esc_attr_e( 'PRO Features', 'send-users-email' );
 ?></h2>
-        </div>
+        <p><?php 
+esc_attr_e( 'Everything you need to send professional, well-timed emails at scale.', 'send-users-email' );
+?></p>
+    </div>
 
-        <?php 
+    <!-- Upgrade banner (free users only) -->
+    <?php 
 ?>
-            <div class="col-sm-12 my-5 text-center">
-                <a class="btn btn-success btn-lg" href="<?php 
+        <div class="sue-pro-upgrade-banner" style="margin-bottom:40px;">
+            <div class="sue-banner-text">
+                <h3><?php 
+esc_attr_e( 'Unlock all PRO features', 'send-users-email' );
+?></h3>
+                <p><?php 
+esc_attr_e( 'Queue system, templates, user groups, SMTP, scheduling & more.', 'send-users-email' );
+?></p>
+            </div>
+            <a class="btn-upgrade" href="<?php 
 echo esc_url( sue_fs()->get_upgrade_url() );
-?>"
-                   role="button"><?php 
+?>" role="button">
+                <?php 
 esc_attr_e( 'Upgrade to PRO', 'send-users-email' );
-?></a>
-            </div>
-        <?php 
+?>
+            </a>
+        </div>
+    <?php 
 ?>
 
-        <div class="col-sm-4">
-            <div class="card shadow">
-                <div class="card-body" style="text-align: justify;">
-                    <img src="<?php 
-echo esc_attr( sue_get_asset_url( 'queue-icon.svg' ) );
-?>" class="card-img-top" alt="Queue">
-                    <div>
-                        <h5 class="card-title text-uppercase"><?php 
+    <!-- Feature cards -->
+    <div class="sue-pro-grid">
+
+        <!-- Queue System -->
+        <div class="sue-feature-card">
+            <div class="sue-card-icon icon-blue">⏱</div>
+            <span class="sue-tag sue-tag-delivery"><?php 
+esc_attr_e( 'Delivery', 'send-users-email' );
+?></span>
+            <h3><?php 
 esc_attr_e( 'Queue System', 'send-users-email' );
-?></h5>
-                        <p class="card-text"><?php 
-esc_attr_e( 'Having trouble with your email service provider, due to reaching your daily or monthly limits?', 'send-users-email' );
+?></h3>
+            <p><?php 
+esc_attr_e( 'Stay within your provider\'s sending limits automatically. Set a daily cap (e.g. 300/day) and the plugin distributes your emails over time using WordPress cron — no manual work needed.', 'send-users-email' );
 ?></p>
-                        <p class="card-text"><?php 
-esc_attr_e( "The queue system of this plugin will send a specified amount of emails regularly so that you don't hit that limit.", 'send-users-email' );
-?></p>
-                        <p class="card-text"><?php 
-esc_attr_e( 'For example: If your hosting/email provider only allows for 300 outgoing emails per day, but you are about to send 900 emails, you can configure the plugin in such a way that it only sends 300 emails per day, staying below the limit.', 'send-users-email' );
-?></p>
-                        <p class="card-text"><?php 
-esc_attr_e( 'These emails will be sent periodically and automatically, using the WordPress cron functionality. You will just have to send 900 emails once and the plugin will do the rest.', 'send-users-email' );
-?></p>
-                    </div>
-                </div>
-            </div>
         </div>
 
-        <div class="col-sm-4">
-            <div class="card shadow">
-                <div class="card-body" style="text-align: justify;">
-                    <img src="<?php 
-echo esc_attr( sue_get_asset_url( 'template-icon.svg' ) );
-?>" class="card-img-top"
-                         alt="Template">
-                    <div>
-                        <h5 class="card-title text-uppercase"><?php 
-esc_attr_e( 'Email Template', 'send-users-email' );
-?></h5>
-                        <p class="card-text"><?php 
-esc_attr_e( 'Are you sending the same email content over and over again?', 'send-users-email' );
-?></p>
-                        <p class="card-text"><?php 
-esc_attr_e( 'Are you tired of typing same email repeatedly?', 'send-users-email' );
-?></p>
-                        <p class="card-text"><?php 
-esc_attr_e( 'The PRO version of Send Users Email allows you to save email templates and reuse them when sending emails to your users.', 'send-users-email' );
-?></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-sm-4">
-            <div class="card shadow">
-                <div class="card-body" style="text-align: justify;">
-                    <img src="<?php 
-echo esc_attr( sue_get_asset_url( 'usergroup-icon.svg' ) );
-?>" class="card-img-top" alt="Queue">
-                    <div>
-                        <h5 class="card-title text-uppercase"><?php 
-esc_attr_e( 'User Groups', 'send-users-email' );
-?></h5>
-                        <p class="card-text"><?php 
-esc_attr_e( 'Choosing individual users or sending emails to roles is not cutting it for you?', 'send-users-email' );
-?></p>
-                        <p class="card-text"><?php 
-esc_attr_e( 'The PRO version supports creation of user groups.', 'send-users-email' );
-?></p>
-                        <p class="card-text"><?php 
-esc_attr_e( 'Easily add users to a group and send emails to all users in that group at once.', 'send-users-email' );
-?></p>
-                        <p class="card-text"><?php 
-esc_attr_e( 'You can use the queue system when sending emails to groups as well. This will make sure, you stay within your providers daily email cap.', 'send-users-email' );
-?></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-sm-4">
-            <div class="card shadow">
-                <div class="card-body" style="text-align: justify;">
-                    <img src="<?php 
-echo esc_attr( sue_get_asset_url( 'styles-icon.svg' ) );
-?>" class="card-img-top"
-                         alt="Template">
-                    <div>
-                        <h5 class="card-title text-uppercase"><?php 
-esc_attr_e( 'Email Styles', 'send-users-email' );
-?></h5>
-                        <p class="card-text"><?php 
-esc_attr_e( 'Having trouble crafting decent-looking emails?', 'send-users-email' );
-?></p>
-                        <p class="card-text"><?php 
-esc_attr_e( 'Send Users Email provides you with an option to use prebuilt email styles.', 'send-users-email' );
-?></p>
-                        <p class="card-text"><?php 
-esc_attr_e( 'The PRO version of Send Users Email provides email styles that are compatible with various screen sizes and you can choose different color schemes as per your need.', 'send-users-email' );
-?></p>
-                        <p class="card-text"><strong><?php 
-esc_attr_e( 'If that\'s not enough, you can even use your own HTML/CSS templates.', 'send-users-email' );
-?></strong></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-sm-4">
-            <div class="card shadow">
-                <div class="card-body" style="text-align: justify;">
-                    <img src="<?php 
-echo esc_attr( sue_get_asset_url( 'smtp-icon.svg' ) );
-?>" class="card-img-top"
-                         alt="Template">
-                    <div>
-                        <h5 class="card-title text-uppercase"><?php 
+        <!-- SMTP Server -->
+        <div class="sue-feature-card">
+            <div class="sue-card-icon icon-cyan">✉</div>
+            <span class="sue-tag sue-tag-delivery"><?php 
+esc_attr_e( 'Delivery', 'send-users-email' );
+?></span>
+            <h3><?php 
 esc_attr_e( 'SMTP Server', 'send-users-email' );
-?></h5>
-                        <p class="card-text"><?php 
-esc_attr_e( "Your emails often go to your user's spam folder? Or you want to send emails in bulk that actually reach your users?", 'send-users-email' );
+?></h3>
+            <p><?php 
+esc_attr_e( 'Stop landing in spam. Connect your own SMTP server or third-party providers like Mailgun or Brevo for reliable email delivery.', 'send-users-email' );
 ?></p>
-                        <p class="card-text"><?php 
-esc_attr_e( 'The PRO version of Send Users Email has the option to save your own SMTP server settings.', 'send-users-email' );
-?></p>
-                        <p class="card-text"><?php 
-esc_attr_e( 'That way, you can send emails directly via your own email server or third-party providers like Mailgun, Brevo and others', 'send-users-email' );
-?></p>
-                    </div>
-                </div>
-            </div>
         </div>
 
-        <div class="col-sm-4">
-            <div class="card shadow">
-                <div class="card-body" style="text-align: justify;">
-                    <img src="<?php 
-echo esc_attr( sue_get_asset_url( 'others-icon.svg' ) );
-?>" class="card-img-top"
-                         alt="Placeholder">
-                    <div>
-                        <h5 class="card-title text-uppercase"><?php 
-esc_attr_e( 'Other features', 'send-users-email' );
-?></h5>
-                        <p class="card-text"><?php 
-esc_attr_e( 'The PRO version of Send Users Email provides these additional features to make your life a easier.', 'send-users-email' );
+        <!-- Email Scheduling -->
+        <div class="sue-feature-card">
+            <div class="sue-card-icon icon-amber">📅</div>
+            <span class="sue-tag sue-tag-delivery"><?php 
+esc_attr_e( 'Delivery', 'send-users-email' );
+?></span>
+            <h3><?php 
+esc_attr_e( 'Scheduled Sending', 'send-users-email' );
+?></h3>
+            <p><?php 
+esc_attr_e( 'Compose now, send later. Schedule emails to go out at the perfect time for your audience.', 'send-users-email' );
 ?></p>
-                        <ul class="list-group list-group-numbered">
-                            <li class="list-group-item"><?php 
-esc_attr_e( 'Use placeholders on email subjects to personalize your emails even further.', 'send-users-email' );
-?></li>
-                            <li class="list-group-item"><?php 
-esc_attr_e( 'Ability to send queued emails at a later date. Schedule your emails to be send in the future.', 'send-users-email' );
-?></li>
-                            <li class="list-group-item"><?php 
-esc_attr_e( 'A clutter-free plugin area so that you can focus on things that matter to you.', 'send-users-email' );
-?></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
         </div>
 
-		<?php 
-?>
+        <!-- Email Templates -->
+        <div class="sue-feature-card">
+            <div class="sue-card-icon icon-purple">📝</div>
+            <span class="sue-tag sue-tag-content"><?php 
+esc_attr_e( 'Content', 'send-users-email' );
+?></span>
+            <h3><?php 
+esc_attr_e( 'Email Templates', 'send-users-email' );
+?></h3>
+            <p><?php 
+esc_attr_e( 'Save and reuse email content you send often. No more rewriting the same message from scratch every time.', 'send-users-email' );
+?></p>
+        </div>
+
+        <!-- Email Styles -->
+        <div class="sue-feature-card">
+            <div class="sue-card-icon icon-rose">🎨</div>
+            <span class="sue-tag sue-tag-content"><?php 
+esc_attr_e( 'Content', 'send-users-email' );
+?></span>
+            <h3><?php 
+esc_attr_e( 'Email Styles & Themes', 'send-users-email' );
+?></h3>
+            <p><?php 
+esc_attr_e( 'Choose from pre-built, responsive email designs in multiple color schemes — or use your own HTML/CSS templates for full control.', 'send-users-email' );
+?></p>
+        </div>
+
+        <!-- User Groups -->
+        <div class="sue-feature-card">
+            <div class="sue-card-icon icon-green">👥</div>
+            <span class="sue-tag sue-tag-audience"><?php 
+esc_attr_e( 'Audience', 'send-users-email' );
+?></span>
+            <h3><?php 
+esc_attr_e( 'User Groups', 'send-users-email' );
+?></h3>
+            <p><?php 
+esc_attr_e( 'Go beyond roles. Create custom groups, add users, and send to entire groups at once — fully compatible with the queue system.', 'send-users-email' );
+?></p>
+        </div>
+
+        <!-- Placeholders -->
+        <div class="sue-feature-card">
+            <div class="sue-card-icon icon-indigo">🏷</div>
+            <span class="sue-tag sue-tag-content"><?php 
+esc_attr_e( 'Content', 'send-users-email' );
+?></span>
+            <h3><?php 
+esc_attr_e( 'Placeholders', 'send-users-email' );
+?></h3>
+            <p><?php 
+esc_attr_e( 'Personalize every part of your email with dynamic placeholders — subject line, tagline, title, and body text. Address users by name, role, or any available field.', 'send-users-email' );
+?></p>
+        </div>
+
+        <!-- Role-based Sending -->
+        <div class="sue-feature-card">
+            <div class="sue-card-icon icon-teal">🔑</div>
+            <span class="sue-tag sue-tag-audience"><?php 
+esc_attr_e( 'Audience', 'send-users-email' );
+?></span>
+            <h3><?php 
+esc_attr_e( 'Send by User Role', 'send-users-email' );
+?></h3>
+            <p><?php 
+esc_attr_e( 'Target emails to all users with a specific WordPress role — administrators, editors, subscribers, or any custom role.', 'send-users-email' );
+?></p>
+        </div>
+
+        <!-- External Recipients -->
+        <div class="sue-feature-card">
+            <div class="sue-card-icon icon-orange">📨</div>
+            <span class="sue-tag sue-tag-audience"><?php 
+esc_attr_e( 'Audience', 'send-users-email' );
+?></span>
+            <h3><?php 
+esc_attr_e( 'External Recipients', 'send-users-email' );
+?></h3>
+            <p><?php 
+esc_attr_e( 'Send emails to any address — no WordPress account required. Reach people outside your site without extra steps.', 'send-users-email' );
+?></p>
+        </div>
+
+        <!-- CSV Email Lists -->
+        <div class="sue-feature-card">
+            <div class="sue-card-icon icon-slate">📄</div>
+            <span class="sue-tag sue-tag-audience"><?php 
+esc_attr_e( 'Audience', 'send-users-email' );
+?></span>
+            <h3><?php 
+esc_attr_e( 'CSV Email Lists', 'send-users-email' );
+?></h3>
+            <p><?php 
+esc_attr_e( 'Import external email lists via CSV upload. Use custom fields from your list for personalization and manage everything from the WordPress dashboard.', 'send-users-email' );
+?></p>
+        </div>
+
+        <!-- Unsubscribe Management -->
+        <div class="sue-feature-card">
+            <div class="sue-card-icon icon-rose">🚫</div>
+            <span class="sue-tag sue-tag-audience"><?php 
+esc_attr_e( 'Audience', 'send-users-email' );
+?></span>
+            <h3><?php 
+esc_attr_e( 'Unsubscribe Management', 'send-users-email' );
+?></h3>
+            <p><?php 
+esc_attr_e( 'Opt users out of receiving emails directly from their WordPress profile page. A simple checkbox lets you — or the users themselves — control who receives your emails.', 'send-users-email' );
+?></p>
+        </div>
+
+        <!-- WooCommerce Integration -->
+        <div class="sue-feature-card">
+            <div class="sue-card-icon icon-purple">🛒</div>
+            <span class="sue-tag sue-tag-content"><?php 
+esc_attr_e( 'Content', 'send-users-email' );
+?></span>
+            <h3><?php 
+esc_attr_e( 'WooCommerce Email Template', 'send-users-email' );
+?></h3>
+            <p><?php 
+esc_attr_e( 'Use your existing WooCommerce email template for a seamless visual integration. Your marketing emails will look and feel like part of your store\'s branding.', 'send-users-email' );
+?></p>
+        </div>
 
     </div>
+
+    <!-- Premium-only: screenshots & tips -->
+    <?php 
+?>
 
 </div>

@@ -13,94 +13,122 @@ $data       = $args['data'] ?? [];
 $is_default = $args['is_default'] ?? false;
 ?>
 
-<div class="container-fluid">
-    <div class="row sue-row">
+<div class="sue-pro-wrap sue-custom-template-wrap">
 
-        <div class="col-sm-9">  
-            <div class="card shadow">
-                <div class="card-body">
-                    <h5 class="card-title text-uppercase mb-4"><?php echo esc_attr( $title, 'send-users-email' ); ?></h5>
+    <div class="sue-pro-header">
+        <h2><?php echo esc_html( $title ); ?></h2>
+        <p><?php esc_html_e( 'Create and save a custom HTML email layout for your campaigns.', 'send-users-email' ); ?></p>
+    </div>
 
+    <div class="sue-settings-layout sue-custom-template-layout">
+
+        <div class="sue-settings-main">
+            <?php if ( $is_default ): ?>
+                <div class="sue-notice sue-notice-info">
+                    <div class="sue-notice-icon">🎨</div>
+                    <div class="sue-notice-body">
+                        <p class="sue-notice-title"><?php esc_html_e( 'Default template active', 'send-users-email' ); ?></p>
+                        <p><?php esc_html_e( 'This custom HTML template is currently set as the default email template.', 'send-users-email' ); ?></p>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+            <div class="sue-log-card">
+                <div class="sue-log-card-header">
+                    <span class="sue-log-card-icon">🧩</span>
+                    <h3><?php esc_html_e( 'HTML Template Editor', 'send-users-email' ); ?></h3>
+                </div>
+                <div class="sue-log-card-body">
                     <div class="sue-messages"></div>
 
                     <form action="javascript:void(0)" id="sue-custom-html-template-form" method="post">
-
-                        <div class="mb-4">
-                            <label for="custom_html_css" class="form-label">
-                                <?php esc_attr_e( 'Add your custom HTML/CSS template here.', 'send-users-email' ); ?>
-                            </label>
-                            <div class="wp-editor-wrap">
-                                <textarea id="custom_html_css" name="custom_html_css" rows="20" class="form-control"><?php echo esc_html( $data ); ?></textarea>
+                        <div class="sue-field-row sue-field-row-editor">
+                            <div class="sue-field-label">
+                                <label for="custom_html_css"><?php esc_html_e( 'Template HTML', 'send-users-email' ); ?></label>
+                                <p class="sue-form-hint"><?php esc_html_e( 'Paste the full HTML for your email layout here. You can include inline CSS and the placeholders shown in the sidebar.', 'send-users-email' ); ?></p>
+                                <p class="sue-form-hint"><?php esc_html_e( 'Tip: Save your changes here, then open Theme Preview to verify the output before sending.', 'send-users-email' ); ?></p>
                             </div>
-                        </div>
-                        
-                        <div class="mb-4">
-                            <div class="spinner-border text-info sue-spinner" role="status">
-                                <span class="visually-hidden"><?php esc_attr_e( 'Loading...',
-                                        'send-users-email' ) ?></span>
+                            <div class="sue-field-input">
+                                <div class="wp-editor-wrap sue-custom-template-editor-wrap">
+                                    <textarea id="custom_html_css" name="custom_html_css" rows="20" class="sue-custom-template-editor"><?php echo esc_textarea( $data ); ?></textarea>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="mb-4">
-                            <button type="submit" class="btn btn-primary" id="sue-custom-html-template-btn">
-                                <span class="dashicons dashicons-admin-settings"></span> Save                                        
-                            </button>
+                        <div class="sue-field-row sue-field-row-actions">
+                            <div class="sue-field-label">
+                                <label><?php esc_html_e( 'Save changes', 'send-users-email' ); ?></label>
+                                <p class="sue-form-hint"><?php esc_html_e( 'Your template will be stored in the plugin settings and used whenever the custom theme is selected.', 'send-users-email' ); ?></p>
+                            </div>
+                            <div class="sue-field-input">
+                                <div class="sue-custom-template-actions">
+                                    <div class="spinner-border text-info sue-spinner" role="status">
+                                        <span class="visually-hidden"><?php esc_html_e( 'Loading...', 'send-users-email' ); ?></span>
+                                    </div>
+
+                                    <button type="submit" class="sue-btn sue-btn-primary" id="sue-custom-html-template-btn">
+                                        <span class="dashicons dashicons-saved" aria-hidden="true"></span>
+                                        <?php esc_html_e( 'Save Template', 'send-users-email' ); ?>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>
 
-        <div class="col-sm-3">
-            
-            <div class="card shadow">
-                <div class="card-body">
-                    <h5 class="card-title text-uppercase"><?php esc_attr_e( 'Instruction', 'send-users-email' ); ?></h5>
-                    <p class="card-text">
-                        <?php esc_attr_e( 'You can paste your own custom HTML template here. Copy your HTML from your favorite newsletter tool, or use free templates from the web. Once pasted here, you can use the placeholders below to define were to ouput your email content. Only use those placeholders and use individual placeholders for personalization only on the email writing interface. You can set this template as your default template on the settings section. Before you use it, click on the Theme Preview section to preview it.', 'send-users-email' ); ?>
-                    </p>
+        <div class="sue-settings-sidebar sue-custom-template-sidebar">
+            <div class="sue-sidebar-card">
+                <div class="sue-sidebar-card-header">
+                    <span class="sue-sidebar-card-icon">ℹ️</span>
+                    <div>
+                        <p class="sue-sidebar-card-title"><?php esc_html_e( 'How it works', 'send-users-email' ); ?></p>
+                        <p class="sue-sidebar-card-desc"><?php esc_html_e( 'Build your own layout and insert the placeholders below where dynamic email content should appear.', 'send-users-email' ); ?></p>
+                    </div>
+                </div>
+
+                <div class="sue-notice sue-notice-info sue-custom-template-note">
+                    <div class="sue-notice-icon">💡</div>
+                    <div class="sue-notice-body">
+                        <p class="sue-notice-title"><?php esc_html_e( 'Recommended workflow', 'send-users-email' ); ?></p>
+                        <p><?php esc_html_e( 'Copy HTML from your preferred newsletter builder or a compatible template source, then replace the content areas with the plugin placeholders.', 'send-users-email' ); ?></p>
+                        <p><?php esc_html_e( 'After saving, open Theme Preview to confirm that the title, tagline, content, and logo render correctly.', 'send-users-email' ); ?></p>
+                    </div>
                 </div>
             </div>
 
-            <div class="card shadow">
-                <div class="card-body">
-                    <h5 class="card-title text-uppercase"><?php esc_attr_e( 'Placeholder', 'send-users-email' ); ?></h5>
-                    <p class="card-text"><?php esc_attr_e( 'You can use the following placeholders to output your content.', 'send-users-email' ); ?></p>
-                    <table class="table table-borderless">
-                        <tbody>
-                            <tr>
-                                <td>
-                                        {{email_title}}<br>
-                                        <?php esc_attr_e( 'Your email title, as set in the email interface', 'send-users-email' ); ?>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                        {{email_tagline}}<br>
-                                        <?php esc_attr_e( 'Your email tagline, as set in the email interface', 'send-users-email' ); ?>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                        {{email_content}}<br>
-                                        <?php esc_attr_e( 'Your email content, as set in the email interface', 'send-users-email' ); ?>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                        {{email_logo}}<br>
-                                        <?php esc_attr_e( 'Email logo URL you set in the settings', 'send-users-email' ); ?>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="sue-messages"></div>
+            <div class="sue-sidebar-card">
+                <div class="sue-sidebar-card-header">
+                    <span class="sue-sidebar-card-icon">🏷️</span>
+                    <div>
+                        <p class="sue-sidebar-card-title"><?php esc_html_e( 'Placeholders', 'send-users-email' ); ?></p>
+                        <p class="sue-sidebar-card-desc"><?php esc_html_e( 'Use these placeholders in your HTML to output the email content dynamically.', 'send-users-email' ); ?></p>
+                    </div>
                 </div>
-            </div>
 
+                <ul class="sue-placeholder-list sue-custom-template-placeholders">
+                    <li>
+                        <code>{{email_title}}</code>
+                        <span><?php esc_html_e( 'Email title from the editor', 'send-users-email' ); ?></span>
+                    </li>
+                    <li>
+                        <code>{{email_tagline}}</code>
+                        <span><?php esc_html_e( 'Email tagline from the editor', 'send-users-email' ); ?></span>
+                    </li>
+                    <li>
+                        <code>{{email_content}}</code>
+                        <span><?php esc_html_e( 'Main email content from the editor', 'send-users-email' ); ?></span>
+                    </li>
+                    <li>
+                        <code>{{email_logo}}</code>
+                        <span><?php esc_html_e( 'Logo URL configured in the settings', 'send-users-email' ); ?></span>
+                    </li>
+                </ul>
+                <div class="sue-messages"></div>
+            </div>
         </div>
     </div>
-</div>    
+</div>
 
 <?php require_once SEND_USERS_EMAIL_PLUGIN_BASE_PATH . '/partials/toast.php'; ?>

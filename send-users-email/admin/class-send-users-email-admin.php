@@ -8,6 +8,8 @@ class Send_Users_Email_Admin {
 
     private $version;
 
+    private static $static_version;
+
     public static $social = [
         'facebook',
         'instagram',
@@ -33,7 +35,10 @@ class Send_Users_Email_Admin {
         'send-users-email-user-groups',
         'send-users-email-groups',
         'send-users-email-preview',
-        'send-users-html-template'
+        'send-users-html-template',
+        'send-users-single-email',
+        'send-users-email-external-lists',
+        'send-users-email-external-list-page'
     );
 
     /**
@@ -42,6 +47,11 @@ class Send_Users_Email_Admin {
     public function __construct( $plugin_name, $version ) {
         $this->plugin_name = $plugin_name;
         $this->version = $version;
+        self::$static_version = $version;
+    }
+
+    public static function get_version() {
+        return self::$static_version;
     }
 
     /**
@@ -103,6 +113,13 @@ class Send_Users_Email_Admin {
                 $this->version,
                 true
             );
+            wp_register_script(
+                'sue-admin-script-color-picker',
+                plugin_dir_url( __FILE__ ) . 'js/send-users-email-admin-settings-color.js',
+                array('jquery'),
+                $this->version,
+                true
+            );
         }
     }
 
@@ -129,16 +146,16 @@ class Send_Users_Email_Admin {
         );
         add_submenu_page(
             'send-users-email',
-            __( 'Email Users', "send-users-email" ),
-            __( 'Email Users', "send-users-email" ),
+            __( 'Send to Users', "send-users-email" ),
+            __( 'Send to Users', "send-users-email" ),
             SEND_USERS_EMAIL_SEND_MAIL_CAPABILITY,
             'send-users-email-users',
             [$this, 'users_email']
         );
         add_submenu_page(
             'send-users-email',
-            __( 'Email Roles', "send-users-email" ),
-            __( 'Email Roles', "send-users-email" ),
+            __( 'Send to User Roles', "send-users-email" ),
+            __( 'Send to User Roles', "send-users-email" ),
             SEND_USERS_EMAIL_SEND_MAIL_CAPABILITY,
             'send-users-email-roles',
             [$this, 'roles_email']
@@ -216,6 +233,27 @@ class Send_Users_Email_Admin {
         require_once 'partials/users-email.php';
     }
 
+    public function email_single_render_template() {
+        $users = count_users();
+        $total_users = $users['total_users'];
+        // Get system users
+        $templates = [];
+        $blog_users = get_users( array(
+            'fields' => array(
+                'ID',
+                'display_name',
+                'user_email',
+                'user_login'
+            ),
+        ) );
+        // Get the default Email title and Tagline
+        $options = get_option( 'sue_send_users_email' );
+        $title = $options['email_title'] ?? '';
+        $tagline = $options['email_tagline'] ?? '';
+        $allowed_title_tagline = $options['allow_title_and_tagline'] ?? 0;
+        require_once 'partials/users-single-email.php';
+    }
+
     /**
      * Handle Email send selecting roles
      */
@@ -235,12 +273,12 @@ class Send_Users_Email_Admin {
      * @return void
      * Handle bulk user selection for email groups on user list page
      */
-    public function add_custom_group_selection_button() {
+    public function add_custom_group_selection_button( $which ) {
         global $wpdb;
         $groups = $wpdb->get_results( "SELECT * FROM " . SEND_USERS_EMAIL_USER_GROUP_NAME_TABLE );
         ?>
-        <div class="alignleft actions" style="margin-left: 10px;">
-            <select name="custom_group_id" id="custom_group_select">
+        <div class="alignleft actions sue-assign-group-wrap" style="margin-left: 10px;">
+            <select name="custom_group_id" class="sue-custom-group-select">
                 <option value="">Select Email Group ...</option>
                 <?php 
         foreach ( $groups as $group ) {
@@ -254,59 +292,95 @@ class Send_Users_Email_Admin {
         }
         ?>
             </select>
-            <button type="button" class="button assign_email_group_button" id="assign_email_group_button">
+            <button type="button" class="button sue-assign-group-btn">
                 <?php 
-        echo esc_attr( 'Assign Group', 'send-users-email' );
+        echo esc_html( 'Assign Group', 'send-users-email' );
         ?>
             </button>
         </div>
 
+        <?php 
+        if ( $which === 'top' ) {
+            ?>
         <script type="text/javascript">
-            document.addEventListener('DOMContentLoaded', function () {
-                const buttons = document.querySelectorAll('.assign_email_group_button');
-                buttons.forEach(button => {
-                    button.addEventListener('click', function () {
-                        let groupId = document.getElementById('custom_group_select').value;
-                        const selectElement = this.previousElementSibling;
+            (function () {
+                var sueBusy = false;
 
-                        if (selectElement && selectElement.value) {
-                            groupId = selectElement.value;
-                        } else {
-                            return;
-                        }
+                document.addEventListener('DOMContentLoaded', function () {
+                    document.querySelectorAll('.sue-assign-group-btn').forEach(function (button) {
+                        button.addEventListener('click', function () {
+                            if ( sueBusy ) {
+                                return;
+                            }
+							
+							if (window.history && history.replaceState) {
+								var url = new URL(window.location.href);
+								url.searchParams.delete('sue_group_removed');
+								history.replaceState(null, document.title, url.toString());
+							}
 
-                        let userIds = Array.from(document.querySelectorAll('input[name="users[]"]:checked'))
-                            .map(checkbox => checkbox.value);
+                            var wrap = this.closest('.sue-assign-group-wrap');
+                            var selectElement = wrap ? wrap.querySelector('.sue-custom-group-select') : null;
+                            var groupId = selectElement ? selectElement.value : '';
 
-                        if (groupId && userIds.length > 0) {
+                            if ( ! groupId ) {
+                                alert('Please select a group and at least one user.');
+                                return;
+                            }
+
+                            var userIds = Array.from(document.querySelectorAll('input[name="users[]"]:checked'))
+                                .map(function (cb) { return cb.value; });
+
+                            if ( userIds.length === 0 ) {
+                                alert('Please select a group and at least one user.');
+                                return;
+                            }
+
+                            sueBusy = true;
+                            // Disable all assign buttons while the request is in flight
+                            document.querySelectorAll('.sue-assign-group-btn').forEach(function (btn) {
+                                btn.disabled = true;
+                            });
+
                             // Send AJAX request
                             jQuery.post(ajaxurl, {
                                 action: 'assign_email_group',
                                 group_id: groupId,
                                 user_ids: userIds,
                                 security: '<?php 
-        echo esc_attr( wp_create_nonce( "assign_email_group_nonce" ) );
-        ?>'
-                            }, function(response) {
+            echo esc_attr( wp_create_nonce( 'assign_email_group_nonce' ) );
+            ?>'
+                            }, function (response) {
                                 if (response.success) {
                                     jQuery.post(ajaxurl, {
                                         action: 'set_admin_notification',
                                         message: response.data.message
-                                    }, function() {
+                                    }, function () {
                                         // Reload the page to display the notification
                                         location.reload();
                                     });
                                 } else {
                                     alert('Error: ' + response.data.message);
+                                    sueBusy = false;
+                                    document.querySelectorAll('.sue-assign-group-btn').forEach(function (btn) {
+                                        btn.disabled = false;
+                                    });
                                 }
+                            }).fail(function () {
+                                alert('Request failed. Please try again.');
+                                sueBusy = false;
+                                document.querySelectorAll('.sue-assign-group-btn').forEach(function (btn) {
+                                    btn.disabled = false;
+                                });
                             });
-                        } else {
-                            alert('Please select a group and at least one user.');
-                        }
+                        });
                     });
-                })
-            });
+                });
+            }());
         </script>
+        <?php 
+        }
+        ?>
         <?php 
     }
 
@@ -321,14 +395,14 @@ class Send_Users_Email_Admin {
             $group_id = intval( $_POST['group_id'] );
             $user_ids = array_map( 'intval', $_POST['user_ids'] );
             foreach ( $user_ids as $user_id ) {
-                $wpdb->delete( SEND_USERS_EMAIL_GROUP_USER_TABLE, [
-                    'user_id'  => $user_id,
-                    'group_id' => $group_id,
-                ] );
-                $wpdb->insert( SEND_USERS_EMAIL_GROUP_USER_TABLE, [
-                    'group_id' => $group_id,
-                    'user_id'  => $user_id,
-                ] );
+                // check if user does not exists in the group before inserting
+                $exists = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM " . SEND_USERS_EMAIL_GROUP_USER_TABLE . " WHERE group_id = %d AND user_id = %d", $group_id, $user_id ) );
+                if ( !$exists ) {
+                    $wpdb->insert( SEND_USERS_EMAIL_GROUP_USER_TABLE, [
+                        'group_id' => $group_id,
+                        'user_id'  => $user_id,
+                    ], ['%d', '%d'] );
+                }
             }
             wp_send_json_success( [
                 'message' => count( $user_ids ) . ' users were assigned to the selected group.',
@@ -389,9 +463,7 @@ class Send_Users_Email_Admin {
             'site_name' => get_bloginfo( 'name' ),
             'user'      => wp_get_current_user(),
         ];
-        global $preview;
-        $preview = true;
-        require_once 'partials/email-template.php';
+        sue_include_template( 'templates/email-template-preview.php', $data );
     }
 
     /**
@@ -410,7 +482,22 @@ class Send_Users_Email_Admin {
         $roles = sue_get_roles( ['administrator'] );
         $selected_roles = sue_get_selected_roles();
         $social = $options['social'] ?? [];
-        require_once 'partials/settings.php';
+        $premium_features = [];
+        sue_include_template( 'settings.php', [
+            'logo'                 => $logo,
+            'title'                => $title,
+            'tagline'              => $tagline,
+            'footer'               => $footer,
+            'email_from_name'      => $email_from_name,
+            'email_from_address'   => $email_from_address,
+            'reply_to_address'     => $reply_to_address,
+            'email_template_style' => $email_template_style,
+            'roles'                => $roles,
+            'selected_roles'       => $selected_roles,
+            'social'               => $social,
+            'premium_features'     => $premium_features,
+        ] );
+        //require_once 'partials/settings.php';
     }
 
     /**
@@ -594,6 +681,53 @@ class Send_Users_Email_Admin {
             'message' => 'Permission Denied',
             'success' => false,
         ), 200 );
+    }
+
+    /**
+     * Summary of handle_ajax_admin_user_single_email
+     * Send email to single user ajax handler.
+     * @return void
+     */
+    public function handle_ajax_admin_user_single_email() {
+        $send_single_user = new SUE_Email_Send_Single_Address($this->plugin_name, $this->version);
+        $send_single_user->send_to_single_address();
+        // Cleanup email progress record
+        Send_Users_Email_cleanup::cleanupUserEmailProgress();
+    }
+
+    /**
+     * Summary of handle_ajax_external_list_email_progress_premium_only
+     * Handle external list email progress ajax handler.
+     * @return void
+     */
+    public function handle_ajax_external_list_email_progress_premium_only() {
+        // if ( current_user_can( SEND_USERS_EMAIL_SEND_MAIL_CAPABILITY ) ) {
+        // 	$param  = isset( $_REQUEST['param'] ) ? sanitize_text_field( $_REQUEST['param'] ) : "";
+        // 	$action = isset( $_REQUEST['action'] ) ? sanitize_text_field( $_REQUEST['action'] ) : "";
+        // 	if ( $param == 'send_email_external_list_progress' && $action == 'sue_email_external_list_progress' ) {
+        // 		$user_id             = get_current_user_id();
+        // 		$options             = get_option( 'sue_send_users_email' );
+        // 		$total_email_send    = $options[ 'email_users_total_email_send_' . $user_id ];
+        // 		$total_email_to_send = $options[ 'email_users_total_email_to_send_' . $user_id ];
+        // 		$progress            = $total_email_to_send ? floor( ( $total_email_send / $total_email_to_send ) * 100 ) : 0;
+        // 		wp_send_json( array( 'progress' => $progress ), 200 );
+        // 	}
+        // }
+        // wp_send_json( array( 'message' => 'Permission Denied', 'success' => false ), 200 );
+        $external_list_email = new SUE_External_List_Admin_Ajax($this->plugin_name, $this->version);
+        $external_list_email->progress( $_REQUEST );
+    }
+
+    /**
+     * Summary of handle_ajax_admin_external_list_email_premium_only
+     * Handle external list email ajax handler.
+     * @return void
+     */
+    public function handle_ajax_admin_external_list_email_premium_only() {
+        $external_list_email = new SUE_External_List_Admin_Ajax($this->plugin_name, $this->version);
+        $external_list_email->send( $_REQUEST );
+        // Cleanup email progress record
+        Send_Users_Email_cleanup::cleanupUserEmailProgress();
     }
 
     /**
@@ -802,7 +936,7 @@ class Send_Users_Email_Admin {
     /**
      * Email template
      */
-    private function email_template( $email_body, $style = 'default', $input_request = [] ) {
+    protected function email_template( $email_body, $style = 'default', $input_request = [] ) {
         ob_start();
         /**
          * Allan
@@ -818,10 +952,24 @@ class Send_Users_Email_Admin {
         $footer = $options['email_footer'] ?? '';
         $styles = $options['email_template_style'] ?? '';
         $social = $options['social'] ?? [];
+        $arg_template_data = [
+            'title'      => $title,
+            'tagline'    => $tagline,
+            'email_body' => $email_body,
+            'logo'       => $logo,
+            'footer'     => $footer,
+            'social'     => $social,
+            'styles'     => $styles,
+            'style'      => $style,
+        ];
+        $obj_template_data = new SUE_Template_Data($arg_template_data);
+        $template_data = [
+            'obj_template_data' => $obj_template_data,
+        ];
         if ( !$style ) {
             $style = 'default';
         }
-        require 'partials/email-template.php';
+        sue_include_template( 'email-template.php', $template_data, false );
         $output = ob_get_contents();
         ob_end_clean();
         /*
@@ -992,7 +1140,7 @@ class Send_Users_Email_Admin {
     /**
      * Replace placeholder text to content
      */
-    private function replace_placeholder(
+    protected function replace_placeholder(
         $email_body,
         $username,
         $display_name,
@@ -1013,7 +1161,7 @@ class Send_Users_Email_Admin {
     /**
      * @return array
      */
-    private function get_email_headers() {
+    protected function get_email_headers() {
         $headers[] = 'Content-Type: text/html; charset=UTF-8';
         $options = get_option( 'sue_send_users_email' );
         $email_from_name = $options['email_from_name'] ?? '';
@@ -1233,7 +1381,7 @@ class Send_Users_Email_Admin {
      * @param mixed $input_requests
      * @return bool
      */
-    private function send_email( $sue_override_user_email_subscription, $sue_data = [] ) {
+    protected function send_email( $sue_override_user_email_subscription, $sue_data = [] ) {
         $user_id = $sue_data['user_id'];
         $email_style = $sue_data['email_style'];
         $to = $sue_data['to'];
@@ -1241,6 +1389,7 @@ class Send_Users_Email_Admin {
         $body = $sue_data['body'];
         $headers = $sue_data['headers'];
         $attachments = $sue_data['attachments'] ?? [];
+        $via = $sue_data['via'] ?? '';
         // this is for the free
         $send_email = true;
         // does the system will send even the unsubscribed users?
@@ -1254,6 +1403,12 @@ class Send_Users_Email_Admin {
          * @var mixed
          */
         $send_using_wp_mail = apply_filters( 'sue_send_using_wp_mail_' . $email_style, '__return_true' );
+        $send_email = apply_filters(
+            'sue_send_email_override_' . $via,
+            $send_email,
+            $sue_override_user_email_subscription,
+            $sue_data
+        );
         /**
          * If ok to send email and user is subscribed then send.
          * And if no hook returned false then send mail.

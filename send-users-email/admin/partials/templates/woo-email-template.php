@@ -1,6 +1,6 @@
 <?php
-global $preview;
-if ( $preview ) :
+$obj_template_data = $args['obj_template_data'] ? $args['obj_template_data'] : null;
+if ( $obj_template_data && $obj_template_data instanceof SUE_Template_Data ) :
     $options = get_option('sue_send_users_email');
     if ( ! is_array( $options ) ) {
         $options = [];

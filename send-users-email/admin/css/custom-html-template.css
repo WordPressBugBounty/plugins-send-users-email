@@ -1,20 +1,126 @@
-.CodeMirror {
-  border: 1px solid #eee;
-  min-height: 500px;
-  resize: vertical;
-  overflow: hidden !important;
+.sue-pro-wrap.sue-custom-template-wrap {
+  width: min(1680px, calc(100vw - 64px));
+  max-width: min(1680px, calc(100vw - 64px));
 }
 
-/* Add to your admin CSS or in a <style> tag */
-/* .wp-editor-wrap {
-  resize: both;
-  overflow: auto;
-  min-width: 300px;
-  min-height: 500px;
-  max-width: 100%;
-  max-height: 90vh;
+.sue-settings-layout.sue-custom-template-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 28px;
+  align-items: start;
 }
-.wp-editor-wrap .CodeMirror {
-  width: 100% !important;
-  height: 100% !important;
-} */
+
+.sue-custom-template-layout .sue-settings-main {
+  min-width: 0;
+}
+
+.sue-field-row.sue-field-row-editor {
+  align-items: start;
+}
+
+.sue-custom-template-editor-wrap {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.sue-custom-template-editor {
+  width: 100%;
+  min-height: 520px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+.CodeMirror {
+  border: 0;
+  min-height: 520px;
+  height: auto;
+  resize: vertical;
+  overflow: hidden !important;
+  background: #fff;
+}
+
+.CodeMirror-scroll {
+  min-height: 520px;
+}
+
+.sue-custom-template-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.sue-custom-template-actions .sue-spinner {
+  display: none;
+  width: 18px;
+  height: 18px;
+  border-width: 2px;
+  flex-shrink: 0;
+}
+
+.sue-custom-template-sidebar {
+  gap: 0;
+}
+
+.sue-custom-template-note {
+  margin-bottom: 0;
+}
+
+.sue-custom-template-placeholders li {
+  align-items: flex-start;
+}
+
+.sue-custom-template-placeholders code {
+  white-space: nowrap;
+}
+
+@media (min-width: 1200px) {
+  .sue-field-row.sue-field-row-editor {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .sue-custom-template-sidebar {
+    position: sticky;
+    top: 32px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .sue-settings-layout.sue-custom-template-layout {
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .sue-pro-wrap.sue-custom-template-wrap {
+    width: auto;
+    max-width: 100%;
+  }
+
+  .sue-settings-layout.sue-custom-template-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sue-custom-template-sidebar {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .sue-custom-template-actions {
+    align-items: flex-start;
+  }
+
+  .sue-custom-template-editor,
+  .CodeMirror,
+  .CodeMirror-scroll {
+    min-height: 420px;
+  }
+}

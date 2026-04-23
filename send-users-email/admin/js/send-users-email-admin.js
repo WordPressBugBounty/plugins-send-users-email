@@ -83,7 +83,7 @@
 
 
     // Initialise tinymce
-    $("#sue-user-email-btn, #sue-roles-email-btn, #sue-group-email-btn, #sue-email-premade-templates-btn").mousedown(function () {
+    $("#sue-user-email-btn, #sue-roles-email-btn, #sue-group-email-btn, #sue-email-premade-templates-btn, #sue-user-single-email-btn, #sue-external-list-email-btn").mousedown(function () {
         tinyMCE.triggerSave();
     });
 
@@ -229,6 +229,51 @@
 
     });
 
+    // Process the Email Single Form
+    $("#sue-users-single-email-form").submit(function () {
+        $(".error-msg").remove();
+        $(".is-invalid").removeClass("is-invalid");
+        $("#sue-user-single-email-btn").attr('disabled', true);
+        // need to validate email field here before sending ajax
+        //email-recipient
+        var email_recipient = $("#email-recipient").val();
+        var email_regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email_regex.test(email_recipient)) {
+            var fieldSel = $("#email-recipient");
+            fieldSel.addClass('is-invalid');
+            fieldSel.after('<div class="invalid-feedback error-msg">Please enter a valid email address.</div>');
+            scrollToError();
+            $("#sue-user-single-email-btn").attr('disabled', false);
+            return false;
+        }
+        
+        showSpinner();
+        var postData = $(this).serialize();
+        postData += "&action=sue_user_single_email_ajax&param=send_email_single_user";
+        $.post(ajaxurl, postData, function (res) {
+            if (res.success === true) {
+                showToast(res.message);
+            }
+        }).fail(function (res) {
+            if (res.responseJSON !== undefined) {
+                if (res.responseJSON.errors != null) {
+                    var errors = res.responseJSON.errors;
+                    for (var field in errors) {
+                        var fieldSel = $("." + field);
+                        fieldSel.addClass('is-invalid');
+                        fieldSel.after('<div class="invalid-feedback error-msg">' + errors[field] + '</div>');
+                    }
+                    scrollToError();
+                }
+            }
+            showToast('Oops! Something went wrong!', 'danger');
+        }).always(function () {
+            $("#sue-user-single-email-btn").attr('disabled', false);
+            showSpinner(false);
+        });
+
+    });
+    
     // Process view email log request
     $("#sue_view_email_log_file").change(function () {
         if ($(this).val() != 0) {

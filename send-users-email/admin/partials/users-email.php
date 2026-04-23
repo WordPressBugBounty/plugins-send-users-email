@@ -1,201 +1,282 @@
-<div class="container-fluid">
-    <div class="row sue-row">
+<div class="sue-pro-wrap sue-users-email-page">
 
-        <div class="col-sm-9">
-            <div class="card shadow">
-                <div class="card-body">
-                    <h5 class="card-title mb-4 text-uppercase text-center"><?php 
-esc_attr_e( 'Send email to selected users', 'send-users-email' );
-?></h5>
+    <div class="sue-pro-header">
+        <h2><?php 
+esc_html_e( 'Send Email to Selected Users', 'send-users-email' );
+?></h2>
+        <p><?php 
+esc_html_e( 'Compose one message and send it directly to specific users in your site.', 'send-users-email' );
+?></p>
+    </div>
 
-					<?php 
+    <div class="sue-settings-layout sue-users-email-layout">
+
+        <div class="sue-settings-main">
+            <div class="sue-log-card">
+                <div class="sue-log-card-header">
+                    <span class="sue-log-card-icon">✉️</span>
+                    <h3><?php 
+esc_html_e( 'Compose Message', 'send-users-email' );
+?></h3>
+                </div>
+                <div class="sue-log-card-body">
+
+                    <?php 
 ?>
 
-					<?php 
+                    <?php 
 if ( $total_users > 6000 ) {
     ?>
-                        <div class="alert alert-danger" role="alert">
-							<?php 
-    esc_attr_e( 'You have high number of users in the system so this page might take some time to load all users. Please consider using Role Email instead.', 'send-users-email' );
-    ?>
+                        <div class="sue-notice sue-notice-warning" role="alert">
+                            <div class="sue-notice-icon">⚠️</div>
+                            <div class="sue-notice-body">
+                                <p class="sue-notice-title"><?php 
+    esc_html_e( 'Large user list detected', 'send-users-email' );
+    ?></p>
+                                <p><?php 
+    esc_html_e( 'You have a high number of users in the system, so loading this page may take longer. Please consider using Role Email instead.', 'send-users-email' );
+    ?></p>
+                            </div>
                         </div>
-					<?php 
+                    <?php 
 }
 ?>
 
                     <form action="javascript:void(0)" id="sue-users-email-form" method="post">
 
-                        <div class="mb-4">
-                            <label for="subject"
-                                   class="form-label"><?php 
-esc_attr_e( 'Email Subject', 'send-users-email' );
+                        <div class="sue-field-row">
+                            <div class="sue-field-label"></div>
+                            <div class="sue-field-input">
+                                <?php 
+$subject_hint = __( 'Add a clear subject so recipients immediately understand the purpose of the message.', 'send-users-email' );
+?>
+                                <div class="sue-input-label-row">
+                                    <label for="subject"><?php 
+esc_html_e( 'Email Subject', 'send-users-email' );
 ?></label>
-                            <input type="text" class="form-control subject" id="subject" name="subject" maxlength="200"
-                                   placeholder="<?php 
+                                    <button type="button" class="sue-field-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="<?php 
+echo esc_attr( $subject_hint );
+?>" title="<?php 
+echo esc_attr( $subject_hint );
+?>" aria-label="<?php 
+esc_attr_e( 'Field description', 'send-users-email' );
+?>">
+                                        <span class="dashicons dashicons-editor-help"></span>
+                                    </button>
+                                </div>
+                                <input type="text" class="sue-input subject" id="subject" name="subject" maxlength="200"
+                                       placeholder="<?php 
 esc_attr_e( 'Email subject here.', 'send-users-email' );
 ?> <?php 
 ?>">
+                            </div>
                         </div>
-                        
+
                         <?php 
 if ( $allowed_title_tagline && sue_fs()->is__premium_only() && sue_fs()->can_use_premium_code() ) {
     ?>
 
-                            <div class="mb-4">
-                                <label for="title"
-                                    class="form-label"><?php 
-    esc_attr_e( 'Email Title', 'send-users-email' );
+                            <div class="sue-field-row">
+                                <div class="sue-field-label"></div>
+                                <div class="sue-field-input">
+                                    <div class="sue-input-label-row">
+                                        <label for="title"><?php 
+    esc_html_e( 'Email Title', 'send-users-email' );
     ?></label>
-                                <input type="text" class="form-control title" id="subject" name="title" maxlength="100" value="<?php 
+                                        <button type="button" class="sue-field-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="<?php 
+    esc_attr_e( 'Shown as the main heading inside the email template. You can use placeholders on title.', 'send-users-email' );
+    ?>" title="<?php 
+    esc_attr_e( 'Shown as the main heading inside the email template. You can use placeholders on title.', 'send-users-email' );
+    ?>" aria-label="<?php 
+    esc_attr_e( 'Field description', 'send-users-email' );
+    ?>">
+                                            <span class="dashicons dashicons-editor-help"></span>
+                                        </button>
+                                    </div>
+                                    <input type="text" class="sue-input title" id="title" name="title" maxlength="100" value="<?php 
     echo esc_attr( $title );
     ?>"
-                                    placeholder="<?php 
+                                           placeholder="<?php 
     esc_attr_e( 'Email title here.', 'send-users-email' );
     ?> <?php 
     ?>">
+                                </div>
                             </div>
 
-                            <div class="mb-4">
-                                <label for="tagline"
-                                    class="form-label"><?php 
-    esc_attr_e( 'Email Tagline', 'send-users-email' );
+                            <div class="sue-field-row">
+                                <div class="sue-field-label"></div>
+                                <div class="sue-field-input">
+                                    <div class="sue-input-label-row">
+                                        <label for="tagline"><?php 
+    esc_html_e( 'Email Tagline', 'send-users-email' );
     ?></label>
-                                <input type="text" class="form-control tagline" id="tagline" name="tagline" maxlength="100" value="<?php 
+                                        <button type="button" class="sue-field-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="<?php 
+    esc_attr_e( 'Optional short subtitle shown below the email title. You can use placeholders on tagline.', 'send-users-email' );
+    ?>" title="<?php 
+    esc_attr_e( 'Optional short subtitle shown below the email title. You can use placeholders on tagline.', 'send-users-email' );
+    ?>" aria-label="<?php 
+    esc_attr_e( 'Field description', 'send-users-email' );
+    ?>">
+                                            <span class="dashicons dashicons-editor-help"></span>
+                                        </button>
+                                    </div>
+                                    <input type="text" class="sue-input tagline" id="tagline" name="tagline" maxlength="100" value="<?php 
     echo esc_attr( $tagline );
     ?>"
-                                    placeholder="<?php 
+                                           placeholder="<?php 
     esc_attr_e( 'Email tagline here.', 'send-users-email' );
     ?> <?php 
     ?>">
+                                </div>
                             </div>
 
                         <?php 
 }
 ?>
 
-                        <div class="mb-4 sue-user-email-datatable-wrapper">
-                            <div class="sue-user-email-datatable">
-                                <label for="sue_users"
-                                       class="form-label"><?php 
-esc_attr_e( 'Select Users', 'send-users-email' );
+                        <div class="sue-field-row sue-users-email-table-row">
+                            <div class="sue-field-label"></div>
+                            <div class="sue-field-input">
+                                <div class="sue-input-label-row">
+                                    <label for="sue_users"><?php 
+esc_html_e( 'Select Users', 'send-users-email' );
 ?></label>
+                                    <button type="button" class="sue-field-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="<?php 
+esc_attr_e( 'Use the ID range filter and table selection to target recipients.', 'send-users-email' );
+?>" title="<?php 
+esc_attr_e( 'Use the ID range filter and table selection to target recipients.', 'send-users-email' );
+?>" aria-label="<?php 
+esc_attr_e( 'Field description', 'send-users-email' );
+?>">
+                                        <span class="dashicons dashicons-editor-help"></span>
+                                    </button>
+                                </div>
+                                <div class="sue-user-email-datatable-wrapper">
+                                    <div class="sue-user-email-datatable sue-users-email-datatable-box">
+                                        <div class="sue-users-filter-bar">
+                                            <p class="sue-users-filter-title"><?php 
+esc_html_e( 'Filter users using user ID range', 'send-users-email' );
+?></p>
+                                            <div class="sue-users-filter-input-group">
+                                                <label for="minID"><?php 
+esc_html_e( 'Minimum ID', 'send-users-email' );
+?></label>
+                                                <input class="sue-input" type="text" id="minID" name="minID">
+                                            </div>
+                                            <div class="sue-users-filter-input-group">
+                                                <label for="maxID"><?php 
+esc_html_e( 'Maximum ID', 'send-users-email' );
+?></label>
+                                                <input class="sue-input" type="text" id="maxID" name="maxID">
+                                            </div>
+                                        </div>
 
-                                <table class="table table-sm">
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            <strong><?php 
-esc_attr_e( 'Filter users using user ID range', 'send-users-email' );
-?></strong>
-                                        </td>
-                                        <td><label for="minID"><?php 
-esc_attr_e( 'Minimum ID', 'send-users-email' );
-?></label></td>
-                                        <td><input class="form-control" type="text" id="minID" name="minID"></td>
-                                        <td><label for="maxID"><?php 
-esc_attr_e( 'Maximum ID', 'send-users-email' );
-?></label></td>
-                                        <td><input class="form-control" type="text" id="maxID" name="maxID"></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-
-                                <table id="sue-user-email-tbl" class="table table-striped table-sm">
-                                    <thead>
-                                    <tr>
-                                        <th><input type="checkbox" id="sueSelectAllUsers"></th>
-                                        <th><?php 
-esc_attr_e( 'ID', 'send-users-email' );
+                                        <div class="sue-users-email-table-wrap">
+                                            <table id="sue-user-email-tbl" class="table table-striped table-sm sue-table">
+                                                <thead>
+                                                <tr>
+                                                    <th><input type="checkbox" id="sueSelectAllUsers"></th>
+                                                    <th><?php 
+esc_html_e( 'ID', 'send-users-email' );
 ?></th>
-                                        <th><?php 
-esc_attr_e( 'Username', 'send-users-email' );
+                                                    <th><?php 
+esc_html_e( 'Username', 'send-users-email' );
 ?></th>
-                                        <th><?php 
-esc_attr_e( 'Email', 'send-users-email' );
+                                                    <th><?php 
+esc_html_e( 'Email', 'send-users-email' );
 ?></th>
-                                        <th><?php 
-esc_attr_e( 'Display Name', 'send-users-email' );
+                                                    <th><?php 
+esc_html_e( 'Display Name', 'send-users-email' );
 ?></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-									<?php 
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <?php 
 foreach ( $blog_users as $user ) {
     ?>
-                                        <tr>
-                                            <td><input type="checkbox" class="sueUserCheck" name="users[]"
-                                                       value="<?php 
+                                                    <tr>
+                                                        <td><input type="checkbox" class="sueUserCheck" name="users[]" value="<?php 
     echo esc_html( $user->ID );
     ?>"></td>
-                                            <td><?php 
+                                                        <td><?php 
     echo esc_html( $user->ID );
     ?></td>
-                                            <td><?php 
+                                                        <td><?php 
     echo esc_html( $user->user_login );
     ?></td>
-                                            <td><?php 
+                                                        <td><?php 
     echo esc_html( $user->user_email );
     ?></td>
-                                            <td><?php 
+                                                        <td><?php 
     echo esc_html( $user->display_name );
     ?></td>
-                                        </tr>
-									<?php 
+                                                    </tr>
+                                                <?php 
 }
 ?>
-                                    </tbody>
-                                </table>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="mb-4">
-                            <label for="sue_user_email_message"
-                                   class="form-label"><?php 
-esc_attr_e( 'Email Message', 'send-users-email' );
+                        <div class="sue-field-row sue-field-row-editor">
+                            <div class="sue-field-label"></div>
+                            <div class="sue-field-input">
+                                <div class="sue-input-label-row">
+                                    <label for="sue_user_email_message"><?php 
+esc_html_e( 'Email Message', 'send-users-email' );
 ?></label>
-
-							<?php 
+                                    <button type="button" class="sue-field-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="<?php 
+esc_attr_e( 'Write the full message body. You can use placeholders where supported.', 'send-users-email' );
+?>" title="<?php 
+esc_attr_e( 'Write the full message body. You can use placeholders where supported.', 'send-users-email' );
+?>" aria-label="<?php 
+esc_attr_e( 'Field description', 'send-users-email' );
+?>">
+                                        <span class="dashicons dashicons-editor-help"></span>
+                                    </button>
+                                </div>
+                                <?php 
 // Initialize RTE
 wp_editor( '', 'sue_user_email_message', [
     'textarea_rows' => 15,
 ] );
 ?>
-                            <div class="message"></div>
+                                <div class="message"></div>
+                            </div>
                         </div>
 
-                        <input type="hidden" id="_wpnonce" name="_wpnonce"
-                               value="<?php 
+                        <input type="hidden" id="_wpnonce" name="_wpnonce" value="<?php 
 echo esc_attr( wp_create_nonce( 'sue-email-user' ) );
 ?>"/>
 
-						<?php 
-?>
-                        
                         <?php 
 ?>
 
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="d-grid gap-2">
-                                    <button type="submit" id="sue-user-email-btn" class="btn btn-primary btn-block">
-                                        <span class="dashicons dashicons-email"></span> <?php 
-esc_attr_e( 'Send Message', 'send-users-email' );
+                        <?php 
+?>
+
+                        <div class="sue-field-row sue-field-row-actions">
+                            <div class="sue-field-label"></div>
+                            <div class="sue-field-input">
+                                <div class="sue-users-email-actions">
+                                    <button type="submit" id="sue-user-email-btn" class="sue-btn sue-btn-primary">
+                                        <span class="dashicons dashicons-email"></span>
+                                        <?php 
+esc_html_e( 'Send Message', 'send-users-email' );
 ?>
                                     </button>
-                                </div>
-                            </div>
-                            <div class="col-md-2 mt-2">
-                                <div class="spinner-border text-info sue-spinner" role="status">
-                                    <span class="visually-hidden"><?php 
-esc_attr_e( 'Loading...', 'send-users-email' );
+                                    <div class="spinner-border text-info sue-spinner" role="status">
+                                        <span class="visually-hidden"><?php 
+esc_html_e( 'Loading...', 'send-users-email' );
 ?></span>
-                                </div>
-                            </div>
-                            <div class="col-md-7 mt-2">
-                                <div class="progress" style="height: 20px; display: none;">
-                                    <div class="progress-bar progress-bar-striped progress-bar-animated"
-                                         role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%
                                     </div>
+                                </div>
+                                <div class="progress sue-users-email-progress" style="height: 20px; display: none;">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
                                 </div>
                             </div>
                         </div>
@@ -206,22 +287,29 @@ esc_attr_e( 'Loading...', 'send-users-email' );
             </div>
         </div>
 
-        <div class="col-sm-3">
+        <div class="sue-settings-sidebar sue-users-email-sidebar">
 
-			<?php 
+            <?php 
 require_once SEND_USERS_EMAIL_PLUGIN_BASE_PATH . '/partials/donate.php';
 ?>
 
-			<?php 
+            <?php 
 require_once SEND_USERS_EMAIL_PLUGIN_BASE_PATH . '/partials/warnings.php';
 ?>
 
-            <div class="card shadow">
-                <div class="card-body">
-                    <h5 class="card-title text-uppercase mb-4"><?php 
-esc_attr_e( 'Hide columns', 'send-users-email' );
-?></h5>
-					<?php 
+            <div class="sue-sidebar-card">
+                <div class="sue-sidebar-card-header">
+                    <span class="sue-sidebar-card-icon">🔲</span>
+                    <div>
+                        <p class="sue-sidebar-card-title"><?php 
+esc_html_e( 'Hide columns', 'send-users-email' );
+?></p>
+                        <p class="sue-sidebar-card-desc"><?php 
+esc_html_e( 'Toggle which columns are visible in the user table.', 'send-users-email' );
+?></p>
+                    </div>
+                </div>
+                <?php 
 $columns = [
     1 => 'id',
     2 => 'username',
@@ -229,59 +317,43 @@ $columns = [
     4 => 'display_name',
 ];
 ?>
-					<?php 
+                <ul class="sue-checkbox-list">
+                    <?php 
 foreach ( $columns as $i => $column ) {
     ?>
-                        <div class="form-check">
-                            <input data-column="<?php 
+                        <li>
+                            <label class="sue-checkbox-item" for="<?php 
+    echo esc_attr( $i . $column );
+    ?>">
+                                <input data-column="<?php 
     echo esc_attr( $i );
-    ?>" class="form-check-input hideUserColumn"
-                                   type="checkbox" value="<?php 
+    ?>" class="hideUserColumn" type="checkbox" value="<?php 
     echo esc_attr( $i );
     ?>" id="<?php 
     echo esc_attr( $i . $column );
     ?>">
-                            <label class="form-check-label" for="<?php 
-    echo esc_attr( $i . $column );
-    ?>"
-                                   style="margin-top: -25px;">
-								<?php 
-    echo esc_attr( ucwords( str_replace( '_', ' ', $column ) ) );
-    ?>
+                                <span><?php 
+    echo esc_html( ucwords( str_replace( '_', ' ', $column ) ) );
+    ?></span>
                             </label>
-                        </div>
-					<?php 
+                        </li>
+                    <?php 
 }
 ?>
-                </div>
+                </ul>
             </div>
 
-			<?php 
-?>
-                <div class="card shadow">
-                    <div class="card-body">
-                        <h5 class="card-title text-uppercase"><?php 
-esc_attr_e( 'Instruction', 'send-users-email' );
-?></h5>
-                        <p class="card-text"><?php 
-esc_attr_e( 'Send email to individual users by selecting them from the user list.', 'send-users-email' );
-?></p>
-                    </div>
-                </div>
-			<?php 
-?>
-
-
-			<?php 
+            <?php 
 // Include placeholder instructions
 require plugin_dir_path( __FILE__ ) . 'templates/placeholder-instruction.php';
 ?>
 
         </div>
 
-		<?php 
+    </div>
+
+    <?php 
 require_once SEND_USERS_EMAIL_PLUGIN_BASE_PATH . '/partials/toast.php';
 ?>
 
-    </div>
 </div>
