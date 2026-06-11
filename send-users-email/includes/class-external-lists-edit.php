@@ -6,7 +6,9 @@ class SUE_External_Lists_Edit
         add_action('sue_external_lists_edit-lists', [self::class, 'render_template'], 20, 2);
         add_action('wp_ajax_sue_update_external_list', [self::class, 'update_external_list']);
         add_action('wp_ajax_sue_remove_external_list', [self::class, 'delete_external_list']);
-        self::register_scripts(Send_Users_Email_Admin::get_version());
+        add_action('admin_enqueue_scripts', function() {
+            self::register_scripts(Send_Users_Email_Admin::get_version());
+        });
     }
 
     /**

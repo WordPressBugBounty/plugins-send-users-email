@@ -25,12 +25,5 @@ esc_html_e( 'Rate the plugin', 'send-users-email' );
 ?></span>
             <span class="sue-link-card-stars">★★★★★</span>
         </a>
-        <a class="sue-link-card" href="https://sendusersemail.com/feature-requests/" target="_blank">
-            <span class="sue-link-card-icon">💡</span>
-            <span class="sue-link-card-text"><?php 
-esc_html_e( 'Vote for new features', 'send-users-email' );
-?></span>
-            <span class="sue-link-card-arrow">→</span>
-        </a>
     </div>
 

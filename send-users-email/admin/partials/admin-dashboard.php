@@ -188,23 +188,4 @@ esc_html_e( 'Upgrade Now', 'send-users-email' );
     <?php 
 ?>
 
-    <!-- Sidebar content for free users -->
-    <?php 
-/* //if ( ! sue_fs()->is__premium_only() || ! sue_fs()->can_use_premium_code() ): ?>
-
-        <?php //require_once SEND_USERS_EMAIL_PLUGIN_BASE_PATH . '/partials/donate.php'; ?>
-
-        <div class="sue-about-card">
-            <div class="sue-card-icon icon-slate">ℹ️</div>
-            <h3><?php esc_attr_e( 'About', 'send-users-email' ); ?></h3>
-            <p><?php esc_attr_e( 'Send emails to users by selecting individuals or bulk send by role.', 'send-users-email' ); ?></p>
-        </div>
-
-    <?php //else: ?>
-
-        <?php //require_once SEND_USERS_EMAIL_PLUGIN_BASE_PATH . '/partials/donate.php'; ?>
-
-    <?php //endif;  */
-?>
-
 </div>
