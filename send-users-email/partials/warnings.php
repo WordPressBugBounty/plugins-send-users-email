@@ -10,7 +10,7 @@
                     esc_html( ini_get( 'max_execution_time' ) )
                 );
             ?></p>
-            <p><?php esc_html_e( 'Consider sending emails in batches. The "Send to Users" feature lets you filter by ID range, making it easy to split large sends.', 'send-users-email' ); ?></p>
+            <p><?php esc_html_e( 'Consider sending emails in batches.', 'send-users-email' ); ?></p>
             <?php if ( sue_fs()->is__premium_only() && sue_fs()->can_use_premium_code() ): ?>
                 <p class="sue-notice-tip"><?php esc_html_e( '💡 Using the built-in queue system is strongly recommended for high-volume sending.', 'send-users-email' ); ?></p>
             <?php endif; ?>

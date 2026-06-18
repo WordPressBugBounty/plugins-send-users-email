@@ -1,11 +1,11 @@
 === Send Users Email - Email Subscribers, Email Marketing Newsletter ===
-Contributors: paretodigital, metalfreek, freemius
+Contributors: paretodigital, metalfreek
 Donate link: https://sendusersemail.com/?utm_source=wp_repo&utm_medium=link&utm_campaign=donate_link
 Tags: email users, email subscribers, email system users, send email, email all users
 Requires at least: 5.7
-Tested up to: 6.8
+Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 2.0.1
+Stable tag: 2.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,43 +13,53 @@ Send Users Email provides a way to send email to all system users either by sele
 
 == Description ==
 
-This plugin simplifies email communication on your WordPress site. With the free version, you can send personalized emails to individual users or roles, style emails with custom CSS, and log sent emails for 15 days.
+Send Users Email turns your WordPress user base into a mailing list. Compose a message once and send it straight to individual users, entire roles, or a single external email address — no separate mailing list service required.
 
-The [PRO version](https://sendusersemail.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=pro_version) adds powerful features like an email queue system to stay within provider limits, email scheduling, user groups, templates, and extended email logs. Whether you're managing large email lists or need more control over your communication, the PRO version offers the tools to boost your efficiency and improve email delivery.
+The free version covers everything you need for one-off announcements and support emails: personalized placeholders, custom CSS styling, social media links in the footer, branded headers, and a 15-day log of everything sent (plus any delivery errors) for troubleshooting.
 
-This plugin uses `wp_mail` function to send emails. Any other E-Mail plugin that tap on `wp_mail` functions works with this plugin.
+The [PRO version](https://sendusersemail.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=pro_version) turns the plugin into a full email marketing tool: an email queue that paces sends to stay within your provider's limits, scheduling for future delivery, custom user groups and external contact lists, a library of pre-designed templates (or your own custom HTML template), subject-line placeholders, per-user email subscription opt-out, your own SMTP server for better deliverability, and extended 90-day logs.
 
-⚡ [PRO Version](https://sendusersemail.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=pro_version) (Free Trial) for emailing groups, roles and batch campaigns
+This plugin uses the `wp_mail` function to send emails, so it works alongside any other email plugin (e.g. SMTP plugins) that also hooks into `wp_mail`.
+
+⚡ [PRO Version](https://sendusersemail.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=pro_version) (Free Trial) for emailing groups, external lists and batch campaigns
 
 📚 [Documentation](https://sendusersemail.com/docs/how-to-install/?utm_source=wp_dir&utm_medium=link&utm_campaign=docs) | 🌟 [PRO Features](https://sendusersemail.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=features#pricing) | 🔥 [Get PRO](https://sendusersemail.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=get_pro)
 
 == Free Version Features ==
 
-- **Send Emails to Users**: Send emails directly to users on your WordPress site.
-- **Send to Individual Users**: Select specific users to send personalized emails.
-- **Send to User Roles**: Send emails to entire user roles, such as administrators, subscribers, or contributors.
-- **Personalized Emails with Placeholders**: Use placeholders to automatically insert personalized details, like the recipient’s name, into your emails.
-- **Custom CSS for Email Styling**: Add custom CSS to your emails to match your brand's style and improve presentation.
-- **Social Icon Links**: Easily add social media icons with links to your emails.
-- **Error Logging**: If any errors occur during email sending, they are logged for troubleshooting.
-- **Email Logs (15 Days)**: The content of sent emails is stored for 15 days, giving you access to recent communication history.
+- **Send to Individual Users**: Select one or more specific users from your site and send them a personalized email.
+- **Send to User Roles**: Send a single email to everyone in a chosen role (Administrator, Editor, Subscriber, etc.), or combine multiple roles in one send.
+- **Send to a Single Email Address**: Quickly compose and send a one-off email to any external address, without it needing to be a registered user.
+- **Personalization Placeholders**: Insert tags such as the recipient's username, first/last name, display name, user ID, or email address so every message feels personal.
+- **Subject & Body via the WordPress Editor**: Compose your message with the familiar WordPress rich text (TinyMCE) editor.
+- **Custom CSS for Email Styling**: Add your own CSS in Settings to restyle the default responsive email template to match your brand.
+- **Branded Email Header**: Set a logo, custom email title, and tagline that appears at the top of every email.
+- **Social Media Icons**: Add links to your social profiles (Facebook, Twitter/X, LinkedIn, Instagram, etc.) shown in the email footer.
+- **From / Reply-To Settings**: Configure the sender name, sender email, and reply-to address used for outgoing emails.
+- **Role-Based Sending Permissions**: Decide which roles, besides Administrators, are allowed to send emails through the plugin.
+- **Email Preview**: Preview how an email will look — including placeholder substitution — before sending it.
+- **Error Logging**: Failures from `wp_mail` are automatically logged with details so you can diagnose delivery problems.
+- **Email Logs (15 Days)**: Sent emails and errors are kept for 15 days, viewable by date from the admin area.
 
 == PRO Features ==
 
-- **All Free Features Included**: Access all the functionalities available in the free version.
-- **Email Queue System**: Send emails in batches to stay within your email provider's limits and improve delivery rates.
-- **Queue Scheduling**: Schedule emails to be sent at a later time or date, giving you more flexibility in managing campaigns.
-- **User Groups**: Create and manage user groups to send targeted emails to specific segments of your audience.
-- **Email Templates**: Save time by creating and reusing email templates for commonly sent messages.
-- **Add your own template**: Add your own HTML/CSS email template and use it as your default template.
-- **Pre-designed Email Styles**: Choose from well-crafted, ready-to-use email styles with various color schemes, no CSS required.
-- **Subject Line Placeholders**: Personalize email subject lines with placeholders for higher engagement.
-- **Default Email Styles**: Set a default email style for consistency across your communications.
-- **Optional Queue Default Setting**: Set whether the email queue should be used by default for all emails.
-- **Extended Email Logs (90 Days)**: Logs are retained for 90 days, adjustable in settings, giving you a longer email history for auditing and review.
-- **Clutter-Free UI**: Enjoy an optimized, user-friendly interface designed to improve your workflow.
-- **Improved Email Deliverability**: Add your own SMPT server or a third-party SMTP server to improve email deliverability
-
+- **All Free Features Included**: Everything above, plus the tools below.
+- **Email Queue System**: Send large batches of email gradually (a configurable number every 5 minutes via WP-Cron) to stay within your provider's sending limits and improve deliverability.
+- **Use Queue by Default**: Optionally make every send go through the queue automatically, without choosing it each time.
+- **Email Scheduling**: Schedule queued emails to go out at a specific future date and time instead of immediately.
+- **Queue Activity & Logs**: Track queue throughput with activity charts and a dedicated 30-day queue email log, with automatic cleanup of old queue records.
+- **User Groups**: Create custom groups of users (independent of WordPress roles) and add members via a searchable multi-select, then email a group directly.
+- **External Lists**: Build and manage contact lists of email addresses that aren't WordPress users — import them in bulk via CSV and email the whole list.
+- **Email Templates**: Save reusable templates (subject + message) so recurring emails can be sent again in a couple of clicks.
+- **Pre-Designed Email Themes**: Choose from 15+ ready-made color and layout styles (Blue, Green, Dark Mode, Modern, Serif, Plain Text, and more) — no CSS required.
+- **Bring Your Own HTML Template**: Upload a fully custom HTML/CSS email layout and set it as your default template.
+- **Default Email Theme**: Pick which theme or custom template loads automatically for every new email you compose.
+- **Subject Line Placeholders**: Personalize subject lines with the same placeholder tags used in the email body.
+- **Per-Email Title & Tagline**: Override the global header title/tagline on a per-email basis when you need a different look for a specific campaign.
+- **Email Subscription Management**: Let users opt in or out of your emails from their profile, with the option to override their preference on a specific send.
+- **Your Own SMTP Server**: Configure a custom or third-party SMTP server (host, port, credentials, TLS/SSL) for more reliable delivery than default PHP mail.
+- **Extended Email Logs**: Keep a configurable history of sent emails — 90 days by default — for auditing and review.
+- **Clutter-Free UI**: A streamlined, modern admin interface designed to keep larger campaigns easy to manage.
 
 📚 [Documentation](https://sendusersemail.com/docs/how-to-install/?utm_source=wp_dir&utm_medium=link&utm_campaign=docs) | 🌟 [PRO Features](https://sendusersemail.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=features#pricing) | 🔥 [Get PRO](https://sendusersemail.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=get_pro)
 
@@ -74,6 +84,10 @@ Absolutely. Go to the `Email Users` page of the plugin and select the user you w
 
 Yes. You are able to choose one or multiple roles at a time and email them.
 
+= Can I email someone who isn't a registered user on my site? =
+
+Yes, the free version lets you send to any single external email address. With the [PRO version](https://sendusersemail.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=pro_version) you can also build and import full external contact lists.
+
 = When are emails sent? =
 
 Emails are processed immediately and there is no delay. However, depending on your hosting or mail service provides, there might be a slight delay in delivery. The PRO version however has an option to send emails via queue, so they do not get sent all at once.
@@ -85,6 +99,14 @@ This plugin only acts as a bridge between your site and your email service provi
 = I have many users in my system and many are not getting the emails? =
 
 Since, processing is happening immediately, a low `max execution time` in your server's PHP settings might terminate the process. Try increasing the value for max execution time. You can do this yourself or contact your hosting provider to do it on your behalf. With PRO version of the plugin, you can avoid this issue by adding your emails to the sending queue so that they are sent in multiple batches with the help of WP cron.
+
+= Can users opt out of receiving emails? =
+
+With the [PRO version](https://sendusersemail.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=pro_version), users can opt in or out of emails from their profile, and you can override that preference on a per-send basis when needed.
+
+= Can I use my own SMTP server? =
+
+Yes, this is a [PRO version](https://sendusersemail.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=pro_version) feature. You can configure your own or a third-party SMTP server (host, port, credentials, TLS/SSL) for improved deliverability.
 
 = I have an issue/question/suggestion/request? =
 
@@ -100,7 +122,7 @@ It works with most major providers, but you should check with your email service
 
 = Can I personalize the emails I send? =
 
-Yes, both the free and [PRO version](https://sendusersemail.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=pro_version) allow email personalization using placeholders.
+Yes, both the free and [PRO version](https://sendusersemail.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=pro_version) allow email personalization using placeholders. The PRO version also extends personalization to the subject line.
 
 = What happens if an email fails to send? =
 
@@ -114,7 +136,15 @@ The queue system ensures your emails are sent gradually, preventing your account
 
 Scheduling is available only in the [PRO version](https://sendusersemail.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=pro_version).
 
-= What’s the difference between the free version’s log retention and the PRO version? =
+= Can I send to a custom group of users instead of a whole role? =
+
+Yes, with the [PRO version](https://sendusersemail.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=pro_version) you can create custom user groups, independent of WordPress roles, and email them directly.
+
+= Can I reuse an email I've already written? =
+
+With the [PRO version](https://sendusersemail.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=pro_version) you can save any email as a template and reuse it later, or pick from a library of pre-designed email themes.
+
+= What's the difference between the free version's log retention and the PRO version? =
 
 The free version logs emails for 15 days, while the [PRO version](https://sendusersemail.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=pro_version) keeps logs for 90 days (adjustable).
 
@@ -128,6 +158,10 @@ The free version logs emails for 15 days, while the [PRO version](https://sendus
 6. Tags for email personalization
 
 == Changelog ==
+
+= 2.0.2 (2026-06-18) =
+* Upgrades Freemius SDK
+* Added translations
 
 = 2.0.1 (2026-06-11)
 * Minor bugfixes

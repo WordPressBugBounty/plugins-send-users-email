@@ -1,0 +1,2241 @@
+# Copyright (C) 2026 Send Users Email
+# This file is distributed under the same license as the Send Users Email package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Send Users Email\n"
+"POT-Creation-Date: 2026-06-18 09:37+0000\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: "
+"__;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 3.9\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: admin/class-send-users-email-admin.php:164
+msgid "Send Users Email"
+msgstr "E-Mail an Benutzer senden"
+
+#: admin/class-send-users-email-admin.php:165
+msgid "Email to Users"
+msgstr "E-Mail an Nutzer"
+
+#: admin/class-send-users-email-admin.php:174,
+#: admin/class-send-users-email-admin.php:175,
+#: admin/partials/admin-dashboard.php:5
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: admin/class-send-users-email-admin.php:183,
+#: admin/class-send-users-email-admin.php:184
+msgid "Send to Users"
+msgstr "An Benutzer senden"
+
+#: admin/class-send-users-email-admin.php:192,
+#: admin/class-send-users-email-admin.php:193
+msgid "Send to User Roles"
+msgstr "An Benutzerrollen senden"
+
+#: admin/class-send-users-email-admin.php:203,
+#: admin/class-send-users-email-admin.php:204
+msgid "Send to User Groups"
+msgstr "An Benutzergruppen senden"
+
+#: admin/class-send-users-email-admin.php:212,
+#: admin/class-send-users-email-admin.php:213
+msgid "Send to External Email"
+msgstr "An externe E-Mail-Adresse senden"
+
+#: admin/class-send-users-email-admin.php:223,
+#: admin/class-send-users-email-admin.php:224
+msgid "HTML Template"
+msgstr "HTML Template"
+
+#: admin/class-send-users-email-admin.php:234
+msgid "Email Theme Preview"
+msgstr "Vorschau des E-Mail-Themas"
+
+#: admin/class-send-users-email-admin.php:235,
+#: admin/partials/templates/email-template-preview.php:20
+msgid "Theme Preview"
+msgstr "Theme Vorschau"
+
+#: admin/class-send-users-email-admin.php:243,
+#: admin/class-send-users-email-admin.php:244,
+#: admin/partials/admin-pro-features.php:132, admin/partials/settings.php:22
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: admin/class-send-users-email-admin.php:285,
+#: admin/class-send-users-email-admin.php:286,
+#: admin/partials/admin-pro-features.php:5
+msgid "PRO Features"
+msgstr "PRO Funktionen"
+
+#: admin/class-send-users-email-admin.php:255,
+#: admin/class-send-users-email-admin.php:256,
+#: admin/partials/admin-pro-features.php:56,
+#: admin/partials/email-premade-templates.php:9
+msgid "Email Templates"
+msgstr "E-Mail Vorlagen"
+
+#: admin/class-send-users-email-admin.php:264,
+#: admin/class-send-users-email-admin.php:265,
+#: admin/partials/admin-pro-features.php:72, admin/partials/user-groups.php:9
+msgid "User Groups"
+msgstr "Benutzergruppen"
+
+#: admin/class-send-users-email-admin.php:275,
+#: admin/class-send-users-email-admin.php:276,
+#: admin/partials/email-queue.php:12
+msgid "Email Queue"
+msgstr "E-Mail Warteschlange"
+
+#: admin/class-send-users-email-admin.php:295,
+#: admin/class-send-users-email-admin.php:296,
+#: admin/partials/email_and_error_log.php:13
+msgid "Email & Error Log"
+msgstr "E-Mail & Fehlerprotokoll"
+
+#: admin/class-send-users-email-admin.php:728,
+#: admin/class-send-users-email-admin.php:1022,
+#: admin/class-send-users-email-admin.php:2553,
+#: includes/class-send-email-to-external-lists.php:90,
+#: includes/class-send-user-single-address.php:35
+msgid "🚀🚀🚀 Email(s) sent successfully!"
+msgstr "🚀🚀🚀 E-Mail(s) erfolgreich versendet!"
+
+#: admin/class-send-users-email-admin.php:743,
+#: admin/class-send-users-email-admin.php:1037,
+#: admin/class-send-users-email-admin.php:1865,
+#: admin/class-send-users-email-admin.php:2563,
+#: includes/class-send-email-to-external-lists.php:100,
+#: includes/class-send-user-single-address.php:44
+msgid "Subject is required and should be between 2 and 200 characters."
+msgstr ""
+"Der Betreff ist erforderlich und sollte zwischen 2 und 200 Zeichen lang sein."
+
+#: admin/class-send-users-email-admin.php:748,
+#: admin/class-send-users-email-admin.php:1042,
+#: admin/class-send-users-email-admin.php:1870,
+#: admin/class-send-users-email-admin.php:2568,
+#: includes/class-send-email-to-external-lists.php:105,
+#: includes/class-send-user-single-address.php:49
+msgid "Please provide email content."
+msgstr "Bitte geben Sie den Inhalt der E-Mail an."
+
+#: admin/class-send-users-email-admin.php:752
+msgid "Please select users."
+msgstr "Bitte wählen Sie Benutzer."
+
+#: admin/class-send-users-email-admin.php:863,
+#: admin/class-send-users-email-admin.php:1160,
+#: admin/class-send-users-email-admin.php:2691,
+#: includes/class-send-email-to-external-lists.php:218
+msgid "🚀🚀🚀 Email(s) added to Queue!"
+msgstr "🚀🚀🚀 E-Mail(s) zur Warteschlange hinzugefügt!"
+
+#: admin/class-send-users-email-admin.php:903,
+#: admin/class-send-users-email-admin.php:904,
+#: admin/class-send-users-email-admin.php:1199,
+#: admin/class-send-users-email-admin.php:1200,
+#: admin/class-send-users-email-admin.php:2719,
+#: admin/class-send-users-email-admin.php:2720,
+#: includes/class-send-email-to-external-lists.php:255,
+#: includes/class-send-email-to-external-lists.php:256,
+#: includes/class-send-user-single-address.php:137,
+#: includes/class-send-user-single-address.php:138
+msgid "email"
+msgid_plural "emails"
+msgstr[0] "E-Mail"
+msgstr[1] "E-Mails"
+
+#: admin/class-send-users-email-admin.php:1046
+msgid "Please select role(s)."
+msgstr "Bitte wählen Sie eine oder mehrere Rollen aus."
+
+#: admin/class-send-users-email-admin.php:1433
+msgid "Please provide valid image URL.."
+msgstr "Bitte geben Sie eine gültige Bild-URL an."
+
+#: admin/class-send-users-email-admin.php:1437
+msgid "Please provide a bit more title."
+msgstr "Bitte geben Sie einen etwas ausführlicheren Titel an."
+
+#: admin/class-send-users-email-admin.php:1441
+msgid "Please provide a bit more tagline."
+msgstr "Bitte gib noch ein paar weitere Stichworte an."
+
+#: admin/class-send-users-email-admin.php:1445
+msgid "Please provide a bit more footer content."
+msgstr "Bitte fügen Sie etwas mehr Inhalt in die Fußzeile ein."
+
+#: admin/class-send-users-email-admin.php:1450
+msgid "Please provide a bit more email from Name."
+msgstr "Bitte geben Sie etwas mehr Informationen aus der E-Mail von Name an."
+
+#: admin/class-send-users-email-admin.php:1455
+msgid "Please provide a valid email from address."
+msgstr "Bitte geben Sie eine gültige E-Mail-Adresse an."
+
+#: admin/class-send-users-email-admin.php:1460
+msgid "Please provide a valid reply to address."
+msgstr "Bitte geben Sie eine gültige Antwortadresse an."
+
+#: admin/class-send-users-email-admin.php:1465,
+#: admin/class-send-users-email-admin.php:1485
+msgid "Please provide a valid positive number."
+msgstr "Bitte geben Sie eine gültige positive Zahl ein."
+
+#: admin/class-send-users-email-admin.php:1470
+msgid "Please provide a valid number. Can be zero or greater."
+msgstr ""
+"Bitte geben Sie eine gültige Zahl ein. Diese kann null oder größer sein."
+
+#: admin/class-send-users-email-admin.php:1475,
+#: admin/class-send-users-email-admin.php:1480
+msgid "Please provide a valid email from name."
+msgstr "Bitte geben Sie eine gültige E-Mail-Adresse an."
+
+#: admin/class-send-users-email-admin.php:1490
+msgid "Please provide a valid SMTP host."
+msgstr "Bitte geben Sie einen gültigen SMTP-Host an."
+
+#: admin/class-send-users-email-admin.php:1494
+msgid "Please provide a valid SMTP port number."
+msgstr "Bitte geben Sie eine gültige SMTP-Portnummer an."
+
+#: admin/class-send-users-email-admin.php:1498
+msgid "Please provide a valid SMTP username."
+msgstr "Bitte geben Sie einen gültigen SMTP-Benutzernamen ein."
+
+#: admin/class-send-users-email-admin.php:1502
+msgid "Please provide a valid SMTP password."
+msgstr "Bitte geben Sie ein gültiges SMTP-Passwort ein."
+
+#: admin/class-send-users-email-admin.php:1898
+msgid "Email template created successfully!"
+msgstr "E-Mail-Vorlage erfolgreich erstellt!"
+
+#: admin/class-send-users-email-admin.php:1890
+msgid "Email template updated successfully!"
+msgstr "E-Mail-Vorlage erfolgreich aktualisiert!"
+
+#: admin/class-send-users-email-admin.php:2075,
+#: admin/class-send-users-email-admin.php:2192,
+#: admin/class-send-users-email-admin.php:2192
+msgid "Delete"
+msgstr "Löschen"
+
+#: admin/class-send-users-email-admin.php:2221
+msgid "Every Five Minutes"
+msgstr "Alle 5 Minuten"
+
+#: admin/class-send-users-email-admin.php:2393
+msgid "Group name is required and should be between 2 and 200 characters."
+msgstr ""
+"Der Gruppenname ist ein Pflichtfeld und muss zwischen 2 und 200 Zeichen lang "
+"sein."
+
+#: admin/class-send-users-email-admin.php:2405
+msgid "Please select user for the group."
+msgstr "Bitte wählen Sie einen Benutzer für die Gruppe aus."
+
+#: admin/class-send-users-email-admin.php:2431
+msgid "User group created successfully!"
+msgstr "Benutzergruppe erfolgreich erstellt!"
+
+#: admin/class-send-users-email-admin.php:2424
+msgid "User group updated successfully!"
+msgstr "Benutzergruppe erfolgreich aktualisiert!"
+
+#: admin/class-send-users-email-admin.php:2572
+msgid "Please select group(s)."
+msgstr "Bitte wählen Sie eine oder mehrere Gruppen aus."
+
+#: admin/partials/admin-dashboard.php:6
+msgid "An overview of your site's users and email activity."
+msgstr ""
+"Ein Überblick über die Nutzer Ihrer Website und deren E-Mail-Aktivitäten."
+
+#: admin/partials/admin-dashboard.php:11
+msgid "Site statistics"
+msgstr "Standortstatistik"
+
+#: admin/partials/admin-dashboard.php:12
+msgid "Quick overview of your users and current email activity."
+msgstr ""
+"Ein kurzer Überblick über Ihre Nutzer und die aktuelle E-Mail-Aktivität."
+
+#: admin/partials/admin-dashboard.php:22,
+#: admin/partials/external-lists/dashboard.php:132
+msgid "Total Users"
+msgstr "Benutzer insgesamt"
+
+#: admin/partials/admin-dashboard.php:46, admin/partials/email-queue.php:66
+msgid "Queued Emails"
+msgstr "E-Mails in Warteschlange"
+
+#: admin/partials/admin-dashboard.php:58
+msgid "Quick actions"
+msgstr "Schnellaktionen"
+
+#: admin/partials/admin-dashboard.php:59
+msgid "Choose how you want to target recipients and send your message."
+msgstr ""
+"Wählen Sie aus, wie Sie Ihre Empfänger ansprechen und Ihre Nachricht "
+"versenden möchten."
+
+#: admin/partials/admin-dashboard.php:65, admin/partials/admin-dashboard.php:67
+msgid "Send to users"
+msgstr "An Benutzer senden"
+
+#: admin/partials/admin-dashboard.php:68
+msgid ""
+"Choose individual WordPress users and send your message directly to the "
+"people you want to reach."
+msgstr ""
+"Wählen Sie einzelne WordPress-Benutzer aus und senden Sie Ihre Nachricht "
+"direkt an die Personen, die Sie erreichen möchten."
+
+#: admin/partials/admin-dashboard.php:71, admin/partials/admin-dashboard.php:73
+msgid "Send to user roles"
+msgstr "An Benutzerrollen senden"
+
+#: admin/partials/admin-dashboard.php:74
+msgid ""
+"Select one or multiple WordPress roles and send emails to everyone assigned "
+"to those roles in one go."
+msgstr ""
+"Wählen Sie eine oder mehrere WordPress-Rollen aus und versenden Sie E-Mails "
+"auf einen Schlag an alle Personen, denen diese Rollen zugewiesen sind."
+
+#: admin/partials/admin-dashboard.php:78, admin/partials/admin-dashboard.php:80
+msgid "Send to user groups"
+msgstr "An Benutzergruppen senden"
+
+#: admin/partials/admin-dashboard.php:81
+msgid ""
+"Target users by your saved groups and email all matching members in one "
+"action."
+msgstr ""
+"Wählen Sie die Empfänger anhand Ihrer gespeicherten Gruppen aus und "
+"versenden Sie in einem Schritt eine E-Mail an alle entsprechenden Mitglieder."
+
+#: admin/partials/admin-dashboard.php:84, admin/partials/admin-dashboard.php:86
+msgid "Send to external email"
+msgstr "An externe E-Mail-Adresse senden"
+
+#: admin/partials/admin-dashboard.php:87
+msgid ""
+"Send an email to a single address that does not belong to a WordPress user "
+"account."
+msgstr ""
+"Senden Sie eine E-Mail an eine einzelne Adresse, die keinem WordPress-"
+"Benutzerkonto zugeordnet ist."
+
+#: admin/partials/admin-dashboard.php:90
+msgid "Send to external List"
+msgstr "An externe Liste senden"
+
+#: admin/partials/admin-dashboard.php:92
+msgid "Send to external List (Beta)"
+msgstr "An externe Liste senden (Beta)"
+
+#: admin/partials/admin-dashboard.php:93
+msgid ""
+"Choose from your imported external lists and send emails to contacts outside "
+"WordPress users."
+msgstr ""
+"Wählen Sie aus Ihren importierten externen Listen aus und versenden Sie E-"
+"Mails an Kontakte, die keine WordPress-Nutzer sind."
+
+#: admin/partials/admin-dashboard.php:104, partials/donate.php:9
+msgid "Send Users Email PRO"
+msgstr "E-Mail an Benutzer senden PRO"
+
+#: admin/partials/admin-dashboard.php:105, partials/donate.php:10
+msgid "Unlock templates, queue system, SMTP, user groups & more."
+msgstr ""
+"Schalten Sie Vorlagen, das Warteschlangensystem, SMTP, Benutzergruppen und "
+"vieles mehr frei."
+
+#: admin/partials/admin-dashboard.php:108, partials/donate.php:13
+msgid "Upgrade Now"
+msgstr "Upgrade jetzt"
+
+#: admin/partials/admin-dashboard.php:122
+msgid ""
+"Questions? <a href=\"%1$s\" target=\"_blank\">Read the docs</a> or <a "
+"href=\"%2$s\" target=\"_blank\">contact support</a>."
+msgstr ""
+"Haben Sie Fragen? <a href=\"%1$s\" target=\"_blank\">Lesen Sie die "
+"Dokumentation</a> oder <a href=\"%2$s\" target=\"_blank\">wenden Sie sich an "
+"den Support</a>."
+
+#: admin/partials/admin-pro-features.php:6
+msgid "Everything you need to send professional, well-timed emails at scale."
+msgstr ""
+"Alles, was Sie brauchen, um professionell gestaltete, zeitgerecht versendete "
+"E-Mails in großem Umfang zu versenden."
+
+#: admin/partials/admin-pro-features.php:16
+msgid "Unlock all PRO features"
+msgstr "Alle PRO-Funktionen freischalten"
+
+#: admin/partials/admin-pro-features.php:17
+msgid "Queue system, templates, user groups, SMTP, scheduling & more."
+msgstr ""
+"Warteschlangensystem, Vorlagen, Benutzergruppen, SMTP, Zeitplanung und mehr."
+
+#: admin/partials/admin-pro-features.php:20,
+#: admin/partials/email-template.php:22,
+#: admin/partials/templates/email-template-preview.php:74
+msgid "Upgrade to PRO"
+msgstr "Upgrade auf PRO "
+
+#: admin/partials/admin-pro-features.php:31,
+#: admin/partials/admin-pro-features.php:39,
+#: admin/partials/admin-pro-features.php:47
+msgid "Delivery"
+msgstr "Lieferung"
+
+#: admin/partials/admin-pro-features.php:32
+msgid "Queue System"
+msgstr "Warteschlangen System"
+
+#: admin/partials/admin-pro-features.php:33
+msgid ""
+"Stay within your provider's sending limits automatically. Set a daily cap "
+"(e.g. 300/day) and the plugin distributes your emails over time using "
+"WordPress cron — no manual work needed."
+msgstr ""
+"Halten Sie die Versandlimits Ihres Providers automatisch ein. Legen Sie ein "
+"Tageslimit fest (z. B. 300 pro Tag), und das Plugin verteilt Ihre E-Mails "
+"mithilfe des WordPress-Cron-Jobs über einen bestimmten Zeitraum – ganz ohne "
+"manuellen Aufwand."
+
+#: admin/partials/admin-pro-features.php:40
+msgid "SMTP Server"
+msgstr "SMTP-Server"
+
+#: admin/partials/admin-pro-features.php:41
+msgid ""
+"Stop landing in spam. Connect your own SMTP server or third-party providers "
+"like Mailgun or Brevo for reliable email delivery."
+msgstr ""
+"Vermeiden Sie es, im Spam-Ordner zu landen. Verbinden Sie Ihren eigenen SMTP-"
+"Server oder Dienste von Drittanbietern wie Mailgun oder Brevo, um eine "
+"zuverlässige E-Mail-Zustellung zu gewährleisten."
+
+#: admin/partials/admin-pro-features.php:48
+msgid "Scheduled Sending"
+msgstr "Geplanter Versand"
+
+#: admin/partials/admin-pro-features.php:49
+msgid ""
+"Compose now, send later. Schedule emails to go out at the perfect time for "
+"your audience."
+msgstr ""
+"Jetzt verfassen, später versenden. Planen Sie den Versand Ihrer E-Mails so, "
+"dass sie zum perfekten Zeitpunkt für Ihre Zielgruppe versendet werden."
+
+#: admin/partials/admin-pro-features.php:55,
+#: admin/partials/admin-pro-features.php:63,
+#: admin/partials/admin-pro-features.php:79,
+#: admin/partials/admin-pro-features.php:119
+msgid "Content"
+msgstr "Inhalt"
+
+#: admin/partials/admin-pro-features.php:57
+msgid ""
+"Save and reuse email content you send often. No more rewriting the same "
+"message from scratch every time."
+msgstr ""
+"Speichern Sie E-Mail-Inhalte, die Sie häufig versenden, und verwenden Sie "
+"sie wieder. So müssen Sie nicht jedes Mal dieselbe Nachricht von Grund auf "
+"neu verfassen."
+
+#: admin/partials/admin-pro-features.php:64
+msgid "Email Styles & Themes"
+msgstr "E-Mail-Designs und -Vorlagen"
+
+#: admin/partials/admin-pro-features.php:65
+msgid ""
+"Choose from pre-built, responsive email designs in multiple color schemes — "
+"or use your own HTML/CSS templates for full control."
+msgstr ""
+"Wählen Sie aus vorgefertigten, responsiven E-Mail-Designs in verschiedenen "
+"Farbschemata – oder nutzen Sie Ihre eigenen HTML/CSS-Vorlagen, um die volle "
+"Kontrolle zu behalten."
+
+#: admin/partials/admin-pro-features.php:71,
+#: admin/partials/admin-pro-features.php:87,
+#: admin/partials/admin-pro-features.php:95,
+#: admin/partials/admin-pro-features.php:103,
+#: admin/partials/admin-pro-features.php:111
+msgid "Audience"
+msgstr "Zielgruppe"
+
+#: admin/partials/admin-pro-features.php:73
+msgid ""
+"Go beyond roles. Create custom groups, add users, and send to entire groups "
+"at once — fully compatible with the queue system."
+msgstr ""
+"Gehen Sie über die Rollen hinaus. Erstellen Sie benutzerdefinierte Gruppen, "
+"fügen Sie Nutzer hinzu und senden Sie Nachrichten auf einmal an ganze "
+"Gruppen – vollständig kompatibel mit dem Warteschlangensystem."
+
+#: admin/partials/admin-pro-features.php:80,
+#: admin/partials/custom-html-template.php:105,
+#: admin/partials/templates/placeholder-external-list-instruction.php:5,
+#: admin/partials/templates/placeholder-instruction.php:5
+msgid "Placeholders"
+msgstr "Platzhalter"
+
+#: admin/partials/admin-pro-features.php:81
+msgid ""
+"Personalize every part of your email with dynamic placeholders — subject "
+"line, tagline, title, and body text. Address users by name, role, or any "
+"available field."
+msgstr ""
+"Passen Sie jeden Teil Ihrer E-Mail mit dynamischen Platzhaltern individuell "
+"an – Betreffzeile, Slogan, Titel und Fließtext. Sprechen Sie die Empfänger "
+"mit ihrem Namen, ihrer Rolle oder einem beliebigen verfügbaren Feld an."
+
+#: admin/partials/admin-pro-features.php:88
+msgid "Send by User Role"
+msgstr "Nach Benutzerrolle senden"
+
+#: admin/partials/admin-pro-features.php:89
+msgid ""
+"Target emails to all users with a specific WordPress role — administrators, "
+"editors, subscribers, or any custom role."
+msgstr ""
+"Senden Sie E-Mails gezielt an alle Benutzer mit einer bestimmten WordPress-"
+"Rolle – Administratoren, Redakteure, Abonnenten oder beliebige "
+"benutzerdefinierte Rollen."
+
+#: admin/partials/admin-pro-features.php:96
+msgid "External Recipients"
+msgstr "Externe Empfänger"
+
+#: admin/partials/admin-pro-features.php:97
+msgid ""
+"Send emails to any address — no WordPress account required. Reach people "
+"outside your site without extra steps."
+msgstr ""
+"Versenden Sie E-Mails an beliebige Adressen – ganz ohne WordPress-Konto. "
+"Erreichen Sie auch Personen außerhalb Ihrer Website, ohne zusätzliche "
+"Schritte."
+
+#: admin/partials/admin-pro-features.php:104
+msgid "CSV Email Lists"
+msgstr "CSV-E-Mail-Listen"
+
+#: admin/partials/admin-pro-features.php:105
+msgid ""
+"Import external email lists via CSV upload. Use custom fields from your list "
+"for personalization and manage everything from the WordPress dashboard."
+msgstr ""
+"Importieren Sie externe E-Mail-Listen per CSV-Upload. Nutzen Sie "
+"benutzerdefinierte Felder aus Ihrer Liste zur Personalisierung und verwalten "
+"Sie alles über das WordPress-Dashboard."
+
+#: admin/partials/admin-pro-features.php:112
+msgid "Unsubscribe Management"
+msgstr "Abmeldeverwaltung"
+
+#: admin/partials/admin-pro-features.php:113
+msgid ""
+"Opt users out of receiving emails directly from their WordPress profile "
+"page. A simple checkbox lets you — or the users themselves — control who "
+"receives your emails."
+msgstr ""
+"Auf der WordPress-Profilseite können Nutzer den Erhalt von E-Mails "
+"abbestellen. Über ein einfaches Kontrollkästchen können Sie – oder die "
+"Nutzer selbst – festlegen, wer Ihre E-Mails erhält."
+
+#: admin/partials/admin-pro-features.php:120
+msgid "WooCommerce Email Template"
+msgstr "WooCommerce-E-Mail-Vorlage"
+
+#: admin/partials/admin-pro-features.php:121
+msgid ""
+"Use your existing WooCommerce email template for a seamless visual "
+"integration. Your marketing emails will look and feel like part of your "
+"store's branding."
+msgstr ""
+"Verwenden Sie Ihre vorhandene WooCommerce-E-Mail-Vorlage für eine nahtlose "
+"visuelle Integration. Ihre Marketing-E-Mails werden optisch und inhaltlich "
+"perfekt zum Erscheinungsbild Ihres Shops passen."
+
+#: admin/partials/admin-pro-features.php:134
+msgid "Queue Settings"
+msgstr "Einstellungen der Warteschlange"
+
+#: admin/partials/admin-pro-features.php:135
+msgid ""
+"Control how many emails are sent every five minutes and set auto-deletion "
+"for old sent emails to keep your database clean."
+msgstr ""
+"Legen Sie fest, wie viele E-Mails alle fünf Minuten versendet werden sollen, "
+"und aktivieren Sie die automatische Löschung alter versendeter E-Mails, um "
+"Ihre Datenbank übersichtlich zu halten."
+
+#: admin/partials/admin-pro-features.php:136
+msgid ""
+"Note: WordPress cron depends on site traffic. Low-traffic sites may "
+"experience delays."
+msgstr ""
+"Hinweis: Der WordPress-Cron hängt vom Traffic der Website ab. Bei Websites "
+"mit geringem Traffic kann es zu Verzögerungen kommen."
+
+#: admin/partials/admin-pro-features.php:137
+msgid "Learn more"
+msgstr "Mehr erfahren"
+
+#: admin/partials/admin-pro-features.php:143
+msgid "Template and Queue"
+msgstr "Vorlage und Warteschlange"
+
+#: admin/partials/admin-pro-features.php:145
+msgid "Templates & Queue"
+msgstr "Vorlagen & Warteschlange"
+
+#: admin/partials/admin-pro-features.php:146
+msgid ""
+"Create reusable templates and add emails to the queue with a single click."
+msgstr ""
+"Erstellen Sie wiederverwendbare Vorlagen und fügen Sie E-Mails mit einem "
+"einzigen Klick zur Warteschlange hinzu."
+
+#: admin/partials/admin-pro-features.php:147
+msgid "Manage templates"
+msgstr "Vorlagen verwalten"
+
+#: admin/partials/admin-pro-features.php:153
+msgid "Email Styles"
+msgstr "Aussehen"
+
+#: admin/partials/admin-pro-features.php:155
+msgid "Email Style Preview"
+msgstr "Vorschau des E-Mail-Stils"
+
+#: admin/partials/admin-pro-features.php:156
+msgid ""
+"Pre-built responsive styles available in Blue, Green, Pink, Purple, Red, and "
+"Yellow."
+msgstr ""
+"Vorgefertigte responsive Designs sind in den Farben Blau, Grün, Rosa, Lila, "
+"Rot und Gelb erhältlich."
+
+#: admin/partials/custom-html-template.php:20
+msgid "Create and save a custom HTML email layout for your campaigns."
+msgstr ""
+"Erstellen und speichern Sie ein individuelles HTML-E-Mail-Layout für Ihre "
+"Kampagnen."
+
+#: admin/partials/custom-html-template.php:30
+msgid "Default template active"
+msgstr "Standardvorlage aktiv"
+
+#: admin/partials/custom-html-template.php:31
+msgid ""
+"This custom HTML template is currently set as the default email template."
+msgstr ""
+"Diese benutzerdefinierte HTML-Vorlage ist derzeit als Standard-E-Mail-"
+"Vorlage festgelegt."
+
+#: admin/partials/custom-html-template.php:39
+msgid "HTML Template Editor"
+msgstr "HTML-Vorlagen-Editor"
+
+#: admin/partials/custom-html-template.php:47
+msgid "Template HTML"
+msgstr "HTML Vorlage"
+
+#: admin/partials/custom-html-template.php:48
+msgid ""
+"Paste the full HTML for your email layout here. You can include inline CSS "
+"and the placeholders shown in the sidebar."
+msgstr ""
+"Fügen Sie hier den vollständigen HTML-Code für Ihr E-Mail-Layout ein. Sie "
+"können Inline-CSS und die in der Seitenleiste angezeigten Platzhalter "
+"einfügen."
+
+#: admin/partials/custom-html-template.php:49
+msgid ""
+"Tip: Save your changes here, then open Theme Preview to verify the output "
+"before sending."
+msgstr ""
+"Tipp: Speichern Sie hier Ihre Änderungen und öffnen Sie anschließend die "
+"Theme-Vorschau, um die Darstellung vor dem Absenden zu überprüfen."
+
+#: admin/partials/custom-html-template.php:60
+msgid "Save changes"
+msgstr "Änderungen speichern"
+
+#: admin/partials/custom-html-template.php:61
+msgid ""
+"Your template will be stored in the plugin settings and used whenever the "
+"custom theme is selected."
+msgstr ""
+"Ihre Vorlage wird in den Plugin-Einstellungen gespeichert und immer dann "
+"verwendet, wenn das benutzerdefinierte Design ausgewählt wird."
+
+#: admin/partials/custom-html-template.php:66,
+#: admin/partials/email-premade-templates.php:90,
+#: admin/partials/external-list-email.php:190,
+#: admin/partials/groups-email.php:177, admin/partials/roles-email.php:168,
+#: admin/partials/settings.php:429, admin/partials/user-groups.php:70,
+#: admin/partials/users-email.php:186, admin/partials/users-single-email.php:98
+msgid "Loading..."
+msgstr "Lade..."
+
+#: admin/partials/custom-html-template.php:71,
+#: admin/partials/email-premade-templates.php:94
+msgid "Save Template"
+msgstr "Vorlage speichern"
+
+#: admin/partials/custom-html-template.php:86
+msgid "How it works"
+msgstr "So funktioniert es"
+
+#: admin/partials/custom-html-template.php:87
+msgid ""
+"Build your own layout and insert the placeholders below where dynamic email "
+"content should appear."
+msgstr ""
+"Erstellen Sie Ihr eigenes Layout und fügen Sie die folgenden Platzhalter an "
+"den Stellen ein, an denen dynamische E-Mail-Inhalte erscheinen sollen."
+
+#: admin/partials/custom-html-template.php:94
+msgid "Recommended workflow"
+msgstr "Empfohlener Arbeitsablauf"
+
+#: admin/partials/custom-html-template.php:95
+msgid ""
+"Copy HTML from your preferred newsletter builder or a compatible template "
+"source, then replace the content areas with the plugin placeholders."
+msgstr ""
+"Kopieren Sie den HTML-Code aus Ihrem bevorzugten Newsletter-Generator oder "
+"einer kompatiblen Vorlagenquelle und ersetzen Sie anschließend die "
+"Inhaltsbereiche durch die Platzhalter des Plugins."
+
+#: admin/partials/custom-html-template.php:96
+msgid ""
+"After saving, open Theme Preview to confirm that the title, tagline, "
+"content, and logo render correctly."
+msgstr ""
+"Öffnen Sie nach dem Speichern die Themenvorschau, um zu überprüfen, ob "
+"Titel, Slogan, Inhalt und Logo korrekt angezeigt werden."
+
+#: admin/partials/custom-html-template.php:106
+msgid ""
+"Use these placeholders in your HTML to output the email content dynamically."
+msgstr ""
+"Verwenden Sie diese Platzhalter in Ihrem HTML-Code, um den E-Mail-Inhalt "
+"dynamisch auszugeben."
+
+#: admin/partials/custom-html-template.php:113
+msgid "Email title from the editor"
+msgstr "Betreff der E-Mail vom Herausgeber"
+
+#: admin/partials/custom-html-template.php:117
+msgid "Email tagline from the editor"
+msgstr "E-Mail-Signatur des Herausgebers"
+
+#: admin/partials/custom-html-template.php:121
+msgid "Main email content from the editor"
+msgstr "Hauptinhalt der E-Mail vom Herausgeber"
+
+#: admin/partials/custom-html-template.php:125
+msgid "Logo URL configured in the settings"
+msgstr "In den Einstellungen konfigurierte Logo-URL"
+
+#: admin/partials/email-premade-templates.php:10
+msgid ""
+"Create and manage premade email templates for quick reuse across your "
+"campaigns."
+msgstr ""
+"Erstellen und verwalten Sie vorgefertigte E-Mail-Vorlagen, um diese in Ihren "
+"Kampagnen schnell wiederverwenden zu können."
+
+#: admin/partials/email-premade-templates.php:20
+msgid "Create Template"
+msgstr "Vorlage erstellen"
+
+#: admin/partials/email-premade-templates.php:29,
+#: admin/partials/external-list-email.php:34,
+#: admin/partials/groups-email.php:28, admin/partials/roles-email.php:32,
+#: admin/partials/users-email.php:48, admin/partials/users-single-email.php:44
+msgid "Email Subject"
+msgstr "E-Mail Betreff"
+
+#: admin/partials/email-premade-templates.php:30
+msgid "Subject line of the template email."
+msgstr "Betreffzeile der E-Mail-Vorlage."
+
+#: admin/partials/email-premade-templates.php:30,
+#: admin/partials/users-email.php:44
+msgid "You can use placeholders in the subject."
+msgstr "Sie können Platzhalter im Betreff verwenden."
+
+#: admin/partials/email-premade-templates.php:34,
+#: admin/partials/roles-email.php:35
+msgid "Email subject here"
+msgstr "E-Mail-Betreff hier"
+
+#: admin/partials/email-premade-templates.php:40,
+#: admin/partials/external-list-email.php:154,
+#: admin/partials/groups-email.php:141, admin/partials/roles-email.php:127,
+#: admin/partials/users-email.php:146, admin/partials/users-single-email.php:66
+msgid "Email Message"
+msgstr "E-Mail Nachricht"
+
+#: admin/partials/email-premade-templates.php:41
+msgid "Full email content with formatting and placeholders."
+msgstr "Der vollständige E-Mail-Inhalt mit Formatierung und Platzhaltern."
+
+#: admin/partials/email-premade-templates.php:55,
+#: admin/partials/user-groups.php:51
+msgid "Status"
+msgstr "Status"
+
+#: admin/partials/email-premade-templates.php:56
+msgid "Only active templates appear in template selection."
+msgstr "In der Vorlagenauswahl werden nur aktive Vorlagen angezeigt."
+
+#: admin/partials/email-premade-templates.php:61,
+#: admin/partials/user-groups.php:57
+msgid "Active"
+msgstr "Aktiv"
+
+#: admin/partials/email-premade-templates.php:68
+msgid "Template Usage"
+msgstr "Verwendung der Vorlage"
+
+#: admin/partials/email-premade-templates.php:69
+msgid "Select which campaign types can use this template."
+msgstr ""
+"Wählen Sie aus, für welche Kampagnentypen diese Vorlage verwendet werden "
+"kann."
+
+#: admin/partials/email-premade-templates.php:73
+msgid "All campaign types"
+msgstr "Alle Kampagnentypen"
+
+#: admin/partials/email-premade-templates.php:74
+msgid "Send to Users only"
+msgstr "Nur an Benutzer senden"
+
+#: admin/partials/email-premade-templates.php:75
+msgid "Send to Roles only"
+msgstr "Nur an Rollen senden"
+
+#: admin/partials/email-premade-templates.php:76
+msgid "Send to User Groups only"
+msgstr "Nur an Benutzergruppen senden"
+
+#: admin/partials/email-premade-templates.php:77
+msgid "Send to External Lists only"
+msgstr "Nur an externe Verteiler senden"
+
+#: admin/partials/email-premade-templates.php:107
+msgid "Template Library"
+msgstr "Vorlagenbibliothek"
+
+#: admin/partials/email-premade-templates.php:114,
+#: admin/partials/email-queue.php:85, admin/partials/email-queue.php:97,
+#: admin/partials/email-queue.php:131, admin/partials/email-queue.php:144,
+#: admin/partials/user-groups.php:96, admin/partials/users-email.php:118
+msgid "ID"
+msgstr "ID"
+
+#: admin/partials/email-premade-templates.php:115,
+#: admin/partials/email-queue.php:86, admin/partials/email-queue.php:98,
+#: admin/partials/email-queue.php:132, admin/partials/email-queue.php:145
+msgid "Subject"
+msgstr "Betreff"
+
+#: admin/partials/email-premade-templates.php:116,
+#: admin/partials/external-lists/dashboard.php:134,
+#: admin/partials/external-lists/edit.php:41, admin/partials/user-groups.php:99
+msgid "Actions"
+msgstr "Aktionen"
+
+#: admin/partials/email-premade-templates.php:154
+msgid "Edit template"
+msgstr "Vorlage bearbeiten"
+
+#: admin/partials/email-premade-templates.php:163
+msgid "Delete template"
+msgstr "Template löschen"
+
+#: admin/partials/email-premade-templates.php:183
+msgid "About templates"
+msgstr "Über Vorlagen"
+
+#: admin/partials/email-premade-templates.php:184
+msgid "Save time by creating reusable email templates."
+msgstr ""
+"Sparen Sie Zeit, indem Sie wiederverwendbare E-Mail-Vorlagen erstellen."
+
+#: admin/partials/email-premade-templates.php:191
+msgid "Template tips"
+msgstr "Tipps zu Vorlagen"
+
+#: admin/partials/email-premade-templates.php:192
+msgid ""
+"Create templates for frequently used emails. Mark them as active to make "
+"them available for selection when composing messages."
+msgstr ""
+"Erstellen Sie Vorlagen für häufig verwendete E-Mails. Markieren Sie diese "
+"als aktiv, damit sie beim Verfassen von Nachrichten zur Auswahl stehen."
+
+#: admin/partials/email-queue.php:13
+msgid ""
+"Track queued deliveries, review sent emails, and monitor queue activity over "
+"time."
+msgstr ""
+"Verfolgen Sie die in der Warteschlange befindlichen Zustellungen, überprüfen "
+"Sie versendete E-Mails und überwachen Sie die Aktivitäten in der "
+"Warteschlange im Zeitverlauf."
+
+#: admin/partials/email-queue.php:20
+msgid "Queue Activity (Last 30 Days)"
+msgstr "Warteschlangenaktivität (letzte 30 Tage)"
+
+#: admin/partials/email-queue.php:24
+msgid ""
+"Data comes from queued email records. To view full 30-day statistics, set "
+"the delete interval on the settings page to more than 30 days."
+msgstr ""
+"Die Daten stammen aus den E-Mail-Datensätzen in der Warteschlange. Um die "
+"vollständigen Statistiken der letzten 30 Tage anzuzeigen, stellen Sie das "
+"Löschintervall auf der Einstellungsseite auf mehr als 30 Tage ein."
+
+#: admin/partials/email-queue.php:74
+msgid "Delete All Queued Emails"
+msgstr "Alle E-Mails in der Warteschlange löschen"
+
+#: admin/partials/email-queue.php:112
+msgid "Queue is empty"
+msgstr "Die Warteschlange ist leer"
+
+#: admin/partials/email-queue.php:113
+msgid "There are currently no emails waiting in the queue."
+msgstr "Derzeit befinden sich keine E-Mails in der Warteschlange."
+
+#: admin/partials/email-queue.php:87, admin/partials/email-queue.php:99,
+#: admin/partials/email-queue.php:133, admin/partials/email-queue.php:146,
+#: admin/partials/external-lists/edit.php:30,
+#: admin/partials/users-email.php:120
+msgid "Email"
+msgstr "E-Mail"
+
+#: admin/partials/email-queue.php:88, admin/partials/email-queue.php:100,
+#: admin/partials/email-queue.php:134, admin/partials/email-queue.php:147
+msgid "Via"
+msgstr "Via"
+
+#: admin/partials/email-queue.php:90, admin/partials/email-queue.php:102,
+#: admin/partials/email-queue.php:137, admin/partials/email-queue.php:150
+msgid "Added"
+msgstr "Hinzugefügt"
+
+#: admin/partials/email-queue.php:124
+msgid "Sent Emails"
+msgstr "Gesendete E-Mails"
+
+#: admin/partials/email-queue.php:136, admin/partials/email-queue.php:149
+msgid "Email Sent At"
+msgstr "E-Mail gesendet am"
+
+#: admin/partials/email-template-with-style-pro.php:406,
+#: admin/partials/templates/email/email-template-blue.php:414,
+#: admin/partials/templates/email/email-template-green.php:415,
+#: admin/partials/templates/email/email-template-pink.php:413,
+#: admin/partials/templates/email/email-template-purity.php:354,
+#: admin/partials/templates/email/email-template-purple.php:414,
+#: admin/partials/templates/email/email-template-red.php:415,
+#: admin/partials/templates/email/email-template-yellow.php:415
+msgid "You are receiving this message because you are a member of"
+msgstr "Sie erhalten diese Nachricht, weil Sie Mitglied bei"
+
+#: admin/partials/email-template.php:18,
+#: admin/partials/templates/email-template-preview.php:70
+msgid "You are using the free version"
+msgstr "Sie nutzen die kostenlose Version"
+
+#: admin/partials/email-template.php:19,
+#: admin/partials/templates/email-template-preview.php:71
+msgid ""
+"Upgrade to PRO to preview and use prebuilt templates — or use your own HTML "
+"template."
+msgstr ""
+"Wechseln Sie auf die PRO-Version, um vorgefertigte Vorlagen in der Vorschau "
+"anzusehen und zu nutzen – oder verwenden Sie Ihre eigene HTML-Vorlage."
+
+#: admin/partials/email-template.php:26
+msgid "Email Plain Text Preview:"
+msgstr "Vorschau der E-Mail im Klartext:"
+
+#: admin/partials/email_and_error_log.php:14
+msgid "Review sent email records and diagnose delivery errors."
+msgstr "E-Mail-Protokolle überprüfen und Zustellungsfehler diagnostizieren."
+
+#: admin/partials/email_and_error_log.php:21
+msgid "No logs yet"
+msgstr "Noch keine Protokolle"
+
+#: admin/partials/email_and_error_log.php:22
+msgid ""
+"There are no logs to display right now. Error logs and sent email logs will "
+"appear here once available."
+msgstr ""
+"Derzeit sind keine Protokolle vorhanden. Fehlerprotokolle und Protokolle zu "
+"versendeten E-Mails werden hier angezeigt, sobald sie verfügbar sind."
+
+#: admin/partials/email_and_error_log.php:31
+msgid "Email Log"
+msgstr "E-Mail-Protokoll"
+
+#: admin/partials/email_and_error_log.php:38
+msgid "Select date to view email log"
+msgstr "Wählen Sie ein Datum aus, um das E-Mail-Protokoll anzuzeigen"
+
+#: admin/partials/email_and_error_log.php:40
+msgid "Select date to view sent email logs"
+msgstr ""
+"Wählen Sie ein Datum aus, um die Protokolle der gesendeten E-Mails anzuzeigen"
+
+#: admin/partials/email_and_error_log.php:47
+msgid "View Log"
+msgstr "Protokoll ansehen"
+
+#: admin/partials/email_and_error_log.php:63
+msgid "Error Log"
+msgstr "Fehlerprotokoll"
+
+#: admin/partials/email_and_error_log.php:65
+msgid "Are you sure you want to delete the error log?"
+msgstr "Möchten Sie das Fehlerprotokoll wirklich löschen?"
+
+#: admin/partials/email_and_error_log.php:69
+msgid "Delete Error Log"
+msgstr "Fehlerprotokoll löschen"
+
+#: admin/partials/email_and_error_log.php:76
+msgid ""
+"Errors are only logged when the wp_mail() function fails. A successful "
+"wp_mail() call does not guarantee delivery — your email provider may still "
+"drop the message. Contact your provider if emails are missing despite no "
+"errors here."
+msgstr ""
+"Fehler werden nur protokolliert, wenn die Funktion wp_mail() fehlschlägt. "
+"Ein erfolgreicher Aufruf von wp_mail() garantiert keine Zustellung – Ihr E-"
+"Mail-Anbieter kann die Nachricht dennoch verwerfen. Wenden Sie sich an Ihren "
+"Anbieter, wenn E-Mails fehlen, obwohl hier keine Fehler aufgetreten sind."
+
+#: admin/partials/email_and_error_log.php:84
+msgid "Error log file is getting large. Please consider clearing it soon."
+msgstr ""
+"Die Fehlerprotokolldatei wird immer größer. Bitte denken Sie daran, sie bald "
+"zu löschen."
+
+#: admin/partials/email_and_error_log.php:88
+msgid ""
+"IMPORTANT! Error log file is very large. Clear it to avoid slow page loads."
+msgstr ""
+"WICHTIG! Die Fehlerprotokolldatei ist sehr groß. Löschen Sie sie, um "
+"langsame Ladezeiten zu vermeiden."
+
+#: admin/partials/email_and_error_log.php:102
+msgid "Log file size: %s MB."
+msgstr "Größe der Protokolldatei: %s MB."
+
+#: admin/partials/external-list-email.php:12
+msgid "Send Email to External Lists"
+msgstr "E-Mail an externe Verteilerlisten senden"
+
+#: admin/partials/external-list-email.php:13
+msgid "Send one message to contacts imported into your external lists."
+msgstr ""
+"Senden Sie eine Nachricht an die Kontakte, die in Ihre externen Listen "
+"importiert wurden."
+
+#: admin/partials/external-list-email.php:22,
+#: admin/partials/groups-email.php:14, admin/partials/roles-email.php:14,
+#: admin/partials/users-email.php:14, admin/partials/users-single-email.php:14
+msgid "Compose Message"
+msgstr "Nachricht verfassen"
+
+#: admin/partials/external-list-email.php:37,
+#: admin/partials/groups-email.php:31
+msgid "Email subject here. You can use placeholder on subject."
+msgstr ""
+"E-Mail-Betreff hier. Sie können im Betreff einen Platzhalter verwenden."
+
+#: admin/partials/external-list-email.php:47,
+#: admin/partials/groups-email.php:41, admin/partials/roles-email.php:45,
+#: admin/partials/settings.php:57, admin/partials/users-email.php:64
+msgid "Email Title"
+msgstr "E-Mail Titel"
+
+#: admin/partials/external-list-email.php:50,
+#: admin/partials/groups-email.php:44
+msgid "Email title here. You can use placeholder on title."
+msgstr ""
+"E-Mail-Betreff hier. Sie können im Betreff einen Platzhalter verwenden."
+
+#: admin/partials/external-list-email.php:58,
+#: admin/partials/groups-email.php:52, admin/partials/roles-email.php:56,
+#: admin/partials/settings.php:70, admin/partials/users-email.php:78
+msgid "Email Tagline"
+msgstr "E-Mail-Slogan"
+
+#: admin/partials/external-list-email.php:61,
+#: admin/partials/groups-email.php:55
+msgid "Email tagline here. You can use placeholder on tagline."
+msgstr ""
+"E-Mail-Slogan hier. Sie können für den Slogan einen Platzhalter verwenden."
+
+#: admin/partials/external-list-email.php:71
+msgid "Select List(s)"
+msgstr "Liste (n)wählen"
+
+#: admin/partials/external-list-email.php:78
+msgid "No external lists found"
+msgstr "Es wurden keine externen Listen gefunden"
+
+#: admin/partials/external-list-email.php:79
+msgid "Please create a list first from the External Lists menu."
+msgstr ""
+"Bitte erstellen Sie zunächst eine Liste über das Menü „Externe Listen“."
+
+#: admin/partials/external-list-email.php:104,
+#: admin/partials/external-list-email.php:134,
+#: admin/partials/groups-email.php:96, admin/partials/groups-email.php:123
+msgid "user"
+msgid_plural "users"
+msgstr[0] "Benutzer"
+msgstr[1] "Benutzer"
+
+#: admin/partials/external-list-email.php:105,
+#: admin/partials/external-list-email.php:135
+msgid "subscriber"
+msgid_plural "subscribers"
+msgstr[0] "Mitglied"
+msgstr[1] "Abonnenten"
+
+#: admin/partials/external-list-email.php:187,
+#: admin/partials/groups-email.php:174, admin/partials/roles-email.php:165,
+#: admin/partials/users-email.php:183, admin/partials/users-single-email.php:95
+msgid "Send Message"
+msgstr "Nachricht senden"
+
+#: admin/partials/external-lists/dashboard.php:5
+msgid "Import External List"
+msgstr "Externe Liste importieren"
+
+#. translators: %s: link to sample CSV
+#: admin/partials/external-lists/dashboard.php:12
+msgid "Your CSV file must contain at least one row. %s."
+msgstr "Ihre CSV-Datei muss mindestens eine Zeile enthalten. %s."
+
+#: admin/partials/external-lists/dashboard.php:13
+msgid "Download a sample CSV"
+msgstr "Herunterladen eines Beispiels CSV"
+
+#: admin/partials/external-lists/dashboard.php:22
+msgid "Import failed"
+msgstr "Import fehlgeschlagen"
+
+#: admin/partials/external-lists/dashboard.php:37
+msgid "Duplicate rows skipped"
+msgstr "Doppelte Zeilen wurden übersprungen"
+
+#. translators: %d: Number of duplicate rows
+#: admin/partials/external-lists/dashboard.php:41
+msgid "%d duplicate rows were found and skipped during import."
+msgstr "%d Beim Import wurden doppelte Zeilen gefunden und übersprungen."
+
+#: admin/partials/external-lists/dashboard.php:59
+msgid "Import complete"
+msgstr "Import vollständig"
+
+#. translators: %d: Number of imported emails
+#: admin/partials/external-lists/dashboard.php:63
+msgid "Import successful! %d emails were added to the external list."
+msgstr "Import erfolgreich! %d E-Mails wurden zur externen Liste hinzugefügt."
+
+#: admin/partials/external-lists/dashboard.php:76
+msgid "External List Name"
+msgstr "Name der externen Liste"
+
+#: admin/partials/external-lists/dashboard.php:77
+msgid "Name for this imported email list."
+msgstr "Name für diese importierte E-Mail-Liste."
+
+#: admin/partials/external-lists/dashboard.php:86
+msgid "CSV File"
+msgstr "CSV Datei"
+
+#: admin/partials/external-lists/dashboard.php:87
+msgid "Upload a .csv file containing email addresses."
+msgstr "Laden Sie eine CSV-Datei mit E-Mail-Adressen hoch."
+
+#: admin/partials/external-lists/dashboard.php:101
+msgid "Import CSV"
+msgstr "CSV-Datei importieren"
+
+#: admin/partials/external-lists/dashboard.php:119
+msgid "External Lists"
+msgstr "Externe Listen"
+
+#: admin/partials/external-lists/dashboard.php:172
+msgid "No lists yet"
+msgstr "Noch keine Listen"
+
+#: admin/partials/external-lists/dashboard.php:173
+msgid "No external lists found. Import your first CSV list above."
+msgstr ""
+"Es wurden keine externen Listen gefunden. Importieren Sie oben Ihre erste "
+"CSV-Liste."
+
+#: admin/partials/external-lists/dashboard.php:130
+msgid "List ID"
+msgstr "Listen ID"
+
+#: admin/partials/external-lists/dashboard.php:131
+msgid "List Name"
+msgstr "Listenname"
+
+#: admin/partials/external-lists/dashboard.php:133,
+#: admin/partials/external-lists/edit.php:40
+msgid "Subscribed"
+msgstr "Abonniert"
+
+#: admin/partials/external-lists/edit.php:11
+msgid "Edit External List"
+msgstr "Externe Liste bearbeiten"
+
+#: admin/partials/external-lists/edit.php:16
+msgid "Search"
+msgstr "Suche"
+
+#: admin/partials/external-lists/edit.php:17
+msgid "Filter entries by email, name, title, salutation, and custom fields."
+msgstr ""
+"Filtern Sie Einträge nach E-Mail-Adresse, Name, Titel, Anrede und "
+"benutzerdefinierten Feldern."
+
+#: admin/partials/external-lists/edit.php:20
+msgid "Type to filter..."
+msgstr "Eingabe zum Filtern..."
+
+#: admin/partials/external-lists/edit.php:87
+msgid "No list entries found"
+msgstr "Es wurden keine Listeneinträge gefunden"
+
+#: admin/partials/external-lists/edit.php:88
+msgid "There are no records in this list yet."
+msgstr "Diese Liste enthält noch keine Einträge."
+
+#: admin/partials/external-lists/edit.php:31
+msgid "First Name"
+msgstr "Vorname"
+
+#: admin/partials/external-lists/edit.php:32
+msgid "Last Name"
+msgstr "Nachname"
+
+#: admin/partials/external-lists/edit.php:33,
+#: admin/partials/templates/placeholder-external-list-instruction.php:24
+msgid "Title"
+msgstr "Titel"
+
+#: admin/partials/external-lists/edit.php:34,
+#: admin/partials/templates/placeholder-external-list-instruction.php:28
+msgid "Salutation"
+msgstr "Anrede"
+
+#: admin/partials/external-lists/edit.php:35
+msgid "Field 01"
+msgstr "Feld 01"
+
+#: admin/partials/external-lists/edit.php:36
+msgid "Field 02"
+msgstr "Feld 02"
+
+#: admin/partials/external-lists/edit.php:37
+msgid "Field 03"
+msgstr "Feld 03"
+
+#: admin/partials/external-lists/edit.php:38
+msgid "Field 04"
+msgstr "Feld 04"
+
+#: admin/partials/external-lists/edit.php:39
+msgid "Field 05"
+msgstr "Feld 05"
+
+#: admin/partials/external-lists/edit.php:57,
+#: admin/partials/templates/email-template-queue.php:17
+msgid "Yes"
+msgstr "Ja"
+
+#: admin/partials/external-lists/edit.php:57,
+#: admin/partials/templates/email-template-queue.php:18
+msgid "No"
+msgstr "Nein"
+
+#: admin/partials/groups-email.php:4
+msgid "Send Email to User Groups"
+msgstr "E-Mail an Benutzergruppen senden"
+
+#: admin/partials/groups-email.php:5
+msgid "Send one message to all users inside the selected custom groups."
+msgstr ""
+"Senden Sie eine Nachricht an alle Benutzer in den ausgewählten "
+"benutzerdefinierten Gruppen."
+
+#: admin/partials/groups-email.php:65
+msgid "Select Group(s)"
+msgstr "Gruppe(n) auswählen"
+
+#: admin/partials/groups-email.php:72
+msgid "No user groups found"
+msgstr "Keine Benutzergruppen gefunden"
+
+#: admin/partials/groups-email.php:73
+msgid "Please create a group first from the User Groups menu."
+msgstr ""
+"Bitte erstellen Sie zunächst eine Gruppe über das Menü „Benutzergruppen“."
+
+#: admin/partials/roles-email.php:4
+msgid "Send Email to Selected Roles"
+msgstr "E-Mail an ausgewählte Rollen senden"
+
+#: admin/partials/roles-email.php:5
+msgid ""
+"Compose one message and send it to all users in the selected WordPress roles."
+msgstr ""
+"Verfassen Sie eine Nachricht und senden Sie diese an alle Benutzer der "
+"ausgewählten WordPress-Rollen."
+
+#: admin/partials/roles-email.php:35, admin/partials/users-email.php:54,
+#: admin/partials/users-single-email.php:47
+msgid "You can use placeholder on subject."
+msgstr "Sie können im Betreff einen Platzhalter verwenden."
+
+#: admin/partials/roles-email.php:48
+msgid "Email title here"
+msgstr "E-Mail-Betreff hier"
+
+#: admin/partials/roles-email.php:48, admin/partials/users-email.php:70
+msgid "You can use placeholder on title."
+msgstr "Sie können im Titel einen Platzhalter verwenden."
+
+#: admin/partials/roles-email.php:59
+msgid "Email tagline here"
+msgstr "E-Mail-Slogan hier"
+
+#: admin/partials/roles-email.php:59, admin/partials/users-email.php:84
+msgid "You can use placeholder on tagline."
+msgstr "Sie können in der Tagline Platzhalter verwenden."
+
+#: admin/partials/roles-email.php:69
+msgid "Select Role(s)"
+msgstr "Rolle(n) auswählen"
+
+#: admin/partials/settings.php:23
+msgid "Configure email defaults, appearance, sending roles, and SMTP."
+msgstr ""
+"Konfigurieren Sie die E-Mail-Standardeinstellungen, das Erscheinungsbild, "
+"die Versandrollen und SMTP."
+
+#: admin/partials/settings.php:33
+msgid "General"
+msgstr "Allgemein"
+
+#: admin/partials/settings.php:44
+msgid "Logo URL"
+msgstr "Logo URL"
+
+#: admin/partials/settings.php:45
+msgid "Email header logo URL. Leave blank to omit the logo."
+msgstr ""
+"URL des Logos im E-Mail-Header. Lassen Sie das Feld leer, um das Logo "
+"wegzulassen."
+
+#: admin/partials/settings.php:58
+msgid "Shown below the logo in the email header."
+msgstr "Wird unterhalb des Logos in der E-Mail-Kopfzeile angezeigt."
+
+#: admin/partials/settings.php:71
+msgid "Shown below the email title."
+msgstr "Wird unterhalb des E-Mail-Betreffs angezeigt."
+
+#: admin/partials/settings.php:83
+msgid "Email Footer"
+msgstr "Email Fußzeile"
+
+#: admin/partials/settings.php:84
+msgid ""
+"Footer content appended to all emails. Supports HTML. Use full https:// URLs "
+"for best compatibility."
+msgstr ""
+"Fußzeilentext, der allen E-Mails angehängt wird. Unterstützt HTML. Verwenden "
+"Sie vollständige https://-URLs, um eine optimale Kompatibilität zu "
+"gewährleisten."
+
+#: admin/partials/settings.php:89
+msgid "Email footer content"
+msgstr "Inhalt der E-Mail-Fußzeile"
+
+#: admin/partials/settings.php:96
+msgid "Email From / Reply-To Name"
+msgstr "Absender-E-Mail-Adresse / Name des Absenders"
+
+#: admin/partials/settings.php:97
+msgid "Name shown as the sender in outgoing emails."
+msgstr "Name, der in ausgehenden E-Mails als Absender angezeigt wird."
+
+#: admin/partials/settings.php:102
+msgid "Email from name"
+msgstr "E-Mail vom Namen"
+
+#: admin/partials/settings.php:109
+msgid "Email From Address"
+msgstr "E-Mail-Absenderadresse"
+
+#: admin/partials/settings.php:110
+msgid "Sender email address used for outgoing emails."
+msgstr ""
+"E-Mail-Adresse des Absenders, die für ausgehende E-Mails verwendet wird."
+
+#: admin/partials/settings.php:122
+msgid "Reply-To Address"
+msgstr "Antwortadresse"
+
+#: admin/partials/settings.php:123
+msgid "Address recipients see when replying to your emails."
+msgstr ""
+"Die Adresse, die die Empfänger sehen, wenn sie auf Ihre E-Mails antworten."
+
+#: admin/partials/settings.php:135
+msgid "Email Template Style"
+msgstr "Stil der E-Mail-Vorlage"
+
+#: admin/partials/settings.php:136
+msgid "Custom CSS applied on top of the default email template styles."
+msgstr ""
+"Benutzerdefiniertes CSS, das zusätzlich zu den Standardstilen der E-Mail-"
+"Vorlage angewendet wird."
+
+#: admin/partials/settings.php:148
+msgid "Roles"
+msgstr "Rollen"
+
+#: admin/partials/settings.php:149
+msgid "Select roles that can send emails. Administrators always have access."
+msgstr ""
+"Wählen Sie die Rollen aus, die E-Mails versenden dürfen. Administratoren "
+"haben immer Zugriff."
+
+#: admin/partials/settings.php:150
+msgid "Only grant access to trusted roles."
+msgstr "Gewähren Sie den Zugriff nur vertrauenswürdigen Rollen."
+
+#: admin/partials/settings.php:172
+msgid "Social Media"
+msgstr "Soziale Medien"
+
+#: admin/partials/settings.php:173
+msgid ""
+"Links to your social media profiles, shown in email footers. Leave blank to "
+"omit. Use full URLs."
+msgstr ""
+"Links zu Ihren Social-Media-Profilen, die in den Fußzeilen Ihrer E-Mails "
+"angezeigt werden. Lassen Sie das Feld leer, wenn Sie diese Links weglassen "
+"möchten. Geben Sie die vollständigen URLs an."
+
+#: admin/partials/settings.php:215
+msgid "Global Default Options"
+msgstr "Globale Standardoptionen"
+
+#: admin/partials/settings.php:221
+msgid "Outgoing Email Rate"
+msgstr "Rate der ausgehenden E-Mails"
+
+#: admin/partials/settings.php:223
+msgid ""
+"How many queued emails to send every 5 minutes. <a href=\"%s\" "
+"target=\"_blank\">Read the docs</a>."
+msgstr ""
+"Wie viele E-Mails aus der Warteschlange sollen alle 5 Minuten versendet "
+"werden? <a href=\"%s\" target=\"_blank\">Lesen Sie die Dokumentation</a>."
+
+#: admin/partials/settings.php:236
+msgid "Delete Sent Emails After"
+msgstr "Gesendete E-Mails löschen nach"
+
+#: admin/partials/settings.php:237
+msgid "Days to keep sent queued emails. Set to 0 to never delete."
+msgstr ""
+"Anzahl der Tage, die E-Mails in der Warteschlange aufbewahrt werden sollen. "
+"Auf 0 setzen, um sie nie zu löschen."
+
+#: admin/partials/settings.php:248
+msgid "Default Email Theme"
+msgstr "Standard-E-Mail-Design"
+
+#: admin/partials/settings.php:249
+msgid "Default color scheme used when sending emails."
+msgstr "Standardfarbschema, das beim Versenden von E-Mails verwendet wird."
+
+#: admin/partials/settings.php:257,
+#: admin/partials/templates/email-template-preview.php:49,
+#: admin/partials/templates/select-theme.php:11,
+#: includes/class-custom-html-template.php:110
+msgid "Custom HTML Template"
+msgstr "Benutzerdefinierte HTML-Vorlage"
+
+#: admin/partials/settings.php:277
+msgid "Use Queue by Default"
+msgstr "Standardmäßig „Warteschlange“ verwenden"
+
+#: admin/partials/settings.php:278
+msgid ""
+"Automatically queue emails instead of sending immediately. Recommended for "
+"high volume."
+msgstr ""
+"E-Mails automatisch in die Warteschlange stellen, anstatt sie sofort zu "
+"versenden. Empfohlen bei hohem E-Mail-Aufkommen."
+
+#: admin/partials/settings.php:286
+msgid "Enable queue by default"
+msgstr "Warteschlange standardmäßig aktivieren"
+
+#: admin/partials/settings.php:296
+msgid "Days to Keep Email Logs"
+msgstr "Aufbewahrungsfrist für E-Mail-Protokolle"
+
+#: admin/partials/settings.php:297
+msgid ""
+"One log file per day. Older logs are deleted automatically. Default: 90 days."
+msgstr ""
+"Eine Protokolldatei pro Tag. Ältere Protokolle werden automatisch gelöscht. "
+"Standard: 90 Tage."
+
+#: admin/partials/settings.php:308
+msgid "Per-email Title & Tagline"
+msgstr "Titel und Slogan pro E-Mail"
+
+#: admin/partials/settings.php:309
+msgid "When enabled, each send form shows individual title and tagline fields."
+msgstr ""
+"Wenn diese Option aktiviert ist, werden in jedem Absendeformular separate "
+"Felder für Titel und Slogan angezeigt."
+
+#: admin/partials/settings.php:317
+msgid "Enable per-email title and tagline"
+msgstr "Titel und Slogan pro E-Mail aktivieren"
+
+#: admin/partials/settings.php:326
+msgid "SMTP Options"
+msgstr "SMTP Einstellungen"
+
+#: admin/partials/settings.php:328
+msgid ""
+"Improve deliverability and avoid spam filters. <a href=\"%s\" "
+"target=\"_blank\">Read the docs</a>."
+msgstr ""
+"Verbessern Sie die Zustellbarkeit und umgehen Sie Spamfilter. <a href=\"%s\" "
+"target=\"_blank\">Lesen Sie die Dokumentation</a>."
+
+#: admin/partials/settings.php:336
+msgid "SMTP Host"
+msgstr "SMTP Host"
+
+#: admin/partials/settings.php:337
+msgid "Hostname of your SMTP server."
+msgstr "Hostname Ihres SMTP-Servers."
+
+#: admin/partials/settings.php:348
+msgid "SMTP Port"
+msgstr "SMTP Port"
+
+#: admin/partials/settings.php:349
+msgid "Typically 465 for SSL or 587 for TLS."
+msgstr "In der Regel 465 für SSL oder 587 für TLS."
+
+#: admin/partials/settings.php:360
+msgid "SMTP Username"
+msgstr "SMTP Benutzername"
+
+#: admin/partials/settings.php:361
+msgid "Usually your email address or a provider-specific username."
+msgstr ""
+"In der Regel Ihre E-Mail-Adresse oder ein anbieterspezifischer Benutzername."
+
+#: admin/partials/settings.php:372
+msgid "SMTP Password"
+msgstr "SMTP-Passwort"
+
+#: admin/partials/settings.php:373
+msgid "Leave blank to keep the currently saved password."
+msgstr ""
+"Lassen Sie das Feld leer, um das aktuell gespeicherte Passwort beizubehalten."
+
+#: admin/partials/settings.php:384
+msgid "SMTP Security"
+msgstr "SMTP Sicherheit"
+
+#: admin/partials/settings.php:385
+msgid "Encryption type. Set the port to match your choice."
+msgstr ""
+"Verschlüsselungsart. Stellen Sie den Port entsprechend Ihrer Auswahl ein."
+
+#: admin/partials/settings.php:407
+msgid "Bypass SSL Verification"
+msgstr "SSL-Überprüfung umgehen"
+
+#: admin/partials/settings.php:408
+msgid "For local/containerized environments only. Do not enable on live sites."
+msgstr ""
+"Nur für lokale/containerisierte Umgebungen. Nicht auf Produktionsseiten "
+"aktivieren."
+
+#: admin/partials/settings.php:416
+msgid "Bypass SSL certificate verification"
+msgstr "SSL-Zertifikatsprüfung umgehen"
+
+#: admin/partials/settings.php:437
+msgid "Save Settings"
+msgstr "Einstellungen speichern"
+
+#: admin/partials/settings.php:456
+msgid "Caution"
+msgstr "Vorsicht"
+
+#: admin/partials/settings.php:457
+msgid ""
+"\"Email From Name\" and \"Email From Address\" can be overridden by other "
+"plugins."
+msgstr ""
+"„Absendername“ und „Absenderadresse“ können durch andere Plugins "
+"überschrieben werden."
+
+#: admin/partials/settings.php:458
+msgid ""
+"If your values are not taking effect, check whether another plugin is "
+"overriding them."
+msgstr ""
+"Falls Ihre Werte nicht wirksam werden, überprüfen Sie, ob ein anderes Plugin "
+"diese überschreibt."
+
+#: admin/partials/settings.php:467
+msgid "Account"
+msgstr "Konto"
+
+#: admin/partials/settings.php:468
+msgid "Manage your subscription."
+msgstr "Verwalten Sie Ihr Abonnement."
+
+#: admin/partials/settings.php:473
+msgid "Go to Account"
+msgstr "Ihr Konto"
+
+#: admin/partials/subscribe-email-user-meta.php:20
+msgid "Subscribe to email notifications"
+msgstr "E-Mail-Benachrichtigungen abonnieren"
+
+#. translators: %s: Blog name
+#: admin/partials/subscribe-email-user-meta.php:35
+msgid "Subscribe to emails from %s"
+msgstr "E-Mails von %s abonnieren"
+
+#: admin/partials/templates/email-template-preview.php:21
+msgid ""
+"Preview your email layout and switch between available themes before sending."
+msgstr ""
+"Zeigen Sie eine Vorschau Ihres E-Mail-Layouts an und wechseln Sie vor dem "
+"Versenden zwischen den verfügbaren Designs."
+
+#: admin/partials/templates/email-template-preview.php:30
+msgid "Preview Settings"
+msgstr "Vorschau-Einstellungen"
+
+#: admin/partials/templates/email-template-preview.php:40
+msgid "Email Theme"
+msgstr "E-Mail-Design"
+
+#: admin/partials/templates/email-template-preview.php:41
+msgid "Choose a theme to instantly reload the preview below."
+msgstr "Wählen Sie ein Design aus, um die Vorschau unten sofort neu zu laden."
+
+#: admin/partials/templates/email-template-preview.php:44
+msgid "Select email theme"
+msgstr "E-Mail-Design auswählen"
+
+#: admin/partials/templates/email-template-preview.php:82
+msgid "Email Preview"
+msgstr "E-Mail Vorschau"
+
+#: admin/partials/templates/email-template-preview.php:91
+msgid "Automatic refresh"
+msgstr "Automatisch neu laden"
+
+#: admin/partials/templates/email-template-preview.php:92
+msgid "The preview reloads automatically when you select a different theme."
+msgstr ""
+"Die Vorschau wird automatisch neu geladen, wenn Sie ein anderes Design "
+"auswählen."
+
+#: admin/partials/templates/email-template-preview.php:108
+msgid "How to use this preview"
+msgstr "So nutzen Sie diese Vorschau"
+
+#: admin/partials/templates/email-template-preview.php:109
+msgid ""
+"Switch themes, review the layout, and verify how your content is rendered "
+"before sending."
+msgstr ""
+"Wechseln Sie das Design, überprüfen Sie das Layout und vergewissern Sie "
+"sich, wie Ihre Inhalte dargestellt werden, bevor Sie die Seite "
+"veröffentlichen."
+
+#: admin/partials/templates/email-template-preview.php:116
+msgid "Preview tip"
+msgstr "Tipp zur Vorschau"
+
+#: admin/partials/templates/email-template-preview.php:117
+msgid ""
+"The custom theme uses your saved custom HTML template and the email settings "
+"configured in the plugin."
+msgstr ""
+"Das benutzerdefinierte Design verwendet Ihre gespeicherte benutzerdefinierte "
+"HTML-Vorlage und die im Plugin konfigurierten E-Mail-Einstellungen."
+
+#: admin/partials/templates/email-template-preview.php:126
+msgid "Preview details"
+msgstr "Vorschau-Details"
+
+#: admin/partials/templates/email-template-preview.php:127
+msgid "A quick summary of the currently displayed preview."
+msgstr "Eine kurze Zusammenfassung der aktuell angezeigten Vorschau."
+
+#: admin/partials/templates/email-template-preview.php:134
+msgid "Selected theme"
+msgstr "Ausgewähltes Thema"
+
+#: admin/partials/templates/email-template-preview.php:138
+msgid "Available themes"
+msgstr "Verfügbare Themen"
+
+#: admin/partials/templates/email-template-preview.php:142
+msgid "Updates immediately after a theme change"
+msgstr "Aktualisierungen unmittelbar nach einem Theme-Wechsel"
+
+#: admin/partials/templates/email-template-queue.php:12,
+#: admin/partials/templates/email-template-queue.php:14
+msgid "Add emails to Queue?"
+msgstr "E-Mails über Warteschlange versenden?"
+
+#: admin/partials/templates/email-template-queue.php:26,
+#: admin/partials/templates/email-template-queue.php:29
+msgid "Select email template to use"
+msgstr "Wählen Sie die E-Mail-Vorlage aus"
+
+#: admin/partials/templates/email-template-queue.php:40
+msgid "Scheduled Date"
+msgstr "Geplantes Datum"
+
+#: admin/partials/templates/email-template-queue.php:42
+msgid ""
+"If you select future date, email will be sent only at the start of that "
+"date. By default, emails are sent immediately. This only work if you add "
+"emails to queue. Please note that if there are emails in queue already at "
+"the processing date, those email will be send first."
+msgstr ""
+"Wenn Sie ein zukünftiges Datum auswählen, wird die E-Mail erst zu Beginn "
+"dieses Datums versendet. Standardmäßig werden E-Mails sofort versendet. Dies "
+"funktioniert nur, wenn Sie E-Mails zur Warteschlange hinzufügen. Bitte "
+"beachten Sie: Befinden sich zum Zeitpunkt der Verarbeitung bereits E-Mails "
+"in der Warteschlange, werden diese zuerst versendet."
+
+#: admin/partials/templates/override-user-email-subscription.php:6
+msgid "Also send this email to unsubscribed users"
+msgstr "Senden Sie diese E-Mail auch an Nutzer, die sich abgemeldet haben"
+
+#: admin/partials/templates/placeholder-external-list-instruction.php:6,
+#: admin/partials/templates/placeholder-instruction.php:6
+msgid ""
+"Insert these tags into your email to personalise each message with recipient "
+"details."
+msgstr ""
+"Fügen Sie diese Tags in Ihre E-Mail ein, um jede Nachricht mit den Angaben "
+"des Empfängers zu personalisieren."
+
+#: admin/partials/templates/placeholder-external-list-instruction.php:12,
+#: admin/partials/templates/placeholder-instruction.php:32
+msgid "Email address"
+msgstr "E-Mail-Adresse"
+
+#: admin/partials/templates/placeholder-external-list-instruction.php:16,
+#: admin/partials/templates/placeholder-instruction.php:24
+msgid "First name"
+msgstr "Vorname"
+
+#: admin/partials/templates/placeholder-external-list-instruction.php:20,
+#: admin/partials/templates/placeholder-instruction.php:28
+msgid "Last name"
+msgstr "Nachname"
+
+#: admin/partials/templates/placeholder-external-list-instruction.php:32
+msgid "Custom field 1"
+msgstr "Benutzerdefiniertes Feld 1"
+
+#: admin/partials/templates/placeholder-external-list-instruction.php:36
+msgid "Custom field 2"
+msgstr "Benutzerdefiniertes Feld 2"
+
+#: admin/partials/templates/placeholder-external-list-instruction.php:40
+msgid "Custom field 3"
+msgstr "Benutzerdefiniertes Feld 3"
+
+#: admin/partials/templates/placeholder-external-list-instruction.php:44
+msgid "Custom field 4"
+msgstr "Benutzerdefiniertes Feld 4"
+
+#: admin/partials/templates/placeholder-external-list-instruction.php:48
+msgid "Custom field 5"
+msgstr "Benutzerdefiniertes Feld 5"
+
+#: admin/partials/templates/placeholder-instruction.php:12
+msgid "User ID"
+msgstr "Benutzer ID"
+
+#: admin/partials/templates/placeholder-instruction.php:16,
+#: admin/partials/users-email.php:119
+msgid "Username"
+msgstr "Benutzername"
+
+#: admin/partials/templates/placeholder-instruction.php:20
+msgid "Display name"
+msgstr "Anzeigename"
+
+#: admin/partials/templates/select-theme.php:5
+msgid "Select email theme to use"
+msgstr "E-Mail-Design auswählen"
+
+#: admin/partials/templates/woo-email-template.php:9,
+#: admin/template-preview.php:33, includes/class-email-template-data.php:16
+msgid "This is a preview title"
+msgstr "Dies ist ein Titel in der Vorschau"
+
+#: admin/partials/templates/woo-email-template.php:10,
+#: admin/template-preview.php:34, includes/class-email-template-data.php:17
+msgid "This is a preview tagline"
+msgstr "Dies ist ein Vorschau-Slogan"
+
+#: admin/partials/templates/woo-email-template.php:11,
+#: admin/template-preview.php:35, includes/class-email-template-data.php:18
+msgid "Demo Footer Content"
+msgstr "Inhalt der Demo-Fußzeile"
+
+#: admin/partials/templates/woo-email-template.php:13,
+#: admin/template-preview.php:41, includes/class-email-template-data.php:24,
+#: includes/class-template-data.php:63, includes/class-template-preview.php:57
+msgid ""
+"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy "
+"eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam "
+"voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet "
+"clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit "
+"amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam "
+"nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed "
+"diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet "
+"clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+msgstr ""
+"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy "
+"eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam "
+"voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet "
+"clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit "
+"amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam "
+"nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed "
+"diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet "
+"clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+
+#: admin/partials/user-groups.php:10
+msgid "Create and manage groups of users for targeted email campaigns."
+msgstr ""
+"Erstellen und verwalten Sie Benutzergruppen für gezielte E-Mail-Kampagnen."
+
+#: admin/partials/user-groups.php:20
+msgid "Create Group"
+msgstr "Gruppe erstellen"
+
+#: admin/partials/user-groups.php:29, admin/partials/user-groups.php:97
+msgid "Group Name"
+msgstr "Gruppenname"
+
+#: admin/partials/user-groups.php:30
+msgid "Name of the user group for easy identification."
+msgstr "Name der Benutzergruppe zur einfachen Identifizierung."
+
+#: admin/partials/user-groups.php:34
+msgid "e.g., Premium Members"
+msgstr "z. B. Premium-Mitglieder"
+
+#: admin/partials/user-groups.php:40
+msgid "Group Members"
+msgstr "Gruppenmitglieder"
+
+#: admin/partials/user-groups.php:41
+msgid "Search by first name, last name, username, or email address."
+msgstr "Suche nach Vornamen, Nachnamen, Benutzernamen oder E-Mail-Adresse."
+
+#: admin/partials/user-groups.php:52
+msgid "Only active groups are available for email campaigns."
+msgstr "Für E-Mail-Kampagnen stehen nur aktive Gruppen zur Verfügung."
+
+#: admin/partials/user-groups.php:74
+msgid "Save Group"
+msgstr "Gruppe speichern"
+
+#: admin/partials/user-groups.php:89
+msgid "Group Library"
+msgstr "Gruppenbibliothek"
+
+#: admin/partials/user-groups.php:98
+msgid "Members"
+msgstr "Mitglieder"
+
+#: admin/partials/user-groups.php:126
+msgid "Edit group"
+msgstr "Gruppe bearbeiten"
+
+#: admin/partials/user-groups.php:135
+msgid "Delete group"
+msgstr "Gruppe löschen"
+
+#: admin/partials/user-groups.php:156
+msgid "About groups"
+msgstr "Über Gruppen"
+
+#: admin/partials/user-groups.php:157
+msgid "Organize users into groups for targeted messaging."
+msgstr ""
+"Ordnen Sie Benutzer in Gruppen ein, um gezielte Nachrichten zu versenden."
+
+#: admin/partials/user-groups.php:164
+msgid "Getting started"
+msgstr "Erste Schritte"
+
+#: admin/partials/user-groups.php:166
+msgid ""
+"Create a group and add users. You can also <a href=\"%1$s\" "
+"target=\"_blank\">add users in bulk</a> on the <a href=\"%2$s\">user list "
+"page</a>."
+msgstr ""
+"Erstellen Sie eine Gruppe und fügen Sie Benutzer hinzu. Sie können <a "
+"href=\"%1$s\" target=\"_blank\">Benutzer</a> auch auf der <a "
+"href=\"%2$s\">Benutzerlistenseite</a> <a href=\"%1$s\" target=\"_blank\">in "
+"großer Anzahl hinzufügen</a>."
+
+#: admin/partials/users-email.php:4
+msgid "Send Email to Selected Users"
+msgstr "E-Mail an ausgewählte Benutzer senden"
+
+#: admin/partials/users-email.php:5
+msgid ""
+"Compose one message and send it directly to specific users in your site."
+msgstr ""
+"Verfassen Sie eine Nachricht und senden Sie diese direkt an bestimmte Nutzer "
+"Ihrer Website."
+
+#: admin/partials/users-email.php:30, admin/partials/users-single-email.php:32
+msgid "Large user list detected"
+msgstr "Es wurde eine umfangreiche Benutzerliste erkannt"
+
+#: admin/partials/users-email.php:31, admin/partials/users-single-email.php:33
+msgid ""
+"You have a high number of users in the system, so loading this page may take "
+"longer. Please consider using Role Email instead."
+msgstr ""
+"Da sich eine große Anzahl von Benutzern im System befindet, kann das Laden "
+"dieser Seite etwas länger dauern. Bitte ziehen Sie stattdessen die "
+"Verwendung von „Role Email“ in Betracht."
+
+#: admin/partials/users-email.php:42
+msgid ""
+"Add a clear subject so recipients immediately understand the purpose of the "
+"message."
+msgstr ""
+"Geben Sie einen aussagekräftigen Betreff an, damit die Empfänger den Zweck "
+"der Nachricht sofort erkennen."
+
+#: admin/partials/users-email.php:49, admin/partials/users-email.php:65,
+#: admin/partials/users-email.php:79, admin/partials/users-email.php:95,
+#: admin/partials/users-email.php:147
+msgid "Field description"
+msgstr "Feldbeschreibung"
+
+#: admin/partials/users-email.php:54, admin/partials/users-single-email.php:47
+msgid "Email subject here."
+msgstr "E-Mail-Betreff hier."
+
+#: admin/partials/users-email.php:65, admin/partials/users-email.php:65
+msgid ""
+"Shown as the main heading inside the email template. You can use "
+"placeholders on title."
+msgstr ""
+"Wird als Hauptüberschrift in der E-Mail-Vorlage angezeigt. Sie können "
+"Platzhalter im Titel verwenden."
+
+#: admin/partials/users-email.php:70
+msgid "Email title here."
+msgstr "E-Mail-Betreff hier."
+
+#: admin/partials/users-email.php:79, admin/partials/users-email.php:79
+msgid ""
+"Optional short subtitle shown below the email title. You can use "
+"placeholders on tagline."
+msgstr ""
+"Optionaler kurzer Untertitel, der unterhalb des E-Mail-Betreffs angezeigt "
+"wird. Sie können Platzhalter in der Tagline verwenden."
+
+#: admin/partials/users-email.php:84
+msgid "Email tagline here."
+msgstr "E-Mail-Slogan hier."
+
+#: admin/partials/users-email.php:94
+msgid "Select Users"
+msgstr "Benutzer wählen"
+
+#: admin/partials/users-email.php:95, admin/partials/users-email.php:95
+msgid "Use the ID range filter and table selection to target recipients."
+msgstr ""
+"Verwenden Sie den Filter für den ID-Bereich und die Tabellenauswahl, um "
+"Empfänger gezielt anzusprechen."
+
+#: admin/partials/users-email.php:102
+msgid "Filter users using user ID range"
+msgstr "Benutzer nach Benutzer-ID-Bereich filtern"
+
+#: admin/partials/users-email.php:104
+msgid "Minimum ID"
+msgstr "Mindest-ID"
+
+#: admin/partials/users-email.php:108
+msgid "Maximum ID"
+msgstr "Maximale ID"
+
+#: admin/partials/users-email.php:121
+msgid "Display Name"
+msgstr "Anzeigename"
+
+#: admin/partials/users-email.php:147, admin/partials/users-email.php:147
+msgid "Write the full message body. You can use placeholders where supported."
+msgstr ""
+"Geben Sie den vollständigen Nachrichtentext ein. Sie können Platzhalter "
+"verwenden, sofern diese unterstützt werden."
+
+#: admin/partials/users-email.php:211
+msgid "Hide columns"
+msgstr "Spalten ausblenden"
+
+#: admin/partials/users-email.php:212
+msgid "Toggle which columns are visible in the user table."
+msgstr ""
+"Legen Sie fest, welche Spalten in der Benutzertabelle angezeigt werden "
+"sollen."
+
+#: admin/partials/users-single-email.php:4
+msgid "Send Email to Single Email Addresses"
+msgstr "E-Mail an einzelne E-Mail-Adressen senden"
+
+#: admin/partials/users-single-email.php:5
+msgid "Quickly send a message to one recipient email address at a time."
+msgstr ""
+"Senden Sie schnell jeweils eine Nachricht an jeweils eine E-Mail-Adresse "
+"eines Empfängers."
+
+#: admin/partials/users-single-email.php:55
+msgid "Email Recipient"
+msgstr "E-Mail Empfänger"
+
+#: admin/partials/users-single-email.php:58
+msgid "Recipient email here."
+msgstr "E-Mail-Adresse des Empfängers hier."
+
+#: admin/partials/wp-user-group-dropdown.php:10
+msgid "Select User Group to Remove"
+msgstr "Benutzergruppe zum Entfernen auswählen"
+
+#: admin/partials/wp-user-group-dropdown.php:25
+msgctxt "Button label"
+msgid "Remove Group"
+msgstr "Gruppe entfernen"
+
+#: admin/partials/wp-user-group-dropdown.php:75
+msgid "Please select users and a group to remove."
+msgstr ""
+"Bitte wählen Sie die Benutzer und eine Gruppe aus, die entfernt werden "
+"sollen."
+
+#: admin/partials/wp-user-group-dropdown.php:78
+msgid "Please select a group to remove."
+msgstr "Bitte wählen Sie eine Gruppe aus, die Sie entfernen möchten."
+
+#: admin/partials/wp-user-group-dropdown.php:81
+msgid "Please select users to remove from the group."
+msgstr ""
+"Bitte wählen Sie die Benutzer aus, die aus der Gruppe entfernt werden sollen."
+
+#: includes/class-add-wp-user-group-column.php:20
+msgid "User Email Group"
+msgstr "Benutzer-E-Mail-Gruppe"
+
+#: includes/class-custom-html-template.php:58
+msgid "An error occurred while processing your request."
+msgstr "Während Ihrer Anfrage ist ein Fehler aufgetreten."
+
+#: includes/class-custom-html-template.php:67
+msgid "Failed to update custom HTML template."
+msgstr ""
+"Die Aktualisierung der benutzerdefinierten HTML-Vorlage ist fehlgeschlagen."
+
+#: includes/class-custom-html-template.php:65
+msgid "Custom HTML template updated successfully."
+msgstr "Die benutzerdefinierte HTML-Vorlage wurde erfolgreich aktualisiert."
+
+#: includes/class-email-subscription-user-meta.php:83
+msgid "Subscribe or Un-Subscribe Email"
+msgstr "E-Mail abonnieren oder abbestellen"
+
+#: includes/class-external-list.php:139, includes/class-external-list.php:140
+msgid "External Lists (Beta)"
+msgstr "Externe Listen (Beta)"
+
+#: includes/class-import-csv.php:28
+msgid "File upload error."
+msgstr "Fehler beim Hochladen der Datei."
+
+#: includes/class-import-csv.php:34
+msgid "Invalid file type. Please upload a CSV file."
+msgstr "Ungültiger Dateityp. Bitte laden Sie eine CSV-Datei hoch."
+
+#: includes/class-import-csv.php:49
+msgid "Could not open the uploaded file."
+msgstr "Die hochgeladene Datei konnte nicht geöffnet werden."
+
+#: includes/class-import-csv.php:80
+msgid "File not found."
+msgstr "Datei nicht gefunden."
+
+#: includes/class-import-csv.php:85
+msgid "Could not open the file."
+msgstr "Die Datei konnte nicht geöffnet werden."
+
+#: includes/class-send-email-to-external-lists.php:109
+msgid "Please select List(s)."
+msgstr "Bitte wählen Sie eine oder mehrere Listen aus."
+
+#: includes/class-send-user-single-address.php:53
+msgid "Please add email recipient."
+msgstr "Bitte geben Sie den E-Mail-Empfänger ein."
+
+#: includes/class-send-user-single-address.php:57
+msgid "Please add valid email recipient."
+msgstr "Bitte geben Sie eine gültige E-Mail-Adresse des Empfängers ein."
+
+#: includes/class-send-user-single-address.php:123
+msgid "❌❌❌ Email sending failed!"
+msgstr "❌❌❌ E-Mail-Versand fehlgeschlagen!"
+
+#: includes/class-send-users-email-external-list.php:20,
+#: includes/class-send-users-email-external-list.php:21
+msgid "Send to External List (Beta)"
+msgstr "An externe Liste senden (Beta)"
+
+#: includes/class-send-users-email-external-list.php:31
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+"Du hast nicht die erforderlichen Rechte, um auf diese Seite zuzugreifen."
+
+#: includes/class-woo-email-template.php:15
+msgid "woocommerce"
+msgstr "WooCommerce"
+
+#: includes/class-wp-user-remove-group.php:32
+msgid "%d user has been removed from the group."
+msgid_plural "%d users have been removed from the group."
+msgstr[0] "%d Der Benutzer wurde aus der Gruppe entfernt."
+msgstr[1] "%d Benutzer wurden aus der Gruppe entfernt."
+
+#: includes/class-wp-user-remove-group.php:42
+msgid "Please select a user group to remove."
+msgstr "Bitte wählen Sie eine Benutzergruppe aus, die Sie entfernen möchten."
+
+#: includes/class-wp-user-remove-group.php:40
+msgid "No users were selected for group removal."
+msgstr "Es wurden keine Benutzer für die Gruppenentfernung ausgewählt."
+
+#: includes/class-wp-user-remove-group.php:103
+msgid "Security check failed. Please try again."
+msgstr "Sicherheitscheck scheiterte. Bitte versuchen Sie es noch einmal."
+
+#: includes/class-wp-user-remove-group.php:107
+msgid "You do not have permission to perform this action."
+msgstr "Du hast keine Berechtigung, um diese Aktion durchzuführen."
+
+#: partials/donate.php:20
+msgid "Rate the plugin"
+msgstr "Bewerte das Plugin"
+
+#: partials/toast.php:6
+msgid "Success"
+msgstr "Erfolg"
+
+#: partials/toast.php:17
+msgid "Warning"
+msgstr "Warnung"
+
+#: partials/warnings.php:5
+msgid "Performance warning"
+msgstr "Leistungswarnung"
+
+#. translators: %d is the PHP max execution time
+#: partials/warnings.php:9
+msgid ""
+"Your PHP max execution time is %d seconds. Please consider increasing this "
+"limit if you are trying to send email to lots of users at once."
+msgstr ""
+"Die maximale Ausführungszeit für PHP beträgt %d Sekunden. Bitte erwägen Sie, "
+"dieses Limit zu erhöhen, wenn Sie versuchen, E-Mails an viele Benutzer "
+"gleichzeitig zu versenden."
+
+#: partials/warnings.php:13
+msgid "Consider sending emails in batches."
+msgstr "Erwägen Sie, E-Mails per Warteschlange zu versenden."
+
+#: partials/warnings.php:15
+msgid ""
+"💡 Using the built-in queue system is strongly recommended for high-volume "
+"sending."
+msgstr ""
+"💡 Für den Versand großer Mengen wird die Verwendung des integrierten "
+"Warteschlangensystems dringend empfohlen."
