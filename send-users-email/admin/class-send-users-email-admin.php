@@ -1427,11 +1427,11 @@ class Send_Users_Email_Admin {
          */
         do_action( 'sue_process_sue_send_using_email_service_' . $email_style, $send_email, $sue_data );
         /**
-         * If the user is unsubscribed, then return true to bypass.
+         * Every non-wp_mail path (unsubscribed user, override filter skip, custom
+         * mail service) counts as handled. Returning anything falsy here makes the
+         * queue treat the email as failed and re-send it on every cron run.
          */
-        if ( !sue_is_user_email_subscribed( $user_id ) || !$send_using_wp_mail ) {
-            return true;
-        }
+        return true;
     }
 
 }
