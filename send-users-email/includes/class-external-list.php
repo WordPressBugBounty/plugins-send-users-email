@@ -42,7 +42,7 @@ class External_Lists
 
     public static function get_action_name()
     {
-        $action_name = isset($_GET['action']) ? sanitize_text_field($_GET['action']) : 'dashboard';
+        $action_name = isset($_GET['action']) ? sanitize_text_field(wp_unslash($_GET['action'])) : 'dashboard'; //phpcs:ignore
         return $action_name;
     }
 
@@ -80,14 +80,14 @@ class External_Lists
      */
     public static function ajax_handle_upload()
     {
-        if ( !isset($_POST['sue_external_lists_nonce']) && ! wp_verify_nonce( $_POST['sue_external_lists_nonce'], 'sue_external_lists_import' ) ) {
+        if ( !isset($_POST['sue_external_lists_nonce']) && ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['sue_external_lists_nonce'])), 'sue_external_lists_import' ) ) {
             wp_send_json_error(['message' => 'Security check failed.']);
         }
 
         check_admin_referer('sue_external_lists_import', 'sue_external_lists_nonce');
 
-        if (isset($_FILES['external_list_file']) && $_FILES['external_list_file']['error'] === UPLOAD_ERR_OK) {
-            $import = Import_CSV::handle_csv_import($_FILES['external_list_file']);
+        if (isset($_FILES['external_list_file']) && $_FILES['external_list_file']['error'] === UPLOAD_ERR_OK) { //phpcs:ignore
+            $import = Import_CSV::handle_csv_import($_FILES['external_list_file']); //phpcs:ignore
 
             if(isset($import['errors']) && count($import['errors']) > 0) {
                 wp_send_json_error(['message' => 'Import failed.', 'errors' => $import['errors']]);
@@ -110,7 +110,7 @@ class External_Lists
      */
     public static function ajax_handle_import()
     {
-        if ( !isset($_POST['nonce']) && !wp_verify_nonce( $_POST['nonce'], 'sue_external_lists_import' ) ) {
+        if ( !isset($_POST['nonce']) && !wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['nonce'])), 'sue_external_lists_import' ) ) {
             wp_send_json_error(['message' => 'Security check failed.']);
         }
 
@@ -152,7 +152,7 @@ class External_Lists
     public static function render_settings_page()
     {
         if (!current_user_can('manage_options')) {
-            wp_die(__('You do not have sufficient permissions to access this page.', 'external-lists'));
+            wp_die( esc_html__('You do not have sufficient permissions to access this page.', 'send-users-email'));
         }
 
         $action = self::get_action_name();
@@ -172,28 +172,28 @@ class External_Lists
     public static function handle_list_import()
     {
         // Implement for the manual form submission if needed
-        $upload = Import_CSV::handle_csv_import($_FILES['external_list_file']);
+        $upload = Import_CSV::handle_csv_import($_FILES['external_list_file']); //phpcs:ignore
         if (isset($upload['errors']) && count($upload['errors']) > 0) {
             $errors = implode(', ', $upload['errors']);
-            wp_redirect(add_query_arg(['page' => 'send-users-email-external-lists', 'errors' => $errors], admin_url('admin.php')));
+            wp_safe_redirect(add_query_arg(['page' => 'send-users-email-external-lists', 'errors' => $errors], admin_url('admin.php')));
             exit;
         }
         
         $_POST['file_path'] = $upload['file_path'];
         
         $current_user_id = get_current_user_id();
-        if (!isset($_POST['user_id'])) {
+        if (!isset($_POST['user_id'])) { //phpcs:ignore
             $_POST['user_id'] = $current_user_id;
         }
 
-        $import_list = Import_User_Service::handle_import_request($_POST);
+        $import_list = Import_User_Service::handle_import_request($_POST); //phpcs:ignore
         if ( isset($import_list['import']['errors']) && count($import_list['import']['errors']) > 0 ) {
             $errors = implode(', ', $import_list['import']['errors']);
-            wp_redirect(add_query_arg(['page' => 'send-users-email-external-lists', 'errors' => $errors], admin_url('admin.php')));
+            wp_safe_redirect(add_query_arg(['page' => 'send-users-email-external-lists', 'errors' => $errors], admin_url('admin.php')));
             exit;
         }
 
-        wp_redirect(add_query_arg(['page' => 'send-users-email-external-lists', 'success' => 'Import successful.'], admin_url('admin.php')));
+        wp_safe_redirect(add_query_arg(['page' => 'send-users-email-external-lists', 'success' => 'Import successful.'], admin_url('admin.php')));
         exit;
     }
 

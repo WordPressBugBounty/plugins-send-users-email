@@ -58,7 +58,7 @@ class SUE_Custom_Html_Template
             'message' => esc_html__('An error occurred while processing your request.', 'send-users-email'),
         ];
 
-        $update = SUE_Custom_Html_Template_Model::form_process($_POST);
+        $update = SUE_Custom_Html_Template_Model::form_process($_POST); //phpcs:ignore
 
         if ($update) {
             $arr_response['status'] = 'success';
@@ -78,8 +78,8 @@ class SUE_Custom_Html_Template
     static public function register(): void
     {
         // Register CodeMirror assets (WordPress core handles dependencies)
-        wp_register_script('wp-codemirror', false, [], false, true);
-        wp_register_style('wp-codemirror', false, [], false);
+        wp_register_script('wp-codemirror', false, [], false, true); //phpcs:ignore
+        wp_register_style('wp-codemirror', false, [], false); //phpcs:ignore
         
     }
 

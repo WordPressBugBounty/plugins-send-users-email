@@ -11,48 +11,48 @@ class Import_CSV
      * @param mixed $request_file
      * @return array
      */
-    public static function upload_file($request_file)
-    {
-        $upload_dir = wp_upload_dir();
-        
-        $file = $request_file;
-        
+    public static function upload_file( $request_file ) {
         $wp_error = new \WP_Error();
-        
+
         $ret = [
-            'errors' => [],
+            'errors'    => [],
             'file_path' => '',
         ];
 
-        if ($file['error'] !== UPLOAD_ERR_OK) {
-            $wp_error->add('upload_error', __('File upload error.', 'send-users-email'));
-        }
-        
-        // Validate file type
-        $filetype = wp_check_filetype($file['name']);
-        if ($filetype['ext'] !== 'csv') {
-            $wp_error->add('invalid_file_type', __('Invalid file type. Please upload a CSV file.', 'send-users-email'));
-        }
-       
-        // Move file to uploads directory
-        $target_path = $upload_dir['basedir'] . '/' . basename($file['name']);
+        if ( ! isset( $request_file['error'] ) || UPLOAD_ERR_OK !== $request_file['error'] ) {
+            $wp_error->add(
+                'upload_error',
+                __( 'File upload error.', 'send-users-email' )
+            );
 
-        // delete the file if it already exists
-        if (file_exists($target_path)) {
-            unlink($target_path);
-        }
-
-        move_uploaded_file($file['tmp_name'], $target_path);
-
-        $handle = fopen($target_path, 'r');
-        if (!$handle) {
-            $wp_error->add('file_open_error', __('Could not open the uploaded file.', 'send-users-email'));
-        }
-
-        if ($wp_error->has_errors()) {
             $ret['errors'] = $wp_error->get_error_messages();
+            return $ret;
+        }
+
+        if ( ! function_exists( 'wp_handle_upload' ) ) {
+            require_once ABSPATH . 'wp-admin/includes/file.php';
+        }
+
+        $upload_overrides = [
+            'test_form' => false,
+            'mimes'     => [
+                'csv' => 'text/csv',
+            ],
+        ];
+
+        $uploaded_file = wp_handle_upload( $request_file, $upload_overrides );
+
+        if ( isset( $uploaded_file['error'] ) ) {
+            $wp_error->add(
+                'upload_error',
+                $uploaded_file['error']
+            );
         } else {
-            $ret['file_path'] = $target_path;
+            $ret['file_path'] = $uploaded_file['file'];
+        }
+
+        if ( $wp_error->has_errors() ) {
+            $ret['errors'] = $wp_error->get_error_messages();
         }
 
         return $ret;
@@ -64,55 +64,104 @@ class Import_CSV
      * @param mixed $file_path
      * @return array
      */
-    public static function get_import_data($file_path)
-    {
+    public static function get_import_data( $file_path ) {
         $error = new \WP_Error();
 
         $data = [
             'skipped_rows' => 0,
-            'row_count' => 0,
-            'errors' => [],
-            'data' => [],
-            'file_path' => $file_path,
+            'row_count'    => 0,
+            'errors'       => [],
+            'data'         => [],
+            'file_path'    => $file_path,
         ];
 
-        if (!file_exists($file_path)) {
-            $error->add('file_not_found', __('File not found.', 'send-users-email'));
+        require_once ABSPATH . 'wp-admin/includes/file.php';
+
+        if ( ! WP_Filesystem() ) {
+            $error->add(
+                'filesystem_error',
+                __( 'Could not initialize the WordPress filesystem.', 'send-users-email' )
+            );
+
+            $data['errors'] = $error->get_error_messages();
+
+            return $data;
         }
 
-        $handle = fopen($file_path, 'r');
-        if (!$handle) {
-            $error->add('file_open_error', __('Could not open the file.', 'send-users-email'));
+        global $wp_filesystem;
+
+        if ( ! $wp_filesystem->exists( $file_path ) ) {
+            $error->add(
+                'file_not_found',
+                __( 'File not found.', 'send-users-email' )
+            );
+
+            $data['errors'] = $error->get_error_messages();
+
+            return $data;
         }
 
-        // Read first line to detect delimiter
-        $first_line = fgets($handle);
-        $delimiter = self::_detect_delimiter($first_line);
-        
-        // Rewind and skip header using detected delimiter
-        rewind($handle);
-        $header = fgetcsv($handle, 0, $delimiter);
-        
+        $contents = $wp_filesystem->get_contents( $file_path );
+
+        if ( false === $contents ) {
+            $error->add(
+                'file_open_error',
+                __( 'Could not read the file.', 'send-users-email' )
+            );
+
+            $data['errors'] = $error->get_error_messages();
+
+            return $data;
+        }
+
+        // Normalize line endings.
+        $contents = str_replace( [ "\r\n", "\r" ], "\n", $contents );
+
+        $lines = explode( "\n", $contents );
+
+        // Remove empty trailing lines.
+        $lines = array_filter(
+            $lines,
+            static function ( $line ) {
+                return '' !== trim( $line );
+            }
+        );
+
+        if ( empty( $lines ) ) {
+            return $data;
+        }
+
+        // Detect delimiter from the first line.
+        $first_line = reset( $lines );
+        $delimiter  = self::_detect_delimiter( $first_line );
+
+        // Skip header.
+        array_shift( $lines );
+
         $skipped_rows = 0;
-        $row_count = 0;
-        
-        while (($row = fgetcsv($handle, 0, $delimiter)) !== false) {
-            $email = sanitize_email($row[0]);
-            
-            if (empty($email) || !is_email($email)) {
+        $row_count    = 0;
+
+        foreach ( $lines as $line ) {
+            $row = str_getcsv( $line, $delimiter );
+
+            if ( empty( $row[0] ) ) {
                 $skipped_rows++;
                 continue;
             }
-            
+
+            $email = sanitize_email( $row[0] );
+
+            if ( empty( $email ) || ! is_email( $email ) ) {
+                $skipped_rows++;
+                continue;
+            }
+
             $row_count++;
-            
             $data['data'][] = $row;
         }
 
-        fclose($handle);
-
         $data['skipped_rows'] = $skipped_rows;
-        $data['row_count'] = $row_count;
+        $data['row_count']    = $row_count;
 
         return $data;
     }

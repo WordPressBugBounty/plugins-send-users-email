@@ -59,7 +59,7 @@ class Send_Users_Email_Admin {
      */
     public function enqueue_styles() {
         // Add css to this plugin page only
-        $page = ( isset( $_REQUEST['page'] ) ? sanitize_text_field( $_REQUEST['page'] ) : "" );
+        $page = ( isset( $_REQUEST['page'] ) ? sanitize_text_field( wp_unslash($_REQUEST['page']) ) : "" ); //phpcs:ignore
         if ( in_array( $page, $this->plugin_pages_slug ) ) {
             wp_enqueue_style(
                 'sue-bootstrap-5',
@@ -90,7 +90,7 @@ class Send_Users_Email_Admin {
      */
     public function enqueue_scripts() {
         // Add JS to this plugin page only
-        $page = ( isset( $_REQUEST['page'] ) ? sanitize_text_field( $_REQUEST['page'] ) : "" );
+        $page = ( isset( $_REQUEST['page'] ) ? sanitize_text_field( wp_unslash($_REQUEST['page']) ) : "" ); //phpcs:ignore
         if ( in_array( $page, $this->plugin_pages_slug ) ) {
             wp_enqueue_script(
                 'bootstrap-js',
@@ -275,7 +275,7 @@ class Send_Users_Email_Admin {
      */
     public function add_custom_group_selection_button( $which ) {
         global $wpdb;
-        $groups = $wpdb->get_results( "SELECT * FROM " . SEND_USERS_EMAIL_USER_GROUP_NAME_TABLE );
+        $groups = $wpdb->get_results( "SELECT * FROM " . SEND_USERS_EMAIL_USER_GROUP_NAME_TABLE ); //phpcs:ignore
         ?>
         <div class="alignleft actions sue-assign-group-wrap" style="margin-left: 10px;">
             <select name="custom_group_id" class="sue-custom-group-select">
@@ -396,9 +396,9 @@ class Send_Users_Email_Admin {
             $user_ids = array_map( 'intval', $_POST['user_ids'] );
             foreach ( $user_ids as $user_id ) {
                 // check if user does not exists in the group before inserting
-                $exists = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM " . SEND_USERS_EMAIL_GROUP_USER_TABLE . " WHERE group_id = %d AND user_id = %d", $group_id, $user_id ) );
+                $exists = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM " . SEND_USERS_EMAIL_GROUP_USER_TABLE . " WHERE group_id = %d AND user_id = %d", $group_id, $user_id ) ); //phpcs:ignore
                 if ( !$exists ) {
-                    $wpdb->insert( SEND_USERS_EMAIL_GROUP_USER_TABLE, [
+                    $wpdb->insert( SEND_USERS_EMAIL_GROUP_USER_TABLE, [ //phpcs:ignore
                         'group_id' => $group_id,
                         'user_id'  => $user_id,
                     ], ['%d', '%d'] );
@@ -419,8 +419,8 @@ class Send_Users_Email_Admin {
      * Handle AJAX request to set admin notification message
      */
     public function set_admin_notification() {
-        if ( isset( $_POST['message'] ) ) {
-            update_option( 'admin_notification_message', sanitize_text_field( $_POST['message'] ) );
+        if ( isset( $_POST['message'] ) ) { //phpcs:ignore
+            update_option( 'admin_notification_message', sanitize_text_field( wp_unslash($_POST['message']) ) ); //phpcs:ignore
         }
         wp_send_json_success();
     }
@@ -534,17 +534,17 @@ class Send_Users_Email_Admin {
      */
     public function handle_ajax_admin_user_email() {
         if ( check_admin_referer( 'sue-email-user' ) ) {
-            $param = ( isset( $_REQUEST['param'] ) ? sanitize_text_field( $_REQUEST['param'] ) : "" );
-            $action = ( isset( $_REQUEST['action'] ) ? sanitize_text_field( $_REQUEST['action'] ) : "" );
+            $param = ( isset( $_REQUEST['param'] ) ? sanitize_text_field( wp_unslash($_REQUEST['param']) ) : "" );
+            $action = ( isset( $_REQUEST['action'] ) ? sanitize_text_field( wp_unslash($_REQUEST['action']) ) : "" );
             if ( $param == 'send_email_user' && $action == 'sue_user_email_ajax' ) {
                 $options = get_option( 'sue_send_users_email' );
                 $option_title = $options['email_title'] ?? '';
                 $option_tagline = $options['email_tagline'] ?? '';
-                $subject = ( isset( $_REQUEST['subject'] ) ? sanitize_text_field( $_REQUEST['subject'] ) : "" );
-                $title = ( isset( $_REQUEST['title'] ) ? sanitize_text_field( $_REQUEST['title'] ) : $option_title );
-                $tagline = ( isset( $_REQUEST['tagline'] ) ? sanitize_text_field( $_REQUEST['tagline'] ) : $option_tagline );
-                $message = ( isset( $_REQUEST['sue_user_email_message'] ) ? wp_kses_post( $_REQUEST['sue_user_email_message'] ) : "" );
-                $users = $_REQUEST['users'] ?? [];
+                $subject = ( isset( $_REQUEST['subject'] ) ? sanitize_text_field( wp_unslash($_REQUEST['subject']) ) : "" );
+                $title = ( isset( $_REQUEST['title'] ) ? sanitize_text_field( wp_unslash($_REQUEST['title']) ) : $option_title );
+                $tagline = ( isset( $_REQUEST['tagline'] ) ? sanitize_text_field( wp_unslash($_REQUEST['tagline']) ) : $option_tagline );
+                $message = ( isset( $_REQUEST['sue_user_email_message'] ) ? wp_kses_post( wp_unslash($_REQUEST['sue_user_email_message']) ) : "" );
+                $users = wp_unslash($_REQUEST['users']) ?? []; //phpcs:ignore
                 $users = array_map( 'sanitize_text_field', $users );
                 $email_style = 'default';
                 $message = sue_remove_caption_shortcode( $message );
@@ -616,7 +616,7 @@ class Send_Users_Email_Admin {
                         $email_subject = stripslashes_deep( $subject );
                         $email_title = stripslashes_deep( $title );
                         $email_tagline = stripslashes_deep( $tagline );
-                        $email_subject = strip_tags( $this->replace_placeholder(
+                        $email_subject = wp_strip_all_tags( $this->replace_placeholder(
                             $email_subject,
                             $username,
                             $display_name,
@@ -641,7 +641,7 @@ class Send_Users_Email_Admin {
                             'email_title'   => $email_title,
                             'email_tagline' => $email_tagline,
                         ];
-                        $sue_override_user_email_subscription = ( isset( $_REQUEST['sue_override_user_email_subscription'] ) ? sanitize_text_field( $_REQUEST['sue_override_user_email_subscription'] ) : 0 );
+                        $sue_override_user_email_subscription = ( isset( $_REQUEST['sue_override_user_email_subscription'] ) ? sanitize_text_field( wp_unslash($_REQUEST['sue_override_user_email_subscription']) ) : 0 );
                         $send_mail = $this->send_email( $sue_override_user_email_subscription, $args_send_mail );
                         if ( !$send_mail ) {
                             $total_failed_email++;
@@ -715,7 +715,7 @@ class Send_Users_Email_Admin {
         // }
         // wp_send_json( array( 'message' => 'Permission Denied', 'success' => false ), 200 );
         $external_list_email = new SUE_External_List_Admin_Ajax($this->plugin_name, $this->version);
-        $external_list_email->progress( $_REQUEST );
+        $external_list_email->progress( $_REQUEST ); //phpcs:ignore
     }
 
     /**
@@ -725,7 +725,7 @@ class Send_Users_Email_Admin {
      */
     public function handle_ajax_admin_external_list_email_premium_only() {
         $external_list_email = new SUE_External_List_Admin_Ajax($this->plugin_name, $this->version);
-        $external_list_email->send( $_REQUEST );
+        $external_list_email->send( $_REQUEST ); //phpcs:ignore
         // Cleanup email progress record
         Send_Users_Email_cleanup::cleanupUserEmailProgress();
     }
@@ -735,8 +735,8 @@ class Send_Users_Email_Admin {
      */
     public function handle_ajax_email_users_progress() {
         if ( current_user_can( SEND_USERS_EMAIL_SEND_MAIL_CAPABILITY ) ) {
-            $param = ( isset( $_REQUEST['param'] ) ? sanitize_text_field( $_REQUEST['param'] ) : "" );
-            $action = ( isset( $_REQUEST['action'] ) ? sanitize_text_field( $_REQUEST['action'] ) : "" );
+            $param = ( isset( $_REQUEST['param'] ) ? sanitize_text_field( wp_unslash($_REQUEST['param']) ) : "" ); //phpcs:ignore
+            $action = ( isset( $_REQUEST['action'] ) ? sanitize_text_field( wp_unslash($_REQUEST['action']) ) : "" ); //phpcs:ignore
             if ( $param == 'send_email_user_progress' && $action == 'sue_email_users_progress' ) {
                 $user_id = get_current_user_id();
                 $options = get_option( 'sue_send_users_email' );
@@ -759,17 +759,17 @@ class Send_Users_Email_Admin {
      */
     public function handle_ajax_admin_role_email() {
         if ( check_admin_referer( 'sue-email-user' ) ) {
-            $param = ( isset( $_REQUEST['param'] ) ? sanitize_text_field( $_REQUEST['param'] ) : "" );
-            $action = ( isset( $_REQUEST['action'] ) ? sanitize_text_field( $_REQUEST['action'] ) : "" );
+            $param = ( isset( $_REQUEST['param'] ) ? sanitize_text_field( wp_unslash($_REQUEST['param']) ) : "" );
+            $action = ( isset( $_REQUEST['action'] ) ? sanitize_text_field( wp_unslash($_REQUEST['action']) ) : "" );
             if ( $param == 'send_email_role' && $action == 'sue_role_email_ajax' ) {
                 $options = get_option( 'sue_send_users_email' );
                 $option_title = $options['email_title'] ?? '';
                 $option_tagline = $options['email_tagline'] ?? '';
-                $subject = ( isset( $_REQUEST['subject'] ) ? sanitize_text_field( $_REQUEST['subject'] ) : "" );
-                $title = ( isset( $_REQUEST['title'] ) ? sanitize_text_field( $_REQUEST['title'] ) : $option_title );
-                $tagline = ( isset( $_REQUEST['tagline'] ) ? sanitize_text_field( $_REQUEST['tagline'] ) : $option_tagline );
-                $message = ( isset( $_REQUEST['sue_user_email_message'] ) ? wp_kses_post( $_REQUEST['sue_user_email_message'] ) : "" );
-                $roles = $_REQUEST['roles'] ?? [];
+                $subject = ( isset( $_REQUEST['subject'] ) ? sanitize_text_field( wp_unslash($_REQUEST['subject']) ) : "" );
+                $title = ( isset( $_REQUEST['title'] ) ? sanitize_text_field( wp_unslash($_REQUEST['title']) ) : $option_title );
+                $tagline = ( isset( $_REQUEST['tagline'] ) ? sanitize_text_field( wp_unslash($_REQUEST['tagline']) ) : $option_tagline );
+                $message = ( isset( $_REQUEST['sue_user_email_message'] ) ? wp_kses_post( wp_unslash($_REQUEST['sue_user_email_message']) ) : "" );
+                $roles = wp_unslash($_REQUEST['roles']) ?? []; //phpcs:ignore
                 $roles = array_map( 'sanitize_text_field', $roles );
                 $email_style = 'default';
                 $message = sue_remove_caption_shortcode( $message );
@@ -842,7 +842,7 @@ class Send_Users_Email_Admin {
                         $email_subject = stripslashes_deep( $subject );
                         $email_title = stripslashes_deep( $title );
                         $email_tagline = stripslashes_deep( $tagline );
-                        $email_subject = strip_tags( $this->replace_placeholder(
+                        $email_subject = wp_strip_all_tags( $this->replace_placeholder(
                             $email_subject,
                             $username,
                             $display_name,
@@ -867,7 +867,7 @@ class Send_Users_Email_Admin {
                             'email_title'   => $email_title,
                             'email_tagline' => $email_tagline,
                         ];
-                        $sue_override_user_email_subscription = ( isset( $_REQUEST['sue_override_user_email_subscription'] ) ? sanitize_text_field( $_REQUEST['sue_override_user_email_subscription'] ) : 0 );
+                        $sue_override_user_email_subscription = ( isset( $_REQUEST['sue_override_user_email_subscription'] ) ? sanitize_text_field( wp_unslash($_REQUEST['sue_override_user_email_subscription']) ) : 0 );
                         $send_mail = $this->send_email( $sue_override_user_email_subscription, $args_send_mail );
                         if ( !$send_mail ) {
                             $total_failed_email++;
@@ -914,8 +914,8 @@ class Send_Users_Email_Admin {
      */
     public function handle_ajax_email_roles_progress() {
         if ( current_user_can( SEND_USERS_EMAIL_SEND_MAIL_CAPABILITY ) ) {
-            $param = ( isset( $_REQUEST['param'] ) ? sanitize_text_field( $_REQUEST['param'] ) : "" );
-            $action = ( isset( $_REQUEST['action'] ) ? sanitize_text_field( $_REQUEST['action'] ) : "" );
+            $param = ( isset( $_REQUEST['param'] ) ? sanitize_text_field( wp_unslash($_REQUEST['param']) ) : "" ); //phpcs:ignore
+            $action = ( isset( $_REQUEST['action'] ) ? sanitize_text_field( wp_unslash($_REQUEST['action']) ) : "" ); //phpcs:ignore
             if ( $param == 'send_email_role_progress' && $action == 'sue_email_roles_progress' ) {
                 $user_id = get_current_user_id();
                 $options = get_option( 'sue_send_users_email' );
@@ -1020,19 +1020,19 @@ class Send_Users_Email_Admin {
      */
     public function handle_ajax_admin_settings() {
         if ( check_admin_referer( 'sue-email-user' ) ) {
-            $param = ( isset( $_REQUEST['param'] ) ? sanitize_text_field( $_REQUEST['param'] ) : "" );
-            $action = ( isset( $_REQUEST['action'] ) ? sanitize_text_field( $_REQUEST['action'] ) : "" );
+            $param = ( isset( $_REQUEST['param'] ) ? sanitize_text_field( wp_unslash($_REQUEST['param']) ) : "" );
+            $action = ( isset( $_REQUEST['action'] ) ? sanitize_text_field( wp_unslash($_REQUEST['action']) ) : "" );
             if ( $param == 'sue_settings' && $action == 'sue_settings_ajax' ) {
-                $logo = ( isset( $_REQUEST['logo'] ) ? esc_url_raw( $_REQUEST['logo'] ) : "" );
-                $title = ( isset( $_REQUEST['title'] ) ? sanitize_text_field( $_REQUEST['title'] ) : "" );
-                $tagline = ( isset( $_REQUEST['tagline'] ) ? sanitize_text_field( $_REQUEST['tagline'] ) : "" );
-                $footer = ( isset( $_REQUEST['footer'] ) ? wp_kses_post( $_REQUEST['footer'] ) : "" );
-                $email_from_name = ( isset( $_REQUEST['email_from_name'] ) ? sanitize_text_field( $_REQUEST['email_from_name'] ) : "" );
-                $email_from_address = ( isset( $_REQUEST['email_from_address'] ) ? sanitize_text_field( $_REQUEST['email_from_address'] ) : "" );
-                $reply_to_address = ( isset( $_REQUEST['reply_to_address'] ) ? sanitize_text_field( $_REQUEST['reply_to_address'] ) : "" );
-                $email_template_style = ( isset( $_REQUEST['email_template_style'] ) ? sanitize_text_field( $_REQUEST['email_template_style'] ) : "" );
-                $selected_roles = $_REQUEST['email_send_roles'] ?? [];
-                $socials = $_REQUEST['social'] ?? [];
+                $logo = ( isset( $_REQUEST['logo'] ) ? esc_url_raw( wp_unslash($_REQUEST['logo']) ) : "" );
+                $title = ( isset( $_REQUEST['title'] ) ? sanitize_text_field( wp_unslash($_REQUEST['title']) ) : "" );
+                $tagline = ( isset( $_REQUEST['tagline'] ) ? sanitize_text_field( wp_unslash($_REQUEST['tagline']) ) : "" );
+                $footer = ( isset( $_REQUEST['footer'] ) ? wp_kses_post( wp_unslash($_REQUEST['footer']) ) : "" );
+                $email_from_name = ( isset( $_REQUEST['email_from_name'] ) ? sanitize_text_field( wp_unslash($_REQUEST['email_from_name']) ) : "" );
+                $email_from_address = ( isset( $_REQUEST['email_from_address'] ) ? sanitize_text_field( wp_unslash($_REQUEST['email_from_address']) ) : "" );
+                $reply_to_address = ( isset( $_REQUEST['reply_to_address'] ) ? sanitize_text_field( wp_unslash($_REQUEST['reply_to_address']) ) : "" );
+                $email_template_style = ( isset( $_REQUEST['email_template_style'] ) ? sanitize_text_field( wp_unslash($_REQUEST['email_template_style']) ) : "" );
+                $selected_roles = wp_unslash($_REQUEST['email_send_roles']) ?? []; //phpcs:ignore
+                $socials = wp_unslash($_REQUEST['social']) ?? []; //phpcs:ignore
                 // Validate inputs
                 $validation_message = [];
                 if ( !empty( $logo ) && !wp_http_validate_url( $logo ) ) {
@@ -1243,7 +1243,7 @@ class Send_Users_Email_Admin {
                     $subject = $smtp_wp_mail_failed['subject'] ?? null;
                 }
             }
-            $message = '[' . date( 'Y-m-d h:i:s' ) . ']: ';
+            $message = '[' . gmdate( 'Y-m-d h:i:s' ) . ']: ';
             $message .= 'ERROR';
             if ( $smtp_error ) {
                 $message .= ' | ' . $smtp_error;
@@ -1252,7 +1252,7 @@ class Send_Users_Email_Admin {
                 $message .= ' | To: ' . sue_obscure_text( $to );
             }
             if ( $subject ) {
-                $message .= ' | Subject: ' . strip_tags( $subject );
+                $message .= ' | Subject: ' . wp_strip_all_tags( $subject );
             }
             sue_log_wp_mail_failed_error( $message );
         }
@@ -1288,10 +1288,10 @@ class Send_Users_Email_Admin {
      */
     public function handle_ajax_view_email_log() {
         if ( check_admin_referer( 'sue-email-log-view' ) ) {
-            $param = ( isset( $_REQUEST['param'] ) ? sanitize_text_field( $_REQUEST['param'] ) : "" );
-            $action = ( isset( $_REQUEST['action'] ) ? sanitize_text_field( $_REQUEST['action'] ) : "" );
+            $param = ( isset( $_REQUEST['param'] ) ? sanitize_text_field( wp_unslash($_REQUEST['param']) ) : "" );
+            $action = ( isset( $_REQUEST['action'] ) ? sanitize_text_field( wp_unslash($_REQUEST['action']) ) : "" );
             if ( $param == 'sue_view_email_log' && $action == 'sue_view_email_log_ajax' ) {
-                $filename = ( isset( $_REQUEST['sue_view_email_log_file'] ) ? sanitize_text_field( $_REQUEST['sue_view_email_log_file'] ) : "" );
+                $filename = ( isset( $_REQUEST['sue_view_email_log_file'] ) ? sanitize_text_field( wp_unslash($_REQUEST['sue_view_email_log_file']) ) : "" );
                 $filename = sanitize_file_name( $filename );
                 if ( current_user_can( SEND_USERS_EMAIL_SEND_MAIL_CAPABILITY ) ) {
                     $emailLog = file_get_contents( sue_log_path( $filename ) );

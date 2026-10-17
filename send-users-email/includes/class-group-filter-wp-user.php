@@ -44,8 +44,8 @@ class SUE_Group_Filter_WP_User {
             return;
         }
         
-        if ( isset( $_GET['sue_user_group_filter'] ) && ! empty( $_GET['sue_user_group_filter'] ) ) {
-            $group_id = intval( $_GET['sue_user_group_filter'] );
+        if ( isset( $_GET['sue_user_group_filter'] ) && ! empty( $_GET['sue_user_group_filter'] ) ) { //phpcs:ignore
+            $group_id = intval( $_GET['sue_user_group_filter'] ); // phpcs:ignore
             $user_ids = SUE_User_Group::getGroupUsersId( $group_id );
             
             if ( empty( $user_ids ) ) {

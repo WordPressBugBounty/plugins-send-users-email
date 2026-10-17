@@ -1,4 +1,6 @@
-<div class="row">
+<?php
+if ( ! defined( 'ABSPATH' ) ) exit;
+?><div class="row">
     <div class="col-md-12">
         <input type="checkbox" id="sue_override_user_email_subscription" name="sue_override_user_email_subscription">
         <label 

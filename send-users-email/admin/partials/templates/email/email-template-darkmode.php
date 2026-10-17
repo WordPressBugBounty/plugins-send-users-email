@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 $obj_template_data = $args['obj_template_data'] ?? null;
 ?>
 <!DOCTYPE html>
@@ -157,11 +159,11 @@ $obj_template_data = $args['obj_template_data'] ?? null;
   </style>
   <?php if ( $obj_template_data && $obj_template_data->get_email_styles() ): ?>
       <style>
-          <?php echo stripslashes_deep( wp_strip_all_tags( $obj_template_data->get_email_styles() ) ); ?>
+          <?php Send_Users_Email::wp_kses_wf(stripslashes_deep( wp_strip_all_tags( $obj_template_data->get_email_styles() ) )); ?>
       </style>
   <?php endif; ?>
 </head>
-<body class="sue-email-template-<?php echo $obj_template_data->get_email_style_name(); ?>" style="margin:0;padding:0;background-color:#141414;color:#e8e8e8;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;" bgcolor="#141414">
+<body class="sue-email-template-<?php echo esc_attr($obj_template_data->get_email_style_name()); ?>" style="margin:0;padding:0;background-color:#141414;color:#e8e8e8;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;" bgcolor="#141414">
 <div class="wrapper">
     <div class="container">
         <table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#141414" style="background-color:#141414;padding:48px 0 64px;">
@@ -177,19 +179,19 @@ $obj_template_data = $args['obj_template_data'] ?? null;
                     <img src="<?php echo esc_attr( $obj_template_data->get_email_logo() ); ?>" width="40" alt="Logo">
                   <?php endif; ?>
                   </div>
-                  <h1 class="pub-name" style="font-size:20px;font-weight:700;color:#ffffff;margin:0 0 6px 0;"><?php echo $obj_template_data ? $obj_template_data->get_email_title() : ''; ?></h1>
-                  <p class="pub-tagline" style="font-size:12px;color:#666666;margin:0;text-transform:uppercase;"><?php echo $obj_template_data ? $obj_template_data->get_email_tagline() : ''; ?></p>
+                  <h1 class="pub-name" style="font-size:20px;font-weight:700;color:#ffffff;margin:0 0 6px 0;"><?php echo $obj_template_data ? esc_html($obj_template_data->get_email_title()) : ''; ?></h1>
+                  <p class="pub-tagline" style="font-size:12px;color:#666666;margin:0;text-transform:uppercase;"><?php echo $obj_template_data ? esc_html($obj_template_data->get_email_tagline()) : ''; ?></p>
                 </div>
 
                 <!-- BODY -->
                 <div class="body" style="padding:40px 52px 48px;">
-                  <p style="font-size:15px;line-height:1.85;color:#e2e2e2;margin:0 0 22px 0;"><?php echo wp_kses_post( stripslashes_deep( $obj_template_data ? $obj_template_data->get_email_body() : '' ) ); ?></p>
+                  <p style="font-size:15px;line-height:1.85;color:#e2e2e2;margin:0 0 22px 0;"><?php Send_Users_Email::wp_kses_wf( stripslashes_deep( $obj_template_data ? $obj_template_data->get_email_body() : '' ) ); ?></p>
 
                 </div>
 
                 <!-- FOOTER -->
                 <div class="footer" style="padding:24px 52px 0;border-top:1px solid #2a2a2a;text-align:center;">
-                  <p style="font-size:11px;color:#666666;margin:0 0 5px 0;line-height:1.7;"><?php echo stripslashes_deep( $obj_template_data ? $obj_template_data->get_email_footer() : '' ); ?></p>
+                  <p style="font-size:11px;color:#666666;margin:0 0 5px 0;line-height:1.7;"><?php Send_Users_Email::wp_kses_wf(stripslashes_deep( $obj_template_data ? $obj_template_data->get_email_footer() : '' )); ?></p>
                 </div>
 
               </table>

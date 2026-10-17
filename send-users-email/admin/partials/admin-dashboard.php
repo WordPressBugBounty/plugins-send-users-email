@@ -1,4 +1,6 @@
-<div class="sue-pro-wrap">
+<?php
+ if ( ! defined( 'ABSPATH' ) ) exit;
+?><div class="sue-pro-wrap">
 
     <!-- Header -->
     <div class="sue-pro-header">

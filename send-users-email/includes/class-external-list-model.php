@@ -7,7 +7,7 @@ class External_List_Model
 
         $table_name = External_Lists_Schema::get_external_list_table_name();
 
-        return $wpdb->insert(
+        return $wpdb->insert( //phpcs:ignore
             $table_name,
             [
                 'list_id'    => $data['list_id'],
@@ -34,7 +34,7 @@ class External_List_Model
 
         $table_name = External_Lists_Schema::get_external_list_meta_table_name();
 
-        return $wpdb->insert(
+        return $wpdb->insert( //phpcs:ignore
             $table_name,
             [
                 'user_id'    => $data['user_id'],
@@ -52,8 +52,7 @@ class External_List_Model
 
         $table_name = External_Lists_Schema::get_external_list_table_name();
 
-        $query = $wpdb->prepare("SELECT COUNT(*) FROM $table_name WHERE email = %s", $email);
-        $count = $wpdb->get_var($query);
+        $count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $table_name WHERE email = %s", $email)); //phpcs:ignore
 
         return $count > 0;
     }
@@ -63,10 +62,8 @@ class External_List_Model
         global $wpdb;
         
         $table_name = External_Lists_Schema::get_external_list_meta_table_name();
-        $sql = "SELECT count FROM $table_name WHERE list_id = %s ORDER BY created_at DESC LIMIT 1";
 
-        $query = $wpdb->prepare($sql, $list_id);
-        $count = $wpdb->get_var($query);
+        $count = $wpdb->get_var($wpdb->prepare("SELECT count FROM $table_name WHERE list_id = %s ORDER BY created_at DESC LIMIT 1", $list_id)); //phpcs:ignore
 
         return $count;
     }
@@ -77,8 +74,7 @@ class External_List_Model
 
         $table_name = External_Lists_Schema::get_external_list_meta_table_name();
 
-        $query = "SELECT * FROM $table_name ORDER BY created_at DESC";
-        $results = $wpdb->get_results($query);
+        $results = $wpdb->get_results("SELECT * FROM $table_name ORDER BY created_at DESC"); //phpcs:ignore
 
         return $results;
     }
@@ -89,8 +85,7 @@ class External_List_Model
 
         $table_name = External_Lists_Schema::get_external_list_table_name();
 
-        $query = "SELECT * FROM $table_name ORDER BY created_at DESC";
-        $results = $wpdb->get_results($query);
+        $results = $wpdb->get_results("SELECT * FROM $table_name ORDER BY created_at DESC"); //phpcs:ignore
 
         return $results;
     }
@@ -108,11 +103,7 @@ class External_List_Model
         
         $list_table = External_Lists_Schema::get_external_list_table_name();
         // Prepare the SQL query with placeholders for list_id, offset, and limit
-        $sql = "SELECT * FROM $list_table WHERE list_id = %s ORDER BY created_at DESC LIMIT %d OFFSET %d";
-        // Set the offset and limit values for pagination
-        $query = $wpdb->prepare($sql, $list_id, $limit, $offset);
-        // Execute the query and retrieve the results
-        $results = $wpdb->get_results($query);
+        $results = $wpdb->get_results($wpdb->prepare("SELECT * FROM $list_table WHERE list_id = %s ORDER BY created_at DESC LIMIT %d OFFSET %d", $list_id, $limit, $offset));  //phpcs:ignore
         return $results;
     }
 
@@ -127,10 +118,8 @@ class External_List_Model
     {
         global $wpdb;
         $list_table = External_Lists_Schema::get_external_list_table_name();
-        
-        $sql = "SELECT COUNT(*) FROM $list_table WHERE list_id = %s";
-        $query = $wpdb->prepare($sql, $list_id);
-        $count = $wpdb->get_var($query);
+
+        $count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $list_table WHERE list_id = %s", $list_id)); //phpcs:ignore
         return (int)$count;
     }
 
@@ -144,21 +133,7 @@ class External_List_Model
         $list_table = External_Lists_Schema::get_external_list_table_name();
         $meta_table = External_Lists_Schema::get_external_list_meta_table_name();
 
-        $query = "
-            SELECT 
-                $meta_table.id,
-                $meta_table.list_id,
-                $meta_table.list_name,
-                COUNT($list_table.id) AS total_users,
-                SUM(CASE WHEN $list_table.subscribed = 1 THEN 1 ELSE 0 END) AS subscribed_users,
-                SUM(CASE WHEN $list_table.subscribed = 0 THEN 1 ELSE 0 END) AS unsubscribed_users
-            FROM $meta_table
-            LEFT JOIN $list_table ON $list_table.list_id = $meta_table.list_id
-            GROUP BY $meta_table.id, $meta_table.list_id, $meta_table.list_name, $meta_table.created_at
-            ORDER BY $meta_table.created_at DESC
-        ";
-
-        $results = $wpdb->get_results($query);
+        $results = $wpdb->get_results("SELECT $meta_table.id, $meta_table.list_id, $meta_table.list_name, COUNT($list_table.id) AS total_users, SUM(CASE WHEN $list_table.subscribed = 1 THEN 1 ELSE 0 END) AS subscribed_users, SUM(CASE WHEN $list_table.subscribed = 0 THEN 1 ELSE 0 END) AS unsubscribed_users FROM $meta_table LEFT JOIN $list_table ON $list_table.list_id = $meta_table.list_id GROUP BY $meta_table.id, $meta_table.list_id, $meta_table.list_name, $meta_table.created_at ORDER BY $meta_table.created_at DESC"); //phpcs:ignore
 
         return $results;
     }
@@ -169,8 +144,7 @@ class External_List_Model
 
         $table_name = External_Lists_Schema::get_external_list_meta_table_name();
 
-        $query = $wpdb->prepare("SELECT * FROM $table_name WHERE list_id = %s ORDER BY created_at DESC", $list_id);
-        $results = $wpdb->get_results($query);
+        $results = $wpdb->get_results($wpdb->prepare("SELECT * FROM $table_name WHERE list_id = %s ORDER BY created_at DESC", $list_id)); //phpcs:ignore
         
         return $results;
     }
@@ -181,8 +155,7 @@ class External_List_Model
 
         $table_name = External_Lists_Schema::get_external_list_meta_table_name();
 
-        $query = $wpdb->prepare("SELECT * FROM $table_name WHERE id = %d", $id);
-        $result = $wpdb->get_row($query);
+        $result = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table_name WHERE id = %d", $id)); //phpcs:ignore
 
         return $result;
     }
@@ -199,29 +172,7 @@ class External_List_Model
             $str_where = 'WHERE ' . $meta_table . '.id IN (' . implode(',', array_map('intval', $id)) . ')';
         }
 
-        $str_query = "
-            SELECT
-                $list_table.id,
-                $list_table.list_id,
-                $list_table.email,
-                $list_table.first_name,
-                $list_table.last_name,
-                $list_table.title,
-                $list_table.salutation,
-                $list_table.field_01,
-                $list_table.field_02,
-                $list_table.field_03,
-                $list_table.field_04,
-                $list_table.field_05,
-                $list_table.subscribed,
-                $meta_table.id as meta_id,
-                $meta_table.list_id as meta_list_id
-            FROM $meta_table
-            LEFT JOIN $list_table ON $list_table.list_id = $meta_table.list_id
-            $str_where
-        ";
-
-        $results = $wpdb->get_results($str_query);
+        $results = $wpdb->get_results("SELECT $list_table.id, $list_table.list_id, $list_table.email, $list_table.first_name, $list_table.last_name, $list_table.title, $list_table.salutation, $list_table.field_01, $list_table.field_02, $list_table.field_03, $list_table.field_04, $list_table.field_05, $list_table.subscribed, $meta_table.id as meta_id, $meta_table.list_id as meta_list_id FROM $meta_table LEFT JOIN $list_table ON $list_table.list_id = $meta_table.list_id $str_where"); //phpcs:ignore
 
         return $results;
     }
@@ -253,9 +204,9 @@ class External_List_Model
             FROM $meta_table
             LEFT JOIN $list_table ON $list_table.list_id = $meta_table.list_id
             WHERE $meta_table.list_id = %s
-        ", $list_id);
+        ", $list_id); //phpcs:ignore
 
-        $results = $wpdb->get_results($query);
+        $results = $wpdb->get_results($query); //phpcs:ignore
 
         return $results;
     }
@@ -288,9 +239,9 @@ class External_List_Model
             FROM $meta_table
             LEFT JOIN $list_table ON $list_table.list_id = $meta_table.list_id
             WHERE $list_table.email = %s
-        ", $email);
+        ", $email); //phpcs:ignore
 
-        $results = $wpdb->get_results($query);
+        $results = $wpdb->get_results($query); //phpcs:ignore
 
         return $results;
     }
@@ -309,7 +260,7 @@ class External_List_Model
             $update_format[] = '%s';
         }
 
-        return $wpdb->update(
+        return $wpdb->update( //phpcs:ignore
             $table_name,
             $update_data,
             ['id' => $id],
@@ -324,7 +275,7 @@ class External_List_Model
 
         $table_name = External_Lists_Schema::get_external_list_table_name();
 
-        return $wpdb->delete(
+        return $wpdb->delete( //phpcs:ignore
             $table_name,
             ['id' => $id],
             ['%d']
@@ -337,7 +288,7 @@ class External_List_Model
 
         $table_name = External_Lists_Schema::get_external_list_table_name();
 
-        return $wpdb->delete(
+        return $wpdb->delete( //phpcs:ignore
             $table_name,
             ['list_id' => $list_id],
             ['%d']

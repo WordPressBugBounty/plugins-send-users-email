@@ -59,20 +59,7 @@ class SUE_Add_WP_User_Group_Column {
         $sue_user_group_name_table = SEND_USERS_EMAIL_USER_GROUP_NAME_TABLE;
         $wp_users_table = $wpdb->prefix . 'users';
 
-        $sql_query = "
-            SELECT
-                GROUP_CONCAT($sue_user_group_name_table.name SEPARATOR ', ') AS user_groups
-            FROM $wp_users_table
-            RIGHT JOIN $sue_group_user_table
-            ON $wp_users_table.ID = $sue_group_user_table.user_id
-            LEFT JOIN $sue_user_group_name_table
-            ON $sue_group_user_table.group_id = $sue_user_group_name_table.id
-            $str_where 
-            GROUP BY $wp_users_table.ID
-            ORDER BY $sue_user_group_name_table.name ASC
-        ";
-
-        return $wpdb->get_results( $sql_query );
+        return $wpdb->get_results("SELECT GROUP_CONCAT($sue_user_group_name_table.name SEPARATOR ', ') AS user_groups FROM $wp_users_table RIGHT JOIN $sue_group_user_table ON $wp_users_table.ID = $sue_group_user_table.user_id LEFT JOIN $sue_user_group_name_table ON $sue_group_user_table.group_id = $sue_user_group_name_table.id $str_where GROUP BY $wp_users_table.ID ORDER BY $sue_user_group_name_table.name ASC"); //phpcs:ignore
     }
 
     /**

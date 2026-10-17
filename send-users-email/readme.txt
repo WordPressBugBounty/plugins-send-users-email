@@ -1,19 +1,19 @@
 === Send Users Email - Email Subscribers, Email Marketing Newsletter ===
-Contributors: paretodigital, metalfreek, freemius
-Donate link: https://sendusersemail.com/?utm_source=wp_repo&utm_medium=link&utm_campaign=donate_link
+Contributors: webfactory, freemius
+Donate link: https://sendusersemail.com/
 Tags: email users, email subscribers, email system users, send email, email all users
 Requires at least: 5.7
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.0.3
+Stable tag: 2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Send Users Email provides a way to send email to all system users either by selecting individual users or user roles.
+Send emails to all your users, individually or by user roles. Send emails without any extra setup.
 
 == Description ==
 
-Send Users Email turns your WordPress user base into a mailing list. Compose a message once and send it straight to individual users, entire roles, or a single external email address — no separate mailing list service required.
+<a href="https://sendusersemail.com/?utm_source=wp_dir&utm_medium=link&utm_campaign=pro_version">Send Users Email</a> turns your WordPress user base into a mailing list. Compose a message once and send it straight to individual users, entire roles, or a single external email address — no separate mailing list service required.
 
 The free version covers everything you need for one-off announcements and support emails: personalized placeholders, custom CSS styling, social media links in the footer, branded headers, and a 15-day log of everything sent (plus any delivery errors) for troubleshooting.
 
@@ -158,6 +158,10 @@ The free version logs emails for 15 days, while the [PRO version](https://sendus
 6. Tags for email personalization
 
 == Changelog ==
+= 2.1 (2026-10-17) =
+* Code cleanup
+* Latest Freemius ver
+
 = 2.0.3 (2026-07-27) =
 * Fixed wp cron issues
 

@@ -1,4 +1,6 @@
-<div class="sue-pro-wrap sue-users-email-page">
+<?php
+if ( ! defined( 'ABSPATH' ) ) exit;
+?><div class="sue-pro-wrap sue-users-email-page">
 
     <div class="sue-pro-header">
         <h2><?php 

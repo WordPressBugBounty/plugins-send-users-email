@@ -91,7 +91,7 @@ class SUE_Send_Emails_External_Lists
         $warningMessage = '';
         $on_queue       = isset( $request_data['on_queue'] ) && ( $request_data['on_queue'] );
         $email_style    = isset( $request_data['selected_email_style'] ) ? sanitize_text_field( $request_data['selected_email_style'] ) : "default";
-        $scheduled_at   = isset( $request_data['selected_scheduled_date'] ) ? sanitize_text_field( $request_data['selected_scheduled_date'] ) : date( 'Y-m-d' );
+        $scheduled_at   = isset( $request_data['selected_scheduled_date'] ) ? sanitize_text_field( $request_data['selected_scheduled_date'] ) : gmdate( 'Y-m-d' );
 
         // Validate inputs
         $validation_message = [];
@@ -168,13 +168,13 @@ class SUE_Send_Emails_External_Lists
                 $email_body = self::replace_placeholder( $email_body, $mail_external_list_data );
 
                 $email_subject = stripslashes_deep( $subject );
-                $email_subject = strip_tags( self::replace_placeholder( $email_subject, $mail_external_list_data ) );
+                $email_subject = wp_strip_all_tags( self::replace_placeholder( $email_subject, $mail_external_list_data ) );
                 
                 $email_title = stripslashes_deep( $title );
-                $email_title = strip_tags( self::replace_placeholder( $email_title, $mail_external_list_data ) );
+                $email_title = wp_strip_all_tags( self::replace_placeholder( $email_title, $mail_external_list_data ) );
 
                 $email_tagline = stripslashes_deep( $tagline );
-                $email_tagline = strip_tags( self::replace_placeholder( $email_tagline, $mail_external_list_data ) );
+                $email_tagline = wp_strip_all_tags( self::replace_placeholder( $email_tagline, $mail_external_list_data ) );
 
                 // Send email
                 $input_request = [

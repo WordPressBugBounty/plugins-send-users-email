@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 $allowed_title_tagline = ( isset( $args['allowed_title_tagline'] ) ? $args['allowed_title_tagline'] : 0 );
 $title = ( isset( $args['title'] ) ? $args['title'] : '' );

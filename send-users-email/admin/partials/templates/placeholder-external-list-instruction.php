@@ -1,4 +1,6 @@
-<div class="sue-sidebar-card">
+<?php
+if ( ! defined( 'ABSPATH' ) ) exit;
+?><div class="sue-sidebar-card">
     <div class="sue-sidebar-card-header">
         <span class="sue-sidebar-card-icon">🏷️</span>
         <div>

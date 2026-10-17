@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 $obj_template_data = $args['obj_template_data'] ?? null;
 ?>
 <!DOCTYPE html
@@ -147,7 +149,7 @@ $obj_template_data = $args['obj_template_data'] ?? null;
     <![endif]-->
     <?php if ( $obj_template_data && $obj_template_data->get_email_styles() ): ?>
         <style>
-            <?php echo stripslashes_deep( wp_strip_all_tags( $obj_template_data->get_email_styles() ) ); ?>
+            <?php Send_Users_Email::wp_kses_wf(stripslashes_deep( wp_strip_all_tags( $obj_template_data->get_email_styles() ) )); ?>
         </style>
     <?php endif; ?>
 
@@ -217,7 +219,7 @@ $obj_template_data = $args['obj_template_data'] ?? null;
                                     <!--[if (gte mso 9)|(IE)]>
                                     <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false"
                                             style="width:600px;height:274px;">
-                                        <v:fill type="tile" src="https://via.placeholder.com/600x374"/>
+                                        
                                         <v:textbox inset="0,0,0,0">
                                     <![endif]-->
 
@@ -295,7 +297,7 @@ $obj_template_data = $args['obj_template_data'] ?? null;
 
             <tr class="sue-email-body">
                 <td style="padding: 15px 18px 15px 18px;background-color: #ffffff;">
-                    <?php echo $obj_template_data->get_email_body(); ?>
+                    <?php Send_Users_Email::wp_kses_wf($obj_template_data->get_email_body()); ?>
                 </td>
             </tr>
 
@@ -306,7 +308,7 @@ $obj_template_data = $args['obj_template_data'] ?? null;
                             <tr>
                                 <td class="padding content sue-footer"
                                     style="background-color:#a9a9a9;color:#ffffff;padding-top:25px;padding-bottom:25px;padding-right:0;padding-left:0;width:100%;text-align:center; width:600px;font-size:14px;">
-                                    <?php echo stripslashes_deep( $obj_template_data->get_email_footer() ); ?>
+                                    <?php Send_Users_Email::wp_kses_wf(stripslashes_deep( $obj_template_data->get_email_footer() )); ?>
                                 </td>
                             </tr>
                         </table>

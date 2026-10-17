@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 $message = isset( $message ) ? $message : '';
 $type = isset( $type ) ? $type : 'info';
 $dismissible = isset( $dismissible ) ? $dismissible : true;

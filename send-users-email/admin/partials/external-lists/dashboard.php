@@ -1,4 +1,6 @@
-<div class="col-sm-9 sue-external-lists-main">
+<?php
+if ( ! defined( 'ABSPATH' ) ) exit;
+?><div class="col-sm-9 sue-external-lists-main">
     <div class="sue-log-card">
         <div class="sue-log-card-header">
             <span class="sue-log-card-icon">📥</span>
@@ -15,13 +17,13 @@
                 ?>
             </p>
 
-            <?php if ( isset( $_GET['errors'] ) ) : ?>
+            <?php if ( isset( $_GET['errors'] ) ) : //phpcs:ignore ?>
                 <div class="sue-notice sue-notice-warning">
                     <div class="sue-notice-icon">⚠️</div>
                     <div class="sue-notice-body">
                         <p class="sue-notice-title"><?php esc_html_e( 'Import failed', 'send-users-email' ); ?></p>
                         <?php
-                        $errors = is_array( $_GET['errors'] ) ? $_GET['errors'] : [ sanitize_text_field( wp_unslash( $_GET['errors'] ) ) ];
+                        $errors = is_array( $_GET['errors'] ) ? $_GET['errors'] : [ sanitize_text_field( wp_unslash( $_GET['errors'] ) ) ]; //phpcs:ignore
                         foreach ( $errors as $error ) :
                             ?>
                             <p><?php echo esc_html( $error ); ?></p>
@@ -30,7 +32,7 @@
                 </div>
             <?php endif; ?>
 
-            <?php if ( isset( $_GET['duplicate_rows'] ) && ! empty( $_GET['duplicate_rows'] ) && (int) $_GET['duplicate_rows'] > 0 ) : ?>
+            <?php if ( isset( $_GET['duplicate_rows'] ) && ! empty( $_GET['duplicate_rows'] ) && (int) $_GET['duplicate_rows'] > 0 ) : //phpcs:ignore ?>
                 <div class="sue-notice sue-notice-warning">
                     <div class="sue-notice-icon">📄</div>
                     <div class="sue-notice-body">
@@ -38,16 +40,16 @@
                         <p>
                             <?php
                             /* translators: %d: Number of duplicate rows */
-                            printf( esc_html__( '%d duplicate rows were found and skipped during import.', 'send-users-email' ), intval( $_GET['duplicate_rows'] ) );
+                            printf( esc_html__( '%d duplicate rows were found and skipped during import.', 'send-users-email' ), intval( $_GET['duplicate_rows'] ) ); //phpcs:ignore
                             ?>
                         </p>
                     </div>
                 </div>
             <?php endif; ?>
 
-            <?php if ( isset( $_GET['list_id'] ) && ! empty( $_GET['list_id'] ) ) : ?>
+            <?php if ( isset( $_GET['list_id'] ) && ! empty( $_GET['list_id'] ) ) : //phpcs:ignore ?>
                 <?php
-                $list_count = External_List_Model::get_list_count( sanitize_text_field( $_GET['list_id'] ) );
+                $list_count = External_List_Model::get_list_count( sanitize_text_field( $_GET['list_id'] ) ); 
                 if ( $list_count === false ) {
                     $list_count = 0;
                 }

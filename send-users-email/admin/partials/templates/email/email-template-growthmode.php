@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 $obj_template_data = $args['obj_template_data'] ?? null;
 ?>
 <!DOCTYPE html>
@@ -268,7 +270,7 @@ $obj_template_data = $args['obj_template_data'] ?? null;
   </style>
   <?php if ( $obj_template_data && $obj_template_data->get_email_styles() ): ?>
       <style>
-          <?php echo stripslashes_deep( wp_strip_all_tags( $obj_template_data->get_email_styles() ) ); ?>
+          <?php Send_Users_Email::wp_kses_wf(stripslashes_deep( wp_strip_all_tags( $obj_template_data->get_email_styles() ) )); ?>
       </style>
   <?php endif; ?>
 </head>
@@ -278,8 +280,8 @@ $obj_template_data = $args['obj_template_data'] ?? null;
 
     <!-- HEADER -->
     <div class="header">
-      <h1 class="pub-name"><?php echo $obj_template_data ? $obj_template_data->get_email_title() : ''; ?></h1>
-      <p class="pub-tagline"><?php echo $obj_template_data ? $obj_template_data->get_email_tagline() : ''; ?></p>
+      <h1 class="pub-name"><?php echo $obj_template_data ? esc_html($obj_template_data->get_email_title()) : ''; ?></h1>
+      <p class="pub-tagline"><?php echo $obj_template_data ? esc_html($obj_template_data->get_email_tagline()) : ''; ?></p>
     </div>
 
     <!-- TICKER -->
@@ -291,7 +293,7 @@ $obj_template_data = $args['obj_template_data'] ?? null;
 
       <!-- BRIEF 1 -->
       <div class="brief">
-        <?php echo $obj_template_data->get_email_body(); ?>
+        <?php Send_Users_Email::wp_kses_wf($obj_template_data->get_email_body()); ?>
       </div>
 
     </div><!-- /content -->
@@ -299,7 +301,7 @@ $obj_template_data = $args['obj_template_data'] ?? null;
     <!-- FOOTER -->
     <div class="footer">
       <?php if ( $obj_template_data && $obj_template_data->get_email_footer() ): ?>
-        <p><?php echo stripslashes_deep( $obj_template_data->get_email_footer() ); ?></p>
+        <p><?php Send_Users_Email::wp_kses_wf(stripslashes_deep( $obj_template_data->get_email_footer() )); ?></p>
       <?php endif; ?>
     </div>
 

@@ -22,7 +22,7 @@ class SUE_Email_External_List {
 
     public static function render_page( $args = [] ) {
         if ( !current_user_can( 'manage_options' ) ) {
-            wp_die( __( 'You do not have sufficient permissions to access this page.', 'send-users-email' ) );
+            wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'send-users-email' ) );
         }
         $templates = [];
         // Get the default Email title and Tagline.

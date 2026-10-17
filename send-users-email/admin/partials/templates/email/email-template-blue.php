@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 $obj_template_data = $args['obj_template_data'] ?? null;
 ?>
 <!DOCTYPE html
@@ -148,7 +150,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
     <![endif]-->
     <?php if ( $obj_template_data && $obj_template_data->get_email_styles() ): ?>
         <style>
-            <?php echo stripslashes_deep( wp_strip_all_tags( $obj_template_data->get_email_styles() ) ); ?>
+            <?php Send_Users_Email::wp_kses_wf(stripslashes_deep( wp_strip_all_tags( $obj_template_data->get_email_styles() ) )); ?>
         </style>
     <?php endif; ?>
 
@@ -276,7 +278,6 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
                                     <!--[if (gte mso 9)|(IE)]>
                                     <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false"
                                             style="width:600px;height:274px;">
-                                        <v:fill type="tile" src="https://via.placeholder.com/600x374"/>
                                         <v:textbox inset="0,0,0,0">
                                     <![endif]-->
 
@@ -356,7 +357,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
             <tr class="sue-email-body">
                 <td style="padding: 25px 18px 25px 18px;">
                     <?php if ( $obj_template_data && $obj_template_data->get_email_body() ): ?>
-                        <?php echo $obj_template_data->get_email_body(); ?>
+                        <?php Send_Users_Email::wp_kses_wf($obj_template_data->get_email_body()); ?>
                     <?php endif; ?>
                 </td>
             </tr>
@@ -368,7 +369,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
                             <tr>
                                 <td class="padding content sue-footer"
                                     style="background-color:#042467;color:#ffffff;padding-top:30px;padding-bottom:30px;padding-right:0;padding-left:0;width:100%;text-align:center; width:600px;">
-                                    <?php echo stripslashes_deep( $obj_template_data->get_email_footer() ); ?>
+                                    <?php Send_Users_Email::wp_kses_wf(stripslashes_deep( $obj_template_data->get_email_footer() )); ?>
                                 </td>
                             </tr>
                         </table>

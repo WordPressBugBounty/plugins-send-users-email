@@ -1,12 +1,14 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 $group_data =  $args['group_data'];
 $which = $args['which'];
 ?>
 <div class="alignleft actions">
 
-    <label class="screen-reader-text" for="ute_group_select"><?php echo esc_html__('Remove users from group', 'users-tablenav-extra'); ?></label>
+    <label class="screen-reader-text" for="ute_group_select"><?php echo esc_html__('Remove users from group', 'send-users-email'); ?></label>
 
-    <select id="sue_wp_user_group_dropdown" class="sue_wp_user_group_dropdown_<?php echo $which;?>" name="sue_wp_user_group_dropdown[]">
+    <select id="sue_wp_user_group_dropdown" class="sue_wp_user_group_dropdown_<?php echo esc_attr($which);?>" name="sue_wp_user_group_dropdown[]">
         <option value=""><?php esc_html_e( 'Select User Group to Remove', 'send-users-email' ); ?></option>
         <?php foreach ( $group_data as $group ) : ?>
             <option value="<?php echo esc_attr( $group->id ); ?>">

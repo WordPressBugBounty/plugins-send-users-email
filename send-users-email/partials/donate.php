@@ -1,5 +1,7 @@
 
-    <div class="sue-pro-upgrade-banner">
+<?php
+ if ( ! defined( 'ABSPATH' ) ) exit;
+?><div class="sue-pro-upgrade-banner">
         <div class="sue-banner-text">
             <h3><?php 
 esc_html_e( 'Send Users Email PRO', 'send-users-email' );

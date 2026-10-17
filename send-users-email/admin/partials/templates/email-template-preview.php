@@ -1,5 +1,7 @@
 <?php
-$style      = isset( $_POST['email_style'] ) ? sanitize_text_field( $_POST['email_style'] ) : 'default';
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+$style      = isset( $_POST['email_style'] ) ? sanitize_text_field( wp_unslash($_POST['email_style']) ) : 'default'; //phpcs:ignore
 $themes     = sue_get_email_theme_scheme();
 $is_premium = sue_fs()->is__premium_only() && sue_fs()->can_use_premium_code();
 if ( ! $is_premium ) {

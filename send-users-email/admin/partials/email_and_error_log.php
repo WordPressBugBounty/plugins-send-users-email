@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 /**
  * @var $errorFileSizeMB
  * @var $errorFileMaxSizeLimit
@@ -99,6 +101,7 @@
                     <p class="sue-form-hint sue-form-hint-<?php echo esc_attr( $barColor ); ?>">
                         <?php
                         printf(
+                            /* translators: %s is file size in MB */
                             esc_html__( 'Log file size: %s MB.', 'send-users-email' ),
                             esc_html( $errorFileSizeMB )
                         );

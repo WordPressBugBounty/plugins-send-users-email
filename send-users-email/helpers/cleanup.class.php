@@ -33,13 +33,13 @@ class Send_Users_Email_cleanup {
         if ( $errorLogFileName ) {
             $file = sue_log_path( $errorLogFileName );
             if ( file_exists( $file ) ) {
-                unlink( $file );
+                wp_delete_file( $file );
             }
         }
         // Temporary code --- old log file cleanup
         $file = sue_log_path( 'error.log' );
         if ( file_exists( $file ) ) {
-            unlink( $file );
+            wp_delete_file( $file );
         }
     }
 
@@ -64,7 +64,7 @@ class Send_Users_Email_cleanup {
         foreach ( $filesToDelete as $fileToDelete ) {
             $log = sue_log_path( $fileToDelete );
             if ( file_exists( $log ) ) {
-                unlink( $log );
+                wp_delete_file( $log );
             }
         }
     }

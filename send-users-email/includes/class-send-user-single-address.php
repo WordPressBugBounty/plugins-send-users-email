@@ -16,8 +16,8 @@ class SUE_Email_Send_Single_Address extends Send_Users_Email_Admin
     {
         if ( check_admin_referer( 'sue-email-user' ) && sue_fs()->is__premium_only() && sue_fs()->can_use_premium_code() ) {
 
-			$param  = isset( $_REQUEST['param'] ) ? sanitize_text_field( $_REQUEST['param'] ) : "";
-			$action = isset( $_REQUEST['action'] ) ? sanitize_text_field( $_REQUEST['action'] ) : "";
+			$param  = isset( $_REQUEST['param'] ) ? sanitize_text_field( wp_unslash($_REQUEST['param']) ) : "";
+			$action = isset( $_REQUEST['action'] ) ? sanitize_text_field( wp_unslash($_REQUEST['action']) ) : "";
 
 			if ( $param == 'send_email_single_user' && $action == 'sue_user_single_email_ajax' ) {
 
@@ -25,9 +25,9 @@ class SUE_Email_Send_Single_Address extends Send_Users_Email_Admin
 		        $option_title   = $options['email_title'] ?? '';
 		        $option_tagline = $options['email_tagline'] ?? '';
 
-				$subject     	 = isset( $_REQUEST['subject'] ) ? sanitize_text_field( $_REQUEST['subject'] ) : "";
-				$email_recipient = isset( $_REQUEST['email-recipient'] ) ? sanitize_email( $_REQUEST['email-recipient'] ) : "";
-				$message     	 = isset( $_REQUEST['sue_user_email_message'] ) ? wp_kses_post( $_REQUEST['sue_user_email_message'] ) : "";
+				$subject     	 = isset( $_REQUEST['subject'] ) ? sanitize_text_field( wp_unslash($_REQUEST['subject']) ) : "";
+				$email_recipient = isset( $_REQUEST['email-recipient'] ) ? sanitize_email( wp_unslash($_REQUEST['email-recipient']) ) : "";
+				$message     	 = isset( $_REQUEST['sue_user_email_message'] ) ? wp_kses_post( wp_unslash($_REQUEST['sue_user_email_message']) ) : "";
 
 				$email_style = 'default';
 				$message     = sue_remove_caption_shortcode( $message );
@@ -35,7 +35,7 @@ class SUE_Email_Send_Single_Address extends Send_Users_Email_Admin
 				$resMessage     = __( '🚀🚀🚀 Email(s) sent successfully!', 'send-users-email' );
 				$warningMessage = '';
 
-                $email_style  = isset( $_REQUEST['selected_email_style'] ) ? sanitize_text_field( $_REQUEST['selected_email_style'] ) : "default";
+                $email_style  = isset( $_REQUEST['selected_email_style'] ) ? sanitize_text_field( wp_unslash($_REQUEST['selected_email_style']) ) : "default";
 
 				// Validate inputs
 				$validation_message = [];

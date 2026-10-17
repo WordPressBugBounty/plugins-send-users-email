@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 $obj_template_data = $args['obj_template_data'] ? $args['obj_template_data'] : null;
 if ( $obj_template_data && $obj_template_data instanceof SUE_Template_Data ) :
     $options = get_option('sue_send_users_email');
@@ -27,5 +29,5 @@ if ( $obj_template_data && $obj_template_data instanceof SUE_Template_Data ) :
     $html = $email->style_inline( $html );
 
     $html .= '<style>body[style]{text-align:unset!important;}</style>';
-    echo $html;
+    Send_Users_Email::wp_kses_wf($html);
 endif;

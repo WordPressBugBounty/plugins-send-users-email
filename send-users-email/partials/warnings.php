@@ -1,4 +1,7 @@
-<?php if ( ini_get( 'max_execution_time' ) <= 60 ): ?>
+<?php
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+if ( ini_get( 'max_execution_time' ) <= 60 ): ?>
     <div class="sue-notice sue-notice-warning" role="alert">
         <div class="sue-notice-icon">⚠️</div>
         <div class="sue-notice-body">

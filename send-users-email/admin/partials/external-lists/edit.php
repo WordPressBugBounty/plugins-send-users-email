@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 $lists_data = $args['lists_data'] ?? [];
 ?>
 <style>
@@ -94,7 +96,7 @@ $lists_data = $args['lists_data'] ?? [];
             <div class="sue-external-edit-pagination">
                 <?php if (isset($args['pagination'])) : ?>
                     <div>
-                        <?php echo $args['pagination']; ?>
+                        <?php Send_Users_Email::wp_kses_wf($args['pagination']); ?>
                     </div>
                 <?php endif; ?>
             </div>

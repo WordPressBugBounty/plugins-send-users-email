@@ -23,10 +23,10 @@ class External_List_Delete_Service
         }
 
         // Delete from external lists table
-        $deleted = $wpdb->delete($table_name, ['list_id' => $list_id]);
+        $deleted = $wpdb->delete($table_name, ['list_id' => $list_id]); //phpcs:ignore
 
         // Delete from external lists meta table
-        $wpdb->delete($meta_table_name, ['list_id' => $list_id]);
+        $wpdb->delete($meta_table_name, ['list_id' => $list_id]); //phpcs:ignore
 
         if ($deleted !== false) {
             return true;
@@ -43,7 +43,7 @@ class External_List_Delete_Service
             wp_send_json_error(['message' => 'Unauthorized'], 403);
         }
 
-        $list_id = isset($_POST['list_id']) ? sanitize_text_field($_POST['list_id']) : '';
+        $list_id = isset($_POST['list_id']) ? sanitize_text_field(wp_unslash($_POST['list_id'])) : '';
 
         if ( empty($list_id) ) {
             wp_send_json_error(['message' => 'Invalid List ID'], 200);

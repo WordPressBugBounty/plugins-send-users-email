@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 $default_email_theme = $args['default_email_theme'] ?? 'default';
 ?>
 <div class="col">
@@ -16,7 +18,7 @@ $default_email_theme = $args['default_email_theme'] ?? 'default';
                 $theme_label .= ' (Legacy)';
             }
             ?>
-            <option value="<?php esc_attr_e( esc_attr( $theme ), 'send-users-email' ); ?>"
+            <option value="<?php esc_attr($theme); ?>"
                 <?php if ( $default_email_theme == $theme ) {
                     echo 'selected';
                 } ?>>

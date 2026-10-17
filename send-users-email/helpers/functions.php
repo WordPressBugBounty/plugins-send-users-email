@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 if ( ! function_exists( 'sue_get_roles' ) ) {
 	function sue_get_roles( $remove_roles = [] ) {
@@ -130,33 +131,55 @@ if ( ! function_exists( 'sue_remove_caption_shortcode' ) ) {
 
 if ( ! function_exists( 'sue_log_path' ) ) {
 	function sue_log_path( $filename = null ) {
-		$dirDetails  = wp_upload_dir();
-		$uploads_dir = trailingslashit( $dirDetails['basedir'] );
+        require_once ABSPATH . 'wp-admin/includes/file.php';
 
-		// check if directory exists and if not create it
-		if ( ! file_exists( $uploads_dir . DIRECTORY_SEPARATOR . 'send-users-email' ) ) {
-			mkdir( $uploads_dir . DIRECTORY_SEPARATOR . 'send-users-email', 0755 );
-		}
+        if ( ! WP_Filesystem() ) {
+            return false;
+        }
 
-		// Create an index file to prevent directory browsing
-		$file = $uploads_dir . DIRECTORY_SEPARATOR . 'send-users-email' . DIRECTORY_SEPARATOR . 'index.php';
-		if ( ! file_exists( $file ) ) {
-			file_put_contents( $file, '' );
-		}
+        global $wp_filesystem;
 
-		// Create .htaccess file to prevent direct file access
-		$file = $uploads_dir . DIRECTORY_SEPARATOR . 'send-users-email' . DIRECTORY_SEPARATOR . '.htaccess';
-		if ( ! file_exists( $file ) ) {
-			file_put_contents( $file, 'deny from all' );
-		}
+        $dir_details = wp_upload_dir();
+        $uploads_dir = trailingslashit( $dir_details['basedir'] );
+        $log_dir     = trailingslashit( $uploads_dir . 'send-users-email' );
 
-		$path = $uploads_dir . DIRECTORY_SEPARATOR . 'send-users-email' . DIRECTORY_SEPARATOR;
-		if ( $filename ) {
-			$path .= $filename;
-		}
+        // Create directory if it does not exist.
+        if ( ! $wp_filesystem->is_dir( $log_dir ) ) {
+            if ( ! $wp_filesystem->mkdir( $log_dir, FS_CHMOD_DIR ) ) {
+                return false;
+            }
+        }
 
-		return $path;
-	}
+        // Create an index file to prevent directory browsing.
+        $index_file = $log_dir . 'index.php';
+
+        if ( ! $wp_filesystem->exists( $index_file ) ) {
+            $wp_filesystem->put_contents(
+                $index_file,
+                '',
+                FS_CHMOD_FILE
+            );
+        }
+
+        // Create .htaccess file to prevent direct file access.
+        $htaccess_file = $log_dir . '.htaccess';
+
+        if ( ! $wp_filesystem->exists( $htaccess_file ) ) {
+            $wp_filesystem->put_contents(
+                $htaccess_file,
+                "Require all denied\n",
+                FS_CHMOD_FILE
+            );
+        }
+
+        $path = $log_dir;
+
+        if ( $filename ) {
+            $path .= sanitize_file_name( $filename );
+        }
+
+        return $path;
+    }
 }
 
 if ( ! function_exists( 'sue_bytes_to_mb' ) ) {
@@ -167,34 +190,95 @@ if ( ! function_exists( 'sue_bytes_to_mb' ) ) {
 
 if ( ! function_exists( 'sue_log_wp_mail_failed_error' ) ) {
 	function sue_log_wp_mail_failed_error( $message ) {
-		$errorLogFileName = sue_get_error_log_filename();
-		if ( ! $errorLogFileName ) {
-			$errorLogFileName = strtolower( wp_generate_password( 8, false ) . '-error.log' );
-			$handle           = fopen( sue_log_path( $errorLogFileName ), 'w' );
-			fclose( $handle );
-		}
-		file_put_contents( sue_log_path( $errorLogFileName ), $message, FILE_APPEND );
-	}
+        require_once ABSPATH . 'wp-admin/includes/file.php';
+
+        if ( ! WP_Filesystem() ) {
+            return false;
+        }
+
+        global $wp_filesystem;
+
+        $error_log_file_name = sue_get_error_log_filename();
+
+        if ( ! $error_log_file_name ) {
+            $error_log_file_name = strtolower(
+                wp_generate_password( 8, false ) . '-error.log'
+            );
+        }
+
+        $log_file = sue_log_path( $error_log_file_name );
+
+        if ( ! $log_file ) {
+            return false;
+        }
+
+        $contents = '';
+
+        if ( $wp_filesystem->exists( $log_file ) ) {
+            $contents = $wp_filesystem->get_contents( $log_file );
+
+            if ( false === $contents ) {
+                $contents = '';
+            }
+        }
+
+        $contents .= $message;
+
+        return $wp_filesystem->put_contents(
+            $log_file,
+            $contents,
+            FS_CHMOD_FILE
+        );
+    }
 }
 
 if ( ! function_exists( 'sue_log_sent_emails' ) ) {
 	function sue_log_sent_emails( $user_email, $email_subject, $email_body, $via = 'user' ) {
-		$filename = 'email-log-' . date( 'Y-m-d' ) . '.log';
-		$file     = sue_log_path( $filename );
-		if ( ! file_exists( $file ) ) {
-			$handle = fopen( $file, 'w' );
-			fclose( $handle );
-		}
+        require_once ABSPATH . 'wp-admin/includes/file.php';
 
-		$message = '[' . date( 'Y-m-d h:i:s' ) . ']';
-		$message .= ' EMAIL SENT';
-		$message .= ' | ADDRESS: ' . sue_obscure_text( $user_email, 3 );
-		$message .= ' | SUBJECT: ' . trim( preg_replace( '/\s+/', ' ', $email_subject ) );
-		$message .= ' | VIA: ' . $via;
-		$message .= ' | CONTENT: ' . preg_replace( "/[\r\n]+/", "\n", strip_tags( $email_body ) );
+        if ( ! WP_Filesystem() ) {
+            return false;
+        }
 
-		file_put_contents( $file, $message, FILE_APPEND );
-	}
+        global $wp_filesystem;
+
+        $filename = 'email-log-' . gmdate( 'Y-m-d' ) . '.log';
+        $file     = sue_log_path( $filename );
+
+        if ( ! $file ) {
+            return false;
+        }
+
+        $message  = '[' . gmdate( 'Y-m-d H:i:s' ) . ']';
+        $message .= ' EMAIL SENT';
+        $message .= ' | ADDRESS: ' . sue_obscure_text( $user_email, 3 );
+        $message .= ' | SUBJECT: ' . trim( preg_replace( '/\s+/', ' ', $email_subject ) );
+        $message .= ' | VIA: ' . $via;
+        $message .= ' | CONTENT: ' . preg_replace(
+            "/[\r\n]+/",
+            "\n",
+            wp_strip_all_tags( $email_body )
+        );
+        $message .= PHP_EOL;
+
+        $contents = '';
+
+        if ( $wp_filesystem->exists( $file ) ) {
+            $contents = $wp_filesystem->get_contents( $file );
+
+            if ( false === $contents ) {
+                $contents = '';
+            }
+        }
+
+        $contents .= $message;
+
+        return $wp_filesystem->put_contents(
+            $file,
+            $contents,
+            FS_CHMOD_FILE
+        );
+    }
 }
 
 if ( ! function_exists( 'sue_remove_non_email_log_filename' ) ) {

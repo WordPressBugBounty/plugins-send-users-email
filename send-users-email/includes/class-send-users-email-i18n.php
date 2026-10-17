@@ -10,7 +10,7 @@ class Send_Users_Email_i18n {
 	 */
 	public function load_plugin_textdomain() {
 
-		load_plugin_textdomain(
+		load_plugin_textdomain( //phpcs:ignore
 			'send-users-email',
 			false,
 			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'

@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 $obj_template_data = $args['obj_template_data'] ?? null;
 ?>
 <!DOCTYPE html>
@@ -174,18 +176,18 @@ $obj_template_data = $args['obj_template_data'] ?? null;
   </style>
   <?php if ( $obj_template_data && $obj_template_data->get_email_styles() ): ?>
       <style>
-          <?php echo stripslashes_deep( wp_strip_all_tags( $obj_template_data->get_email_styles() ) ); ?>
+          <?php Send_Users_Email::wp_kses_wf(stripslashes_deep( wp_strip_all_tags( $obj_template_data->get_email_styles() ) )); ?>
       </style>
   <?php endif; ?>
 </head>
-<body class="sue-email-template-<?php echo $obj_template_data->get_email_style_name(); ?>">
+<body class="sue-email-template-<?php echo esc_attr($obj_template_data->get_email_style_name()); ?>">
 <div class="wrapper">
   <div class="container">
 
     <!-- PUBLICATION HEADER -->
     <div class="header">
-      <p class="pub-name"><?php echo $obj_template_data ? $obj_template_data->get_email_title() : ''; ?></p>
-      <p class="pub-tagline"><?php echo $obj_template_data ? $obj_template_data->get_email_tagline() : ''; ?></p>
+      <p class="pub-name"><?php echo $obj_template_data ? esc_html($obj_template_data->get_email_title()) : ''; ?></p>
+      <p class="pub-tagline"><?php echo $obj_template_data ? esc_html($obj_template_data->get_email_tagline()) : ''; ?></p>
     </div>
 
     <!-- BODY -->
@@ -196,7 +198,7 @@ $obj_template_data = $args['obj_template_data'] ?? null;
 
     <!-- FOOTER -->
     <div class="footer">
-      <p><?php echo stripslashes_deep( $obj_template_data ? $obj_template_data->get_email_footer() : '' ); ?></p>
+      <p><?php Send_Users_Email::wp_kses_wf(stripslashes_deep( $obj_template_data ? $obj_template_data->get_email_footer() : '' )); ?></p>
     </div>
 
   </div>

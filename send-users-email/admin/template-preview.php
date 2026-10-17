@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 if (isset($_GET['wp_nonce']) && isset($_GET['action']) && $_GET['action'] === 'template_preview_iframe_action') {
     define('WP_USE_THEMES', false); 
     // Construct path from __FILE__ instead of GET to avoid encoding issues
@@ -11,11 +13,11 @@ if (isset($_GET['wp_nonce']) && isset($_GET['action']) && $_GET['action'] === 't
     $path = dirname($path);      // ABSPATH
     $path = rtrim($path, '/\\') . DIRECTORY_SEPARATOR;
     if (!file_exists($path . 'wp-load.php')) {
-        die('WordPress loader not found. Checked path: ' . htmlspecialchars($path) . 'wp-load.php');
+        die('WordPress loader not found. Checked path: ' . esc_html($path) . 'wp-load.php');
     }
     require_once($path . 'wp-load.php');
 
-    $nonce = isset($_GET['wp_nonce']) ? sanitize_text_field($_GET['wp_nonce']) : '';
+    $nonce = isset($_GET['wp_nonce']) ? sanitize_text_field(wp_unslash($_GET['wp_nonce'])) : '';
     if (!wp_verify_nonce($nonce, 'template_preview_iframe_action')) {
         die('Invalid nonce');
     }
@@ -52,7 +54,7 @@ if (isset($_GET['wp_nonce']) && isset($_GET['action']) && $_GET['action'] === 't
         'social' => $social,
         'styles' => $styles,
         'preview' => $preview,
-        'style'   => isset($_GET['style']) ? sanitize_text_field($_GET['style']) : 'default',
+        'style'   => isset($_GET['style']) ? sanitize_text_field(wp_unslash($_GET['style'])) : 'default',
     ];
 
     $obj_template_data = new SUE_Template_Data($arg_template_data);
@@ -62,7 +64,7 @@ if (isset($_GET['wp_nonce']) && isset($_GET['action']) && $_GET['action'] === 't
         'iframe_preview'    => true,
     ];
 
-    $style = ( isset( $_GET['style'] ) ) ? sanitize_text_field( $_GET['style'] ) : 'default';
+    $style = ( isset( $_GET['style'] ) ) ? sanitize_text_field( wp_unslash($_GET['style']) ) : 'default';
 
     $height_reporter = '<script>
 (function(){
@@ -106,12 +108,12 @@ if (isset($_GET['wp_nonce']) && isset($_GET['action']) && $_GET['action'] === 't
             );
             break;
         case 'custom':
-            echo SUE_Custom_Html_Template::parse_template(
+            Send_Users_Email::wp_kses_wf(SUE_Custom_Html_Template::parse_template(
                 $title,
                 $tagline,
                 $email_body,
                 $logo 
-            );
+            ), true);
         break;
         case 'woocommerce':
             sue_include_template(
@@ -138,7 +140,7 @@ if (isset($_GET['wp_nonce']) && isset($_GET['action']) && $_GET['action'] === 't
         $html .= $height_reporter;
     }
 
-    echo $html;
+    Send_Users_Email::wp_kses_wf($html, true);
 
 } else {
     die('Nonce not provided');

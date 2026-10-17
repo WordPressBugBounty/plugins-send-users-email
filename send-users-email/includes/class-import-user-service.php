@@ -130,25 +130,25 @@ class Import_User_Service
      */
     public static function ajax_mock_chunk_process()
     {
-        if ( !isset($_POST['nonce']) && !wp_verify_nonce( $_POST['nonce'], 'sue_external_lists_import' ) ) {
-            wp_die(__('Security check failed.', 'external-lists'));
+        if ( !isset($_POST['nonce']) && !wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['nonce'])), 'sue_external_lists_import' ) ) {
+            wp_die(esc_html__('Security check failed.', 'send-users-email'));
         }
 
-        $chunk_index = intval($_POST['chunk_index']);
-        $total_chunks = intval($_POST['total_chunks']);
+        $chunk_index = intval($_POST['chunk_index'] ?? 0);
+        $total_chunks = intval($_POST['total_chunks'] ?? 0);
 
         // Define the minimum and maximum sleep duration in microseconds
         $minMicroseconds = 100000; // 0.1 seconds
         $maxMicroseconds = 500000; // 0.5 seconds
         
         // Generate a random number of microseconds within the defined range
-        $randomMicroseconds = mt_rand($minMicroseconds, $maxMicroseconds);
+        $randomMicroseconds = wp_rand($minMicroseconds, $maxMicroseconds);
         
         // Simulate processing time
         usleep($randomMicroseconds); // Random delay between 0.1 and 0.5 seconds    
 
         // Simulate inserted rows per chunk
-        $inserted = rand(10, 50);
+        $inserted = wp_rand(10, 50);
 
         wp_send_json_success([
             'inserted' => $inserted,

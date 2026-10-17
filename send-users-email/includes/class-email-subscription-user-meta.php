@@ -104,7 +104,7 @@ class SUE_Email_Subscription_User_Meta
             return false;
         }
 
-        $email_subscription = isset($_POST['sue_email_subscription']) ? 1 : 0;
+        $email_subscription = isset($_POST['sue_email_subscription']) ? 1 : 0; //phpcs:ignore
 
         update_user_meta($user_id, self::META_KEY, $email_subscription);
     }
@@ -174,8 +174,8 @@ class SUE_Email_Subscription_User_Meta
     static public function get_all_subscribed_users()
     {
         $args = [
-            'meta_key' => self::META_KEY,
-            'meta_value' => 1,
+            'meta_key' => self::META_KEY, //phpcs:ignore
+            'meta_value' => 1, //phpcs:ignore
             'fields' => 'ID',
         ];
         $user_query = new WP_User_Query($args);
@@ -194,8 +194,8 @@ class SUE_Email_Subscription_User_Meta
     static public function get_all_unsubscribed_users()
     {
         $args = [
-            'meta_key' => self::META_KEY,
-            'meta_value' => 0,
+            'meta_key' => self::META_KEY, //phpcs:ignore
+            'meta_value' => 0, //phpcs:ignore
             'fields' => 'ID',
         ];
         $user_query = new WP_User_Query($args);

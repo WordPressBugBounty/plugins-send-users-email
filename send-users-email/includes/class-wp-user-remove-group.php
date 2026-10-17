@@ -23,12 +23,13 @@ class SUE_WP_User_Remove_Group
      */
     static public function display_removal_notice()
     {
-        if (isset($_GET['sue_group_removed'])) {
-            $removed_count = intval($_GET['sue_group_removed']);
+        if (isset($_GET['sue_group_removed'])) { //phpcs:ignore
+            $removed_count = intval($_GET['sue_group_removed']); //phpcs:ignore
             
             $notice_type = 'success';
             
             $notice_message = sprintf(
+                /* translators: %d is the number of users */
                 _n('%d user has been removed from the group.', '%d users have been removed from the group.', $removed_count, 'send-users-email'),
                 $removed_count
             );
@@ -36,9 +37,9 @@ class SUE_WP_User_Remove_Group
             $notice_dismissible = true;
 
             if ($removed_count <= 0) {
-                if($_GET['sue_group_removed'] === 'no-users-selected-for-group-removal'){
+                if($_GET['sue_group_removed'] === 'no-users-selected-for-group-removal'){ //phpcs:ignore
                     $notice_message = esc_html__('No users were selected for group removal.', 'send-users-email');
-                } elseif ($_GET['sue_group_removed'] === 'select-a-group-to-remove'){
+                } elseif ($_GET['sue_group_removed'] === 'select-a-group-to-remove'){ //phpcs:ignore
                     $notice_message = esc_html__('Please select a user group to remove.', 'send-users-email');
                 }
                 $notice_type = 'error';
@@ -99,7 +100,7 @@ class SUE_WP_User_Remove_Group
             return;
         }
 
-        if (!isset($_REQUEST['sue_remove_group_nonce']) || !wp_verify_nonce($_REQUEST['sue_remove_group_nonce'], 'sue_remove_group')) {
+        if (!isset($_REQUEST['sue_remove_group_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['sue_remove_group_nonce'])), 'sue_remove_group')) {
             wp_die(esc_html__('Security check failed. Please try again.', 'send-users-email'));
         }
 
@@ -113,8 +114,8 @@ class SUE_WP_User_Remove_Group
 
         $group_id = 0;
 
-        if (is_array($_REQUEST['sue_wp_user_group_dropdown']) && !empty($_REQUEST['sue_wp_user_group_dropdown'])) {
-            foreach ($_REQUEST['sue_wp_user_group_dropdown'] as $gid) {
+        if (is_array($_REQUEST['sue_wp_user_group_dropdown']) && !empty($_REQUEST['sue_wp_user_group_dropdown'])) { 
+            foreach ($_REQUEST['sue_wp_user_group_dropdown'] as $gid) { //phpcs:ignore
                 if (!empty($gid)) {
                     $group_id = intval($gid);
                 }
@@ -140,7 +141,7 @@ class SUE_WP_User_Remove_Group
             $query_args['sue_group_removed'] = $removed;
         }
 
-        wp_redirect(add_query_arg($query_args, admin_url('users.php')));
+        wp_safe_redirect(add_query_arg($query_args, admin_url('users.php')));
         exit;
     }
 
@@ -174,7 +175,7 @@ class SUE_WP_User_Remove_Group
         $sue_group_user_table = SEND_USERS_EMAIL_GROUP_USER_TABLE;
 
         // remove the user from the group user table
-        return $wpdb->delete(
+        return $wpdb->delete( //phpcs:ignore
             $sue_group_user_table,
             [
                 'group_id' => (int)$group_id,

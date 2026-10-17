@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 
 $obj_template_data = $args['obj_template_data'] ?? null;
 $iframe_preview = $args['iframe_preview'] ?? false;
@@ -109,8 +111,8 @@ if ( $obj_template_data && $obj_template_data->get_email_styles() ) {
     ?>
         <style>
             <?php 
-    echo stripslashes_deep( wp_strip_all_tags( $obj_template_data->get_email_styles() ) );
-    ?>
+            Send_Users_Email::wp_kses_wf(stripslashes_deep( wp_strip_all_tags( $obj_template_data->get_email_styles() ) ));
+            ?>
         </style>
 	<?php 
 }
@@ -121,7 +123,7 @@ if ( $obj_template_data && $obj_template_data->get_email_styles() ) {
     <?php 
 ?>
 <body class="sue-email-template-" style="<?php 
-echo $body_inline_styles;
+echo esc_html($body_inline_styles);
 ?>">
     <?php 
 ?>
@@ -179,7 +181,7 @@ if ( $obj_template_data && $obj_template_data->get_email_title() || $obj_templat
 if ( $obj_template_data && $obj_template_data->get_email_body() ) {
     ?>
 			    <?php 
-    echo $obj_template_data->get_email_body();
+    Send_Users_Email::wp_kses_wf($obj_template_data->get_email_body());
     ?>
             <?php 
 }
@@ -193,7 +195,7 @@ if ( $obj_template_data && $obj_template_data->get_email_footer() ) {
         <tr class="sue-footer">
             <td>
 				<?php 
-    echo stripslashes_deep( $obj_template_data->get_email_footer() );
+    Send_Users_Email::wp_kses_wf(stripslashes_deep( $obj_template_data->get_email_footer() ));
     ?>
             </td>
         </tr>

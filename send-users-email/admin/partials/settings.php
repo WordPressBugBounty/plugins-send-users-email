@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 /**
  * Settings Page Template
  *
@@ -182,7 +184,7 @@ $social               = isset( $args['social'] ) ? $args['social'] : [];
                                                  height="18" class="sue-social-icon">
                                             <input type="text" class="sue-input" id="<?php echo esc_attr( $platform ); ?>"
                                                    name="social[<?php echo esc_attr( $platform ); ?>]"
-                                                   value="<?php echo $social[ $platform ] ?? ''; ?>"
+                                                   value="<?php echo esc_html($social[ $platform ] ?? ''); ?>"
                                                    placeholder="<?php echo esc_attr( ucfirst( $platform ) ); ?> URL">
                                         </div>
                                     <?php endforeach; ?>
@@ -220,6 +222,7 @@ $social               = isset( $args['social'] ) ? $args['social'] : [];
                                 <div class="sue-field-label">
                                     <label for="email_outgoing_rate"><?php esc_html_e( 'Outgoing Email Rate', 'send-users-email' ); ?></label>
                                     <p class="sue-form-hint"><?php echo sprintf(
+                                        /* translators: %s is the Docs link */
                                         wp_kses_post( __( 'How many queued emails to send every 5 minutes. <a href="%s" target="_blank">Read the docs</a>.', 'send-users-email' ) ),
                                         'https://sendusersemail.com/docs/how-the-email-queue-works/?utm_source=wp_backend&utm_medium=read_docs&utm_campaign=queue'
                                     ); ?></p>
@@ -325,6 +328,7 @@ $social               = isset( $args['social'] ) ? $args['social'] : [];
                             <div class="sue-settings-section">
                                 <h4><?php esc_html_e( 'SMTP Options', 'send-users-email' ); ?></h4>
                                 <p><?php echo sprintf(
+                                    /* translators: %s is the docs URL */
                                     wp_kses_post( __( 'Improve deliverability and avoid spam filters. <a href="%s" target="_blank">Read the docs</a>.', 'send-users-email' ) ),
                                     'https://sendusersemail.com/docs/using-an-smtp-server/?utm_source=wp_backend&utm_medium=read_docs&utm_campaign=smtp'
                                 ); ?></p>

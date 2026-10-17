@@ -45,7 +45,7 @@ class SUE_External_Lists_Edit
 
     public static function get_list_id()
     {
-        return isset($_GET['list_id']) ? $_GET['list_id'] : 0;
+        return isset($_GET['list_id']) ? sanitize_key(wp_unslash($_GET['list_id'])) : 0; //phpcs:ignore
     }
 
     public static function render_template( $action, $args )
@@ -62,7 +62,7 @@ class SUE_External_Lists_Edit
             'list_id' => $get_list_id
         ], admin_url('admin.php'));
 
-        $paged = isset($_GET['paged']) ? intval($_GET['paged']) : 1;
+        $paged = isset($_GET['paged']) ? intval($_GET['paged']) : 1; //phpcs:ignore
 
         if($total_items < $per_page){
             $paged = 0; // Reset to first page if total items are less than or equal to items per page
@@ -100,7 +100,7 @@ class SUE_External_Lists_Edit
         if ( ! check_ajax_referer('sue_update_external_list', 'security')) {
             wp_send_json_error('Invalid nonce');
         }
-        $data = isset($_POST['data']) ? $_POST['data'] : [];
+        $data = isset($_POST['data']) ? wp_unslash($_POST['data']) : []; //phpcs:ignore
         $list_id = isset($data['id']) ? intval($data['id']) : 0;
         
         if ($list_id <= 0) {
